@@ -1,17 +1,17 @@
-# Просветы
+# Highlights
 
-С обновлением **3.0.0** просвет (подсветка игроков сквозь стены) выделен в отдельную библиотеку — `highlight`.
+With update **3.0.0**, highlighting (seeing players through walls) has been moved to its own library — `highlight`.
 
-## Основные функции
+## Core functions
 
 ### `highlight.ByDistance(ply, ent)` <span class="fh-badge server">SERVER</span>
 
-Автоматически просвечивает игроку `ply` всех выживших в радиусе, заданном консольной командой `halo_radius`. По умолчанию используется аниматрониками на бинд `+RELOAD`.
+Automatically highlights all survivors within the radius set by the console command `halo_radius` for player `ply`. Used by animatronics on the `+RELOAD` bind by default.
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `ply` | `Player` | Игрок, который просвечивает |
-| `ent` | `Entity` | Энтити-модель аниматроника `ply` (нужно для звуков) |
+| `ply` | `Player` | The player doing the highlighting |
+| `ent` | `Entity` | The animatronic's entity/model for `ply` (needed for sounds) |
 
 ```lua
 hook.Add("KeyPress", "MyHighlight", function(ply, key)
@@ -24,47 +24,47 @@ end)
 
 ### `highlight.Add(ply, players, duration)` <span class="fh-badge server">SERVER</span>
 
-Просвечивает указанных игроков для `ply` на заданное время.
+Highlights specified players for `ply` for a given duration.
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `ply` | `Player` | Кто видит просвет |
-| `players` | `Player` или `table[Player]` | Кого просвечивает |
-| `duration` | `float` | Длительность в секундах |
+| `ply` | `Player` | Who sees the highlight |
+| `players` | `Player` or `table[Player]` | Who gets highlighted |
+| `duration` | `float` | Duration in seconds |
 
-::: warning Учтите
-Эта функция **не включает звуки** оповещения о просвете. Используйте `highlight.NotifyTarget()` для оповещения.
+::: warning Note
+This function **does not play** highlight notification sounds. Use `highlight.NotifyTarget()` for notifications.
 :::
 
-## Кулдауны
+## Cooldowns
 
 ### `highlight.Cooldown(ply, duration)` <span class="fh-badge server">SERVER</span>
 
-Устанавливает игроку кулдаун на просвет и обновляет значение в интерфейсе.
+Sets a cooldown on highlighting for the player and updates the UI value.
 
 ```lua
-highlight.Cooldown(ply, 15)  -- 15 секунд КД
+highlight.Cooldown(ply, 15)  -- 15 second cooldown
 ```
 
 ::: info
-Если у аниматроника изначально не было способности «Просвет» в интерфейсе, она там не появится.
+If the animatronic didn't originally have the "Highlight" ability in the UI, it won't appear there.
 :::
 
 ### `highlight.GetCooldown(ply)` <span class="fh-badge server">SERVER</span>
 
-Возвращает количество секунд до следующего использования просвета.
+Returns the number of seconds until the next highlight can be used.
 
 ```lua
 if highlight.GetCooldown(ply) > 0 then
-    ply:ChatPrint("Просвет ещё не готов!")
+    ply:ChatPrint("Highlight is not ready yet!")
 end
 ```
 
-## Звуки просвета
+## Highlight sounds
 
 ### `highlight.AddVisionSounds(name, snd_affected, snd_unaffected)` <span class="fh-badge shared">SHARED</span>
 
-Регистрирует звуки просвета для конкретного аниматроника.
+Registers highlight sounds for a specific animatronic.
 
 ```lua
 highlight.AddVisionSounds(
@@ -75,22 +75,22 @@ highlight.AddVisionSounds(
 ```
 
 ::: tip
-В путях звуков обязательно указывайте полное имя файла, включая расширение.
+Always specify the full file name including the extension in sound paths.
 :::
 
 ### `highlight.GetVisionSound(ent)` <span class="fh-badge shared">SHARED</span>
 
-Возвращает таблицу со звуками: `{ affected = "...", unaffected = "..." }`.
+Returns a table with sounds: `{ affected = "...", unaffected = "..." }`.
 
 ### `highlight.NotifyTarget(target, ent, isAffected)` <span class="fh-badge server">SERVER</span>
 
-Включает звук просвета и накладывает визуальный эффект на игрока.
+Plays the highlight sound and applies a visual effect to the player.
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `target` | `Player` | Кого оповестить |
-| `ent` | `Entity` | Модель аниматроника, который просвечивает |
-| `isAffected` | `bool` | `true` — звук успеха, `false` — звук провала |
+| `target` | `Player` | Who to notify |
+| `ent` | `Entity` | The animatronic's model doing the highlighting |
+| `isAffected` | `bool` | `true` — success sound, `false` — fail sound |
 
 ```lua
 highlight.NotifyTarget(survivor, animEnt, true)
