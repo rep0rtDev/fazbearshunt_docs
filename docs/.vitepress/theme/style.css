@@ -148,7 +148,7 @@ body {
 .VPSidebar {
   background-color: var(--vp-sidebar-bg-color) !important;
   border-right: 1px solid var(--vp-c-border) !important;
-  padding: 16px 0 32px !important;
+  padding: 16px 0 32px 16px !important;
   width: var(--vp-sidebar-width) !important;
   top: var(--vp-nav-height) !important;
   height: calc(100vh - var(--vp-nav-height)) !important;
