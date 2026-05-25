@@ -1,65 +1,65 @@
 # Fazbear's Hunt Wiki
 
-Добро пожаловать на техническую документацию гейммода **Fazbear's Hunt** для Garry's Mod.
+Welcome to the technical documentation for the **Fazbear's Hunt** gamemode for Garry's Mod.
 
-Эта вики — справочник для разработчиков, которые хотят создавать модификации, расширения и собственные аниматроники для режима.
+This wiki is a reference for developers who want to create modifications, extensions, and custom animatronics for the gamemode.
 
-::: tip Новичкам
-Если вы впервые здесь — начните с раздела **[О режиме](/guide/introduction)**, затем перейдите к **[Началу работы](/guide/getting-started)**.
+::: tip New here?
+If this is your first time — start with **[About the Gamemode](/guide/introduction)**, then move on to **[Getting Started](/guide/getting-started)**.
 :::
 
-## С чего начать
+## Where to Begin
 
-Для уверенного старта нужно иметь хотя бы базовые навыки программирования и среднее понимание структуры [GLua](https://wiki.facepunch.com/gmod/).
+To get started confidently, you need at least basic programming skills and a moderate understanding of [GLua](https://wiki.facepunch.com/gmod/) structure.
 
-Если вы новичок и хотите сделать простую модификацию (например, добавить чужой Пилл-Пак из Мастерской Steam), прочитайте раздел [Первая модификация](/guide/first-modification).
+If you're a beginner and want to make a simple modification (e.g. add someone else's Pill Pack from the Steam Workshop), read the [First Modification](/guide/first-modification) section.
 
-## Разделы документации
+## Documentation Sections
 
-### 📖 Руководство
+### 📖 Guide
 
-Введение в гейммод, настройка окружения для разработки, первая модификация.
+Introduction to the gamemode, setting up a development environment, first modification.
 
-- [О режиме](/guide/introduction)
-- [Начало работы](/guide/getting-started)
-- [Первая модификация](/guide/first-modification)
+- [About the Gamemode](/guide/introduction)
+- [Getting Started](/guide/getting-started)
+- [First Modification](/guide/first-modification)
 
-### 🎮 Геймплейные системы
+### 🎮 Gameplay Systems
 
-Документация по основным механикам Fazbear's Hunt.
+Documentation on the core mechanics of Fazbear's Hunt.
 
-- [Раунды](/gameplay/rounds) — создание собственных типов раундов
-- [Подарки](/gameplay/gifts) — свои положительные и отрицательные эффекты
-- [Просветы](/gameplay/highlights) — подсветка игроков сквозь стены
-- [Статистика](/gameplay/statistics) — собственные метрики раунда
+- [Rounds](/gameplay/rounds) — creating custom round types
+- [Gifts](/gameplay/gifts) — custom positive and negative effects
+- [Highlights](/gameplay/highlights) — player highlighting through walls
+- [Statistics](/gameplay/statistics) — custom round metrics
 
-### 📚 API справочник
+### 📚 API Reference
 
-Полный технический справочник всех функций и методов.
+Full technical reference for all functions and methods.
 
-- [PlayerMeta](/reference/player-meta) — расширения мета-таблицы Player
-- [Функции FH](/reference/functions) — глобальные функции режима
-- [Аниматроники](/reference/animatronics) — управление списками аниматроников
-- [Типы раундов](/reference/round-types) — встроенные и пользовательские
+- [PlayerMeta](/reference/player-meta) — Player metatable extensions
+- [FH Functions](/reference/functions) — global gamemode functions
+- [Animatronics](/reference/animatronics) — animatronic list management
+- [Round Types](/reference/round-types) — built-in and custom types
 
-### 🪝 Хуки
+### 🪝 Hooks
 
-Все хуки гейммода с примерами использования.
+All gamemode hooks with usage examples.
 
-- [Обзор хуков](/hooks/) — как пользоваться хуками
-- [Хуки раунда](/hooks/round) — начало, окончание раунда
-- [Хуки аниматроников](/hooks/animatronics) — скримеры, Шокер
-- [Способности аниматроников](/hooks/abilities) — уникальные хуки каждого
-- [Хуки ивентов](/hooks/events) — Маска Маньяка и т.п.
+- [Hooks Overview](/hooks/) — how to use hooks
+- [Round Hooks](/hooks/round) — round start and end
+- [Animatronic Hooks](/hooks/animatronics) — jumpscares, Taser
+- [Animatronic Abilities](/hooks/abilities) — unique hooks per animatronic
+- [Event Hooks](/hooks/events) — Maniac's Mask etc.
 
-## Учтите
+## Keep in Mind
 
-::: warning Следите за обновлениями
-Если хотите, чтобы ваша модификация работала стабильно — следите за обновлениями вики после обновлений режима. Функции могут изменяться или удаляться.
+::: warning Stay Updated
+If you want your modification to work reliably — keep an eye on wiki updates after gamemode updates. Functions may change or be removed.
 :::
 
-## Полезные ссылки
+## Useful Links
 
-- [Discord-сервер Fazbear's Hunt](https://discord.gg/fazbearhunt)
-- [GitHub репозиторий документации](https://github.com/s3rgeant/fazbearshunt_docs)
-- [Официальная GMod Wiki](https://wiki.facepunch.com/gmod/)
+- [Fazbear's Hunt Discord Server](https://discord.gg/3yFA2pwQJR)
+- [Documentation GitHub Repository](https://github.com/rep0rtDev/fazbearshunt_docs)
+- [Official GMod Wiki](https://wiki.facepunch.com/gmod/)
