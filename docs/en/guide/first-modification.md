@@ -1,57 +1,57 @@
-# Первая модификация
+# First modification
 
-В этом гайде мы добавим в Fazbear's Hunt чужой аниматроник (Пилл-Пак из Мастерской Steam) в качестве полноценного аниматроника режима.
+In this guide, we will add a third-party animatronic (Pill-Pak from the Steam Workshop) to Fazbear's Hunt as a full-fledged mode animatronic.
 
-## Шаг 1. Найдите Пилл-Пак
+## Step 1. Find Pill-Pak
 
-Зайдите в Steam Workshop, найдите Пилл-Пак с моделью, которую хотите использовать. Запомните его **технический ID** (например, `pill_wfreddy2`).
+Go to Steam Workshop, find Pill-Pak with the model you want to use. Remember its **technical ID** (e.g., `pill_wfreddy2`).
 
-::: warning Внимание
-Пилл-Пак должен быть подписан и установлен на сервере, иначе игра не сможет его использовать.
+::: warning Attention
+Pill-Pak must be subscribed to and installed on the server, otherwise the game won't be able to use it.
 :::
 
-## Шаг 2. Сделайте его играбельным
+## Step 2. Make it playable
 
-Создайте файл `lua/autorun/server/my_animatronic.lua`:
+Create the file `lua/autorun/server/my_animatronic.lua`:
 
 ```lua
 hook.Add("Initialize", "RegisterMyAnimatronic", function()
-    -- Делаем аниматроника играбельным
+    -- Make the animatronic playable
     pill_makePreferable("pill_wfreddy2", true)
 end)
 ```
 
-После этого режим начнёт выбирать его в раундах.
+After this, the mode will start choosing it in rounds.
 
-## Шаг 3. (Опционально) Сделайте вторичным
+## Step 3. (Optional) Make it secondary
 
-Если хотите, чтобы этот аниматроник появлялся как дополнительный (рядом с основным):
+If you want this animatronic to appear as an additional one (alongside the main one):
 
 ```lua
 pill_makeSecondary("pill_wfreddy2", true)
 ```
 
-## Шаг 4. Выдача игроку вручную
+## Step 4. Manually assign to a player
 
-Если вы хотите выдать аниматроника конкретному игроку (например, при особом событии):
+If you want to give the animatronic to a specific player (e.g., during a special event):
 
 ```lua
 hook.Add("fh_startgame", "GiveCustomKiller", function(roundType)
-    local target = player.GetAll()[1]  -- первый игрок
+    local target = player.GetAll()[1]  -- first player
     if IsValid(target) then
         giveKiller(target, "pill_wfreddy2", true)
     end
 end)
 ```
 
-## Что дальше
+## What's next
 
-Теперь, когда у вас есть аниматроник, изучите:
+Now that you have an animatronic, explore:
 
-- **[Функции FH](/reference/functions.md)** — для глубокого изменения поведения
-- **[Хуки аниматроников](/hooks/animatronics.md)** — для перехвата скримеров и т.д.
-- **[Способности аниматроников](/hooks/abilities.md)** — хуки конкретных способностей
+- **[FH Functions](/en/reference/functions.md)** — for deep behavior changes
+- **[Animatronic Hooks](/en/hooks/animatronics.md)** — for intercepting screamers, etc.
+- **[Animatronic Abilities](/en/hooks/abilities.md)** — hooks for specific abilities
 
-::: tip Совет
-Не забывайте проверять валидность игроков (`IsValid(ply)`) перед вызовом методов — на них могут уйти, отключиться, или вернуться в лобби.
+::: tip Tip
+Always check player validity (`IsValid(ply)`) before calling methods — they might leave, disconnect, or return to the lobby.
 :::
