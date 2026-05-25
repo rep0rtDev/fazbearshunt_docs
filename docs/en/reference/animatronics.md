@@ -1,61 +1,61 @@
-# Аниматроники
+# Animatronics
 
-Краткий справочник по работе с аниматрониками в Fazbear's Hunt.
+A quick reference for working with animatronics in Fazbear's Hunt.
 
-## Как устроены аниматроники
+## How animatronics work
 
-Каждый аниматроник в FH — это **Пилл-Пак** ([Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=104604943)) с определённым техническим именем (например, `pill_wfreddy2`).
+Each animatronic in FH is a **Pill Pack** ([Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=104604943)) with a specific technical name (e.g., `pill_wfreddy2`).
 
-Гейммод определяет:
-- **Играбельные** — могут быть выбраны как основной аниматроник раунда
-- **Вторичные** — могут появляться как дополнительные
+The gamemode defines:
+- **Playable** — can be selected as the main animatronic of the round
+- **Secondary** — can appear as additional ones
 
-## Базовые операции
+## Basic operations
 
-### Добавить аниматроника в режим
+### Add an animatronic to the mode
 
 ```lua
 pill_makePreferable("pill_wfreddy2", true)
 ```
 
-### Сделать вторичным
+### Make secondary
 
 ```lua
 pill_makeSecondary("pill_wbonnie2", true)
 ```
 
-### Получить модель аниматроника игрока
+### Get a player's animatronic model
 
 ```lua
 local ent = pk_pills.getMappedEnt(ply)
 if IsValid(ent) then
-    print("Модель:", ent:GetModel())
+    print("Model:", ent:GetModel())
 end
 ```
 
-## Реакция на способности
+## Reacting to abilities
 
-Используйте хуки для реакции на действия аниматроников:
+Use hooks to react to animatronic actions:
 
-| Аниматроник | Хук | Описание |
+| Animatronic | Hook | Description |
 |---|---|---|
-| Фредди | [`FH_BlindRageStart`](/hooks/abilities.md#freddy) | Слепая Ярость началась |
-| Бонни | [`FH_YoursMineStart`](/hooks/abilities.md#bonnie) | Чужой Взгляд начался |
-| Чика | [`FH_MinePlanted`](/hooks/abilities.md#chica) | Кекс установлен |
-| Шедоу Фредди | [`FH_SFreddySubmergeIn`](/hooks/abilities.md#shadow-freddy) | Уход в невидимость |
-| Золотой Фредди | [`FH_OutworldStart`](/hooks/abilities.md#golden-freddy) | Загранное Измерение |
+| Freddy | [`FH_BlindRageStart`](/en/hooks/abilities.md#freddy) | Blind Rage started |
+| Bonnie | [`FH_YoursMineStart`](/en/hooks/abilities.md#bonnie) | Through Your Eyes started |
+| Chica | [`FH_MinePlanted`](/en/hooks/abilities.md#chica) | Cupcake planted |
+| Shadow Freddy | [`FH_SFreddySubmergeIn`](/en/hooks/abilities.md#shadow-freddy) | Fading into invisibility |
+| Golden Freddy | [`FH_OutworldStart`](/en/hooks/abilities.md#golden-freddy) | Outworld Dimension |
 
-См. полный список: [Способности аниматроников →](/hooks/abilities.md)
+See full list: [Animatronic abilities →](/en/hooks/abilities.md)
 
-## Скримеры
+## Screamers
 
-Скример — кульминационное действие аниматроника. Перехват скримеров идёт через:
+A screamer is the animatronic's climax action. Intercepting screamers is done via:
 
-- [`FH_PlayerShouldJumpscare`](/hooks/animatronics.md#fh_playershouldjumpscare) — можно отменить
-- [`FH_AnimatronicJumpscare`](/hooks/animatronics.md#fh_animatronicjumpscare) — после успешного скримера
-- [`FH_JumpscareEvent`](/hooks/animatronics.md#fh_jumpscareevent) — перед заморозкой жертвы
+- [`FH_PlayerShouldJumpscare`](/en/hooks/animatronics.md#fh_playershouldjumpscare) — can be canceled
+- [`FH_AnimatronicJumpscare`](/en/hooks/animatronics.md#fh_animatronicjumpscare) — after a successful screamer
+- [`FH_JumpscareEvent`](/en/hooks/animatronics.md#fh_jumpscareevent) — before freezing the victim
 
-## Создание собственного скримера
+## Creating a custom screamer
 
 ```lua
 hook.Add("KeyPress", "MyJumpscare", function(ply, key)
@@ -68,8 +68,8 @@ hook.Add("KeyPress", "MyJumpscare", function(ply, key)
     local target = FindNearestPlayer(ply:GetPos(), 80, ply, 90)
     if not IsValid(target) or not target:IsSurvivor() then return end
 
-    -- 1. Проиграть свою анимацию...
-    -- 2. Запустить скример FH
+    -- 1. Play your own animation...
+    -- 2. Trigger FH screamer
     jumpscareEvent(ply, ent, target, ply:GetPos():Distance(target:GetPos()))
 end)
 ```
