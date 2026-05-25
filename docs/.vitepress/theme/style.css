@@ -347,7 +347,7 @@ body {
   font-weight: 600 !important;
   font-size: 17px !important;
   line-height: 1.35 !important;
-  margin: 28px 0 10px 0 !important;
+  margin: 32px 0 12px -16px !important;
   color: var(--vp-c-text-1) !important;
   border-top: none !important;
   padding-top: 0 !important;
