@@ -1,63 +1,63 @@
 # FAQ
 
-Часто задаваемые вопросы по разработке для Fazbear's Hunt.
+Frequently asked questions about developing for Fazbear's Hunt.
 
-## Общие
+## General
 
-### Какой версии GMod нужен?
+### What version of GMod is required?
 
-Любая актуальная версия Garry's Mod (после 2020 года). Гейммод регулярно обновляется под последние сборки.
+Any up-to-date version of Garry's Mod (after 2020). The gamemode is regularly updated for the latest builds.
 
-### Где исходники гейммода?
+### Where are the gamemode sources?
 
-Гейммод **проприетарный**, исходники закрыты. Эта вики — официальный API, доступный для модификаций.
+The gamemode is **proprietary** — sources are closed. This wiki is the official API available for modifications.
 
-### Как сообщить об ошибке в API?
+### How do I report a bug in the API?
 
-Откройте issue в [репозитории документации](https://github.com/s3rgeant/fazbearshunt_docs/issues).
+Open an issue in the [documentation repository](https://github.com/s3rgeant/fazbearshunt_docs/issues).
 
 ---
 
-## Разработка
+## Development
 
-### Где писать код модификации?
+### Where do I write my modification code?
 
-В обычном аддоне GMod: `garrysmod/addons/<имя_аддона>/lua/autorun/`.
+In a regular GMod addon: `garrysmod/addons/<addon_name>/lua/autorun/`.
 
-### Почему мой хук не срабатывает?
+### Why isn't my hook firing?
 
-Проверьте:
-1. **Сторона выполнения** — серверные хуки не работают в клиентских файлах
-2. **Имя хука** — регистр важен (`FH_PlayerShouldJumpscare`, а не `fh_player_should_jumpscare`)
-3. **Уникальное имя** — второй аргумент `hook.Add` должен быть уникальным
-4. **Загрузку файла** — посмотрите в консоли, нет ли ошибок при старте
+Check:
+1. **Execution side** — server-side hooks don't work in client files
+2. **Hook name** — casing matters (`FH_PlayerShouldJumpscare`, not `fh_player_should_jumpscare`)
+3. **Unique name** — the second argument to `hook.Add` must be unique
+4. **File loading** — check the console for any errors on startup
 
-### Как отлаживать?
+### How do I debug?
 
-Используйте `print()`, `PrintTable()` и встроенный профайлер GMod. Серверная консоль печатает в `garrysmod/console.log`.
+Use `print()`, `PrintTable()`, and GMod's built-in profiler. The server console prints to `garrysmod/console.log`.
 
-### Можно ли использовать чужие пилл-паки?
+### Can I use someone else's pill packs?
 
-Да! Это самый простой способ добавить аниматроника:
+Yes! It's the easiest way to add an animatronic:
 
 ```lua
 pill_makePreferable("pill_wfreddy_from_workshop", true)
 ```
 
-См. [Первая модификация →](/guide/first-modification.md)
+See [First Modification →](/en/guide/first-modification.md)
 
 ---
 
-## Совместимость
+## Compatibility
 
-### Будет ли мой код работать после обновления режима?
+### Will my code work after a gamemode update?
 
-Зависит от того, что изменилось. **Следите за этой вики** — функции могут быть переименованы или удалены. Хуки обычно стабильнее функций.
+It depends on what changed. **Keep an eye on this wiki** — functions may be renamed or removed. Hooks are generally more stable than functions.
 
-### Можно ли заменять стандартные хуки?
+### Can I override default hooks?
 
-Да, через возврат значений. Например, вернув `false` в `FH_PlayerShouldJumpscare`, вы отменяете стандартный скример.
+Yes, via return values. For example, returning `false` in `FH_PlayerShouldJumpscare` cancels the default jumpscare.
 
-### Конфликтуют ли аддоны между собой?
+### Can addons conflict with each other?
 
-Если несколько аддонов меняют одно и то же — да, может возникнуть конфликт. Используйте **уникальные имена** обработчиков хуков и проверяйте порядок загрузки.
+If multiple addons modify the same thing — yes, a conflict may occur. Use **unique names** for hook handlers and check load order.
