@@ -39,21 +39,21 @@ end
 
 | Аниматроник | Хук | Описание |
 |---|---|---|
-| Фредди | [`FH_BlindRageStart`](/hooks/abilities#freddy) | Слепая Ярость началась |
-| Бонни | [`FH_YoursMineStart`](/hooks/abilities#bonnie) | Чужой Взгляд начался |
-| Чика | [`FH_MinePlanted`](/hooks/abilities#chica) | Кекс установлен |
-| Шедоу Фредди | [`FH_SFreddySubmergeIn`](/hooks/abilities#shadow-freddy) | Уход в невидимость |
-| Золотой Фредди | [`FH_OutworldStart`](/hooks/abilities#golden-freddy) | Загранное Измерение |
+| Фредди | [`FH_BlindRageStart`](/hooks/abilities.md#freddy) | Слепая Ярость началась |
+| Бонни | [`FH_YoursMineStart`](/hooks/abilities.md#bonnie) | Чужой Взгляд начался |
+| Чика | [`FH_MinePlanted`](/hooks/abilities.md#chica) | Кекс установлен |
+| Шедоу Фредди | [`FH_SFreddySubmergeIn`](/hooks/abilities.md#shadow-freddy) | Уход в невидимость |
+| Золотой Фредди | [`FH_OutworldStart`](/hooks/abilities.md#golden-freddy) | Загранное Измерение |
 
-См. полный список: [Способности аниматроников →](/hooks/abilities)
+См. полный список: [Способности аниматроников →](/hooks/abilities.md)
 
 ## Скримеры
 
 Скример — кульминационное действие аниматроника. Перехват скримеров идёт через:
 
-- [`FH_PlayerShouldJumpscare`](/hooks/animatronics#fh_playershouldjumpscare) — можно отменить
-- [`FH_AnimatronicJumpscare`](/hooks/animatronics#fh_animatronicjumpscare) — после успешного скримера
-- [`FH_JumpscareEvent`](/hooks/animatronics#fh_jumpscareevent) — перед заморозкой жертвы
+- [`FH_PlayerShouldJumpscare`](/hooks/animatronics.md#fh_playershouldjumpscare) — можно отменить
+- [`FH_AnimatronicJumpscare`](/hooks/animatronics.md#fh_animatronicjumpscare) — после успешного скримера
+- [`FH_JumpscareEvent`](/hooks/animatronics.md#fh_jumpscareevent) — перед заморозкой жертвы
 
 ## Создание собственного скримера
 
