@@ -60,6 +60,6 @@
 
 ## Полезные ссылки
 
-- [Discord-сервер Fazbear's Hunt](https://discord.gg/fazbearhunt)
-- [GitHub репозиторий документации](https://github.com/s3rgeant/fazbearshunt_docs)
+- [Discord-сервер Fazbear's Hunt](https://discord.gg/3yFA2pwQJR)
+- [GitHub репозиторий документации](https://github.com/rep0rtDev/fazbearshunt_docs)
 - [Официальная GMod Wiki](https://wiki.facepunch.com/gmod/)
