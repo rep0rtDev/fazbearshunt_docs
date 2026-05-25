@@ -1,12 +1,12 @@
-# Способности аниматроников
+# Animatronic Abilities
 
-Уникальные хуки для каждого аниматроника со своими механиками.
+Unique hooks for each animatronic with their own mechanics.
 
-## Фредди {#freddy}
+## Freddy {#freddy}
 
 ### `FH_BlindRageStart` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Фредди начал поиск цели через Слепую Ярость.
+Freddy has started searching for a target through Blind Rage.
 
 ```lua
 hook.Run("FH_BlindRageStart", ply, ent, victim)
@@ -14,7 +14,7 @@ hook.Run("FH_BlindRageStart", ply, ent, victim)
 
 ### `FH_BlindRageFailed` <span class="fh-badge hook">HOOK</span>
 
-Слепая Ярость не нашла цель.
+Blind Rage failed to find a target.
 
 ```lua
 hook.Run("FH_BlindRageFailed", ply, ent, victim)
@@ -22,7 +22,7 @@ hook.Run("FH_BlindRageFailed", ply, ent, victim)
 
 ### `FH_BlindRageSuccess` <span class="fh-badge hook">HOOK</span>
 
-Цель Слепой Ярости успешно выбрана.
+The Blind Rage target has been successfully selected.
 
 ```lua
 hook.Run("FH_BlindRageSuccess", ply, ent, victim)
@@ -30,17 +30,17 @@ hook.Run("FH_BlindRageSuccess", ply, ent, victim)
 
 ```lua
 hook.Add("FH_BlindRageSuccess", "RageBonus", function(freddy, ent, victim)
-    victim:ChatPrint("Тебя заметил Фредди!")
+    victim:ChatPrint("Freddy has spotted you!")
 end)
 ```
 
 ---
 
-## Бонни {#bonnie}
+## Bonnie {#bonnie}
 
 ### `FH_YoursMineStart` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Бонни активировал способность **«Чужим Взглядом»**.
+Bonnie has activated the **"Through Your Eyes"** ability.
 
 ```lua
 hook.Run("FH_YoursMineStart", ply, ent, target)
@@ -48,7 +48,7 @@ hook.Run("FH_YoursMineStart", ply, ent, target)
 
 ### `FH_YoursMineSpectating` <span class="fh-badge hook">HOOK</span>
 
-Бонни начал следить за целью.
+Bonnie has started spectating the target.
 
 ```lua
 hook.Run("FH_YoursMineSpectating", ply, ent, target)
@@ -56,7 +56,7 @@ hook.Run("FH_YoursMineSpectating", ply, ent, target)
 
 ### `FH_YoursMineEnd` <span class="fh-badge hook">HOOK</span>
 
-Бонни закончил слежку.
+Bonnie has stopped spectating.
 
 ```lua
 hook.Run("FH_YoursMineEnd", ply, ent, target)
@@ -64,36 +64,36 @@ hook.Run("FH_YoursMineEnd", ply, ent, target)
 
 ---
 
-## Чика {#chica}
+## Chica {#chica}
 
 ### `FH_MinePlanted` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Чика успешно установила кекс-мину.
+Chica has successfully planted a cupcake mine.
 
 ```lua
 hook.Run("FH_MinePlanted", ply, ent, cupcake)
 ```
 
-| Аргумент | Тип | Описание |
+| Argument | Type | Description |
 |---|---|---|
-| `ply` | `Player` | Чика |
-| `ent` | `Entity` | Модель Чики |
-| `cupcake` | `Entity` | Установленный кекс |
+| `ply` | `Player` | Chica |
+| `ent` | `Entity` | Chica's model |
+| `cupcake` | `Entity` | The planted cupcake |
 
 ```lua
 hook.Add("FH_MinePlanted", "BigCupcake", function(ply, ent, cupcake)
-    -- Делаем кексы в 2 раза больше
+    -- Make cupcakes 2 times bigger
     cupcake:SetModelScale(2, 0.5)
 end)
 ```
 
 ---
 
-## Шедоу Фредди {#shadow-freddy}
+## Shadow Freddy {#shadow-freddy}
 
 ### `FH_SFreddySubmergeIn` <span class="fh-badge hook">HOOK</span>
 
-Шедоу Фредди **начал** уходить в невидимость.
+Shadow Freddy **started** fading into invisibility.
 
 ```lua
 hook.Run("FH_SFreddySubmergeIn", ply, ent)
@@ -101,7 +101,7 @@ hook.Run("FH_SFreddySubmergeIn", ply, ent)
 
 ### `FH_SFreddySubmergePostIn` <span class="fh-badge hook">HOOK</span>
 
-Шедоу Фредди **полностью** ушёл в невидимость.
+Shadow Freddy has **fully** faded into invisibility.
 
 ```lua
 hook.Run("FH_SFreddySubmergePostIn", ply, ent)
@@ -109,7 +109,7 @@ hook.Run("FH_SFreddySubmergePostIn", ply, ent)
 
 ### `FH_SFreddySubmergeOut` <span class="fh-badge hook">HOOK</span>
 
-Шедоу Фредди вышел из невидимости.
+Shadow Freddy has emerged from invisibility.
 
 ```lua
 hook.Run("FH_SFreddySubmergeOut", ply, ent)
@@ -117,11 +117,11 @@ hook.Run("FH_SFreddySubmergeOut", ply, ent)
 
 ---
 
-## Золотой Фредди {#golden-freddy}
+## Golden Freddy {#golden-freddy}
 
 ### `FH_OutworldStart` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Золотой Фредди выбрал цель для Загранного Измерения.
+Golden Freddy has selected a target for the Outworld Dimension.
 
 ```lua
 hook.Run("FH_OutworldStart", wgfreddy, victim)
@@ -129,20 +129,20 @@ hook.Run("FH_OutworldStart", wgfreddy, victim)
 
 ### `FH_OutworldEnd` <span class="fh-badge hook">HOOK</span>
 
-Загранное Измерение отключилось.
+The Outworld Dimension has been disabled.
 
 ```lua
 hook.Run("FH_OutworldEnd", wgfreddy, victim)
 ```
 
-::: danger Всегда проверяйте валидность
-Загранное Измерение может отключиться из-за того, что один из игроков отключился от сервера. Обязательно проверяйте `IsValid()`:
+::: danger Always check validity
+The Outworld Dimension may be disabled because one of the players disconnected from the server. Always check `IsValid()`:
 
 ```lua
 hook.Add("FH_OutworldEnd", "Cleanup", function(gfreddy, victim)
     if IsValid(victim) then
-        victim:ChatPrint("Ты вернулся в реальный мир.")
+        victim:ChatPrint("You have returned to the real world.")
     end
 end)
+)
 ```
-:::
