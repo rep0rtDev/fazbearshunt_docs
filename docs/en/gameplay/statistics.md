@@ -1,42 +1,42 @@
-# Статистика
+# Statistics
 
-Статистика выводится всем игрокам в конце раунда в виде сообщений вида:
-> **Игрок** прыгнул **42** раза.
+Statistics are displayed to all players at the end of the round as messages like:
+> **Player** jumped **42** times.
 
-Чтобы добавить свою статистику, нужно сначала зарегистрировать строку перевода.
+To add your own statistics, you must first register a translation string.
 
-## Подготовка: файл перевода
+## Preparation: translation file
 
-Создайте файл локализации (например, `resource/localization/en/fh_stats.properties`).
+Create a localization file (e.g., `resource/localization/en/fh_stats.properties`).
 
-::: warning Важно
-Все ключи должны начинаться с `fazhunt.stats.` и **не повторять** уже существующие.
+::: warning Important
+All keys must start with `fazhunt.stats.` and **not duplicate** existing ones.
 :::
 
-Пример строки:
+Example string:
 
 ```properties
-fazhunt.stats.jumped=прыгнул %i раз(а).
+fazhunt.stats.jumped=jumped %i time(s).
 ```
 
-- Перед текстом подставляется ник игрока.
-- На месте `%i` подставляется значение статистики.
+- The player's name is prepended to the text.
+- The `%i` is replaced with the statistic value.
 
-[Пример полного файла перевода →](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/localization/fh_stats.properties)
+[Full translation file example →](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/localization/fh_stats.properties)
 
-## Функции
+## Functions
 
 ### `stats.SetMin(statName, minValue)` <span class="fh-badge server">SERVER</span>
 
-Устанавливает минимальное значение интереса. Если игрок не наберёт этого числа — статистика не покажется в чате.
+Sets the minimum value of interest. If a player doesn't reach this number, the statistic won't be shown in chat.
 
 ```lua
-stats.SetMin("jumped", 10)  -- меньше 10 прыжков — не выводим
+stats.SetMin("jumped", 10)  -- fewer than 10 jumps — don't display
 ```
 
 ### `stats.Add(ply, statName, value)` <span class="fh-badge server">SERVER</span>
 
-Прибавляет значение к статистике игрока.
+Adds a value to the player's statistic.
 
 ```lua
 hook.Add("KeyPress", "CountJumps", function(ply, key)
@@ -48,22 +48,22 @@ end)
 
 ### `stats.GetTop(statName)` <span class="fh-badge server">SERVER</span>
 
-Возвращает лидера по статистике и его значение.
+Returns the leader for a statistic and their value.
 
 ```lua
 local topPly, topValue = stats.GetTop("jumped")
-print(topPly:Nick() .. " прыгнул " .. topValue .. " раз")
+print(topPly:Nick() .. " jumped " .. topValue .. " times")
 ```
 
-## Пример: полный цикл
+## Example: full cycle
 
 ```lua
--- 1. Установить минимум
+-- 1. Set the minimum
 hook.Add("Initialize", "MyStatsInit", function()
     stats.SetMin("destroyed_props", 5)
 end)
 
--- 2. Считать действия
+-- 2. Count actions
 hook.Add("EntityRemoved", "CountDestroyed", function(ent)
     local attacker = ent.LastAttacker
     if IsValid(attacker) and attacker:IsPlayer() then
@@ -72,8 +72,8 @@ hook.Add("EntityRemoved", "CountDestroyed", function(ent)
 end)
 ```
 
-Не забудьте добавить в файл перевода:
+Don't forget to add to the translation file:
 
 ```properties
-fazhunt.stats.destroyed_props=уничтожил %i пропов.
+fazhunt.stats.destroyed_props=destroyed %i prop(s).
 ```
