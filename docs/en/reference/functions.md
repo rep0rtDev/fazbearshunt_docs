@@ -1,28 +1,28 @@
-# Функции FH
+# FH Functions
 
-Глобальные функции гейммода. Используйте для модификации поведения раундов, аниматроников и подарков.
+Global gamemode functions. Use them to modify the behavior of rounds, animatronics, and gifts.
 
-## Управление аниматрониками
+## Animatronic management
 
 ### `giveKiller(ply, killer, [force])` <span class="fh-badge server">SERVER</span>
 
-Назначает игрока аниматроником.
+Assigns a player as an animatronic.
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `ply` | `Player` | Кому выдать |
-| `killer` | `string` | Техническое имя (например, `"pill_wfreddy2"`) |
-| `force` | `bool` *(опц.)* | Если `true` — выдаст даже если такой же уже есть |
+| `ply` | `Player` | Who to assign |
+| `killer` | `string` | Technical name (e.g., `"pill_wfreddy2"`) |
+| `force` | `bool` *(opt.)* | If `true` — assigns even if the same one is already present |
 
 ```lua
 giveKiller(ply, "pill_wspringtrap2", true)
 ```
 
-[Пример использования →](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/plushtrap_half_players.lua)
+[Usage example →](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/plushtrap_half_players.lua)
 
 ### `TaseAnimatronic(ply)` <span class="fh-badge server">SERVER</span>
 
-Если игрок — аниматроник, бьёт его током (как Шокер).
+If the player is an animatronic, tases them (like the Taser).
 
 ```lua
 TaseAnimatronic(ply)
@@ -30,34 +30,34 @@ TaseAnimatronic(ply)
 
 ### `restoreAnimatronics()` <span class="fh-badge server">SERVER</span>
 
-Снимает роль аниматроника со всех текущих аниматроников.
+Removes the animatronic role from all current animatronics.
 
 ---
 
-## Подарки
+## Gifts
 
 ### `doGiftSpawning()` <span class="fh-badge server">SERVER</span> {#dogiftspawning}
 
-Включает появление подарков на карте.
+Enables gift spawning on the map.
 
 ### `disableGiftSpawning()` <span class="fh-badge server">SERVER</span> {#disablegiftspawning}
 
-Отключает появление подарков.
+Disables gift spawning.
 
 ---
 
-## Информация о раунде
+## Round information
 
 ### `fh.GetRoundCount()` <span class="fh-badge shared">SHARED</span>
 
-Возвращает номер текущего раунда (целое число).
+Returns the current round number (integer).
 
 ### `fh.GetEarnedKillers(players)` <span class="fh-badge server">SERVER</span>
 
-Возвращает таблицу игроков, "заслуживших" быть аниматроником в этом раунде. Также **запоминает** их на несколько раундов.
+Returns a table of players who "earned" being an animatronic in this round. Also **remembers** them for several rounds.
 
-::: danger Внимание
-Если вы вызвали эту функцию — **ОБЯЗАТЕЛЬНО выдайте** этим игрокам аниматроника. Иначе они «застрянут» в запоминании, и в следующие раунды их не выберут.
+::: danger Attention
+If you call this function — you **MUST** assign these players as animatronics. Otherwise, they will remain "stuck" in memory and won't be selected in future rounds.
 :::
 
 ```lua
@@ -69,114 +69,114 @@ end
 
 ### `fh.SetRoundType(number)` <span class="fh-badge server">SERVER</span>
 
-Устанавливает тип раунда. Режим вызывает это сам в начале раунда.
+Sets the round type. The mode calls this itself at the start of a round.
 
-::: warning Аккуратно
-Используйте только если точно знаете, что делаете.
+::: warning Be careful
+Use only if you know exactly what you're doing.
 :::
 
 ### `fh.GetRoundType()` <span class="fh-badge shared">SHARED</span>
 
-Возвращает текущий тип раунда.
+Returns the current round type.
 
-| Значение | Тип раунда |
+| Value | Round type |
 |---|---|
-| `0` | Обычный |
-| `1` | Со Спрингтрапом |
+| `0` | Normal |
+| `1` | Springtrap |
 
 ### `fh.GetActiveUsedKiller(killer)` <span class="fh-badge shared">SHARED</span>
 
-Возвращает `true`, если указанный аниматроник присутствует на карте сейчас.
+Returns `true` if the specified animatronic is currently present on the map.
 
 ```lua
 if fh.GetActiveUsedKiller("pill_wbonnie2") then
-    print("Бонни уже в игре!")
+    print("Bonnie is already in the game!")
 end
 ```
 
 ---
 
-## Способности аниматроников
+## Animatronic abilities
 
-::: info Где использовать
-Эти функции предназначены для использования внутри **пилл-паков** аниматроников или своих хуков, расширяющих их.
+::: info Where to use
+These functions are intended for use inside animatronic **Pill Packs** or your own hooks that extend them.
 :::
 
 ### `jumpscareEvent(ply, ent, target, [dist])` <span class="fh-badge server">SERVER</span>
 
-Замораживает игрока-жертву в скримере. Вызывайте **после** проигрывания анимации.
+Freezes the victim player in a screamer. Call **after** playing the animation.
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `ply` | `Player` | Аниматроник |
-| `ent` | `Entity` | Модель аниматроника (см. `pk_pills.getMappedEnt(ply)`) |
-| `target` | `Player` | Жертва |
-| `dist` | `float` *(опц.)* | Дистанция между аниматроником и жертвой |
+| `ply` | `Player` | The animatronic |
+| `ent` | `Entity` | The animatronic's model (see `pk_pills.getMappedEnt(ply)`) |
+| `target` | `Player` | The victim |
+| `dist` | `float` *(opt.)* | Distance between the animatronic and victim |
 
 ### `HighlightPlayers(ply, ent)` <span class="fh-badge server">SERVER</span>
 
-Используется всеми аниматрониками (кроме Плюштрапа) на бинд `+reload`. Просвечивает игроков в радиусе `halo_radius`.
+Used by all animatronics (except Plushtrap) on the `+reload` bind. Highlights players within `halo_radius`.
 
 ### `takePlayer(ply, ent)` <span class="fh-badge server">SERVER</span>
 
-Используется Эндоскелетом для захвата игрока. Автоматически ищет цель поблизости.
+Used by the Endoskeleton to capture a player. Automatically finds a nearby target.
 
 ### `endoRelease(ply)` <span class="fh-badge server">SERVER</span>
 
-Заставляет аниматроника отпустить ранее схваченного игрока.
+Forces the animatronic to release a previously captured player.
 
 ---
 
-## Поиск целей
+## Target finding
 
 ### `FindNearestPlayer(origin, radius, ignorePlayer, fov)` <span class="fh-badge server">SERVER</span>
 
-Ищет ближайшего игрока в радиусе.
+Finds the nearest player within a radius.
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `origin` | `Vector` | Точка поиска |
-| `radius` | `number` | Радиус |
-| `ignorePlayer` | `Player` | Кого игнорировать |
-| `fov` | `number` | Если указано вместе с `ignorePlayer` — поиск только в конусе обзора |
+| `origin` | `Vector` | Search point |
+| `radius` | `number` | Radius |
+| `ignorePlayer` | `Player` | Who to ignore |
+| `fov` | `number` | If specified together with `ignorePlayer` — search only within the field of view cone |
 
-Идеально подходит для выбора цели атаки.
+Perfect for choosing an attack target.
 
 ### `fh_get_nearest_players(origin, radius, ignorePlayer)` <span class="fh-badge server">SERVER</span>
 
-Возвращает **таблицу** игроков в радиусе. Используется Клоуном при ударе молотом.
+Returns a **table** of players within a radius. Used by the Clown when striking with a hammer.
 
 ### `fh_get_nearest_props(origin, radius)` <span class="fh-badge server">SERVER</span>
 
-Возвращает таблицу пропов в радиусе.
+Returns a table of props within a radius.
 
 ---
 
-## Управление списками аниматроников
+## Animatronic list management
 
 ### `killers.getAllSolos()` <span class="fh-badge shared">SHARED</span>
 
-Аниматроники без вторичности. ⚠ Не проверяет играбельность.
+Animatronics without secondary status. ⚠ Does not check playability.
 
 ### `killers.getAllPreferables(secondaries)` <span class="fh-badge shared">SHARED</span>
 
-Все играбельные аниматроники. Если `secondaries = true` — включает и вторичных.
+All playable animatronics. If `secondaries = true` — includes secondary ones as well.
 
 ### `killers.getAllNonPreferables()` <span class="fh-badge shared">SHARED</span>
 
-Все **не**играбельные аниматроники.
+All **non**-playable animatronics.
 
 ### `killers.getAllSecondaries()` <span class="fh-badge shared">SHARED</span>
 
-Все вторичные аниматроники.
+All secondary animatronics.
 
 ### `killers.getAll()` <span class="fh-badge shared">SHARED</span>
 
-Все зарегистрированные аниматроники.
+All registered animatronics.
 
 ### `pill_makePreferable(anim, bool)` <span class="fh-badge shared">SHARED</span>
 
-Делает аниматроника играбельным или убирает из списка играбельных.
+Makes an animatronic playable or removes it from the playable list.
 
 ```lua
 pill_makePreferable("pill_wfreddy2", true)
@@ -184,7 +184,7 @@ pill_makePreferable("pill_wfreddy2", true)
 
 ### `pill_makeSecondary(anim, bool)` <span class="fh-badge shared">SHARED</span>
 
-Добавляет/убирает аниматроника из списка вторичных.
+Adds/removes an animatronic from the secondary list.
 
 ```lua
 pill_makeSecondary("pill_wbonnie2", true)
