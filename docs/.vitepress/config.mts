@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: "Fazbear's Hunt Wiki",
-  cleanUrls: false,
+  cleanUrls: true,
   lastUpdated: true,
   ignoreDeadLinks: true,
 
