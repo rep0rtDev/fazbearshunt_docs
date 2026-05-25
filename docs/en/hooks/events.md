@@ -1,14 +1,14 @@
-# Хуки ивентов
+# Event Hooks
 
-Хуки, связанные с особыми предметами и игровыми событиями.
+Hooks related to special items and game events.
 
-## Маска Маньяка <span class="fh-badge client">CLIENT</span>
+## Maniac Mask <span class="fh-badge client">CLIENT</span>
 
-Маска Маньяка — особый предмет. Когда выживший её надевает, через некоторое время он получает **одержимость** — после этого аниматроники не могут его заскримерить.
+The Maniac Mask is a special item. When a survivor wears it, after some time they gain **obsession** — after which animatronics cannot screamer them.
 
 ### `FH_KillerObsessed` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
 
-Вызывается после получения статуса одержимости.
+Called after gaining the obsessed status.
 
 ```lua
 hook.Run("FH_KillerObsessed")
@@ -16,14 +16,14 @@ hook.Run("FH_KillerObsessed")
 
 ```lua
 hook.Add("FH_KillerObsessed", "ObsessedFX", function()
-    chat.AddText(Color(255, 0, 0), "Ты стал одержимым. Аниматроники тебя не видят.")
-    -- можно запустить визуальный эффект
+    chat.AddText(Color(255, 0, 0), "You have become obsessed. Animatronics cannot see you.")
+    -- can trigger a visual effect
 end)
 ```
 
 ### `FH_KillerLostObsession` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
 
-Вызывается после **потери** статуса одержимости (например, после смерти).
+Called after **losing** the obsessed status (e.g., after death).
 
 ```lua
 hook.Run("FH_KillerLostObsession")
@@ -31,6 +31,6 @@ hook.Run("FH_KillerLostObsession")
 
 ```lua
 hook.Add("FH_KillerLostObsession", "ObsessionLost", function()
-    chat.AddText(Color(255, 200, 200), "Одержимость пропала.")
+    chat.AddText(Color(255, 200, 200), "Obsession is gone.")
 end)
 ```
