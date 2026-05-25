@@ -1,22 +1,22 @@
-# Подарки
+# Gifts
 
-Система подарков FH позволяет игрокам подбирать коробки с положительными или отрицательными эффектами. Вы можете регистрировать собственные.
+FH's gift system allows players to pick up boxes with positive or negative effects. You can register your own.
 
-## Свои эффекты
+## Custom effects
 
 ### `gifts.AddPositiveEffect(name, desc, num, func, [req])` <span class="fh-badge server">SERVER</span>
 
-Регистрирует **положительный** эффект подарка.
+Registers a **positive** gift effect.
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `name` | `string` | Техническое имя эффекта |
-| `desc` | `string` | Описание для игрока (можно переводимая строка или пусто) |
-| `num` | `int` | Число для подстановки в `%i` описания (если ≥ 0) |
-| `func` | `function` | Функция, выполняемая при получении эффекта |
-| `req` | `function` *(опц.)* | Условие выдачи эффекта |
+| `name` | `string` | Technical name of the effect |
+| `desc` | `string` | Description for the player (can be a translatable string or empty) |
+| `num` | `int` | Number to substitute into `%i` in the description (if ≥ 0) |
+| `func` | `function` | Function executed when the effect is received |
+| `req` | `function` *(opt.)* | Condition for granting the effect |
 
-**Пример: выдать монтировку игроку, если у него её нет.**
+**Example: give a crowbar to the player if they don't have one.**
 
 ```lua
 gifts.AddPositiveEffect(
@@ -27,7 +27,7 @@ gifts.AddPositiveEffect(
         ply:Give("weapon_crowbar")
     end,
     function(ply)
-        -- Выдавать только если монтировки ещё нет
+        -- Grant only if the player doesn't already have a crowbar
         return not ply:HasWeapon("weapon_crowbar")
     end
 )
@@ -35,7 +35,7 @@ gifts.AddPositiveEffect(
 
 ### `gifts.AddNegativeEffect(name, desc, num, func)` <span class="fh-badge server">SERVER</span>
 
-Регистрирует **отрицательный** эффект подарка. Параметры — те же, кроме `req`.
+Registers a **negative** gift effect. Parameters are the same, except `req`.
 
 ```lua
 gifts.AddNegativeEffect(
@@ -49,11 +49,11 @@ gifts.AddNegativeEffect(
 )
 ```
 
-## Хуки
+## Hooks
 
 ### `FH_ShouldPlayerReceiveGifts` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Вызывается перед тем, как заспавнить подарок игроку. Возврат `false` — игрок не получит подарок.
+Called before spawning a gift for a player. Returning `false` means the player will not receive a gift.
 
 ```lua
 hook.Add("FH_ShouldPlayerReceiveGifts", "NoGiftsForAdmins", function(ply)
@@ -61,8 +61,8 @@ hook.Add("FH_ShouldPlayerReceiveGifts", "NoGiftsForAdmins", function(ply)
 end)
 ```
 
-## См. также
+## See also
 
-- [`doGiftSpawning()`](/reference/functions.md#dogiftspawning) — включить появление подарков
-- [`disableGiftSpawning()`](/reference/functions.md#disablegiftspawning) — отключить появление подарков
-- [`PLAYER:SetGiftOwnership(bool)`](/reference/player-meta.md#setgiftownership) — установить флаг владения подарком
+- [`doGiftSpawning()`](/en/reference/functions.md#dogiftspawning) — enable gift spawning
+- [`disableGiftSpawning()`](/en/reference/functions.md#disablegiftspawning) — disable gift spawning
+- [`PLAYER:SetGiftOwnership(bool)`](/en/reference/player-meta.md#setgiftownership) — set gift ownership flag
