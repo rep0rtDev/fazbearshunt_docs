@@ -1,45 +1,45 @@
-# Типы раундов
+# Round Types
 
-Справочник встроенных типов раундов и инструкция по созданию своих.
+Reference for built-in round types and instructions for creating your own.
 
-## Встроенные типы
+## Built-in types
 
-| ID | Имя | Описание |
+| ID | Name | Description |
 |---|---|---|
-| `0` | `normal` | Обычный раунд |
-| `1` | `springtrap` | Один игрок получает Спрингтрапа |
+| `0` | `normal` | Normal round |
+| `1` | `springtrap` | One player gets Springtrap |
 
-Получить тип текущего раунда:
+Get the current round type:
 
 ```lua
 if fh.GetRoundType() == 1 then
-    print("Идёт Спрингтрап раунд!")
+    print("Springtrap round is underway!")
 end
 ```
 
-## Создание своего типа раунда
+## Creating your own round type
 
-См. полную документацию: [Раунды →](/gameplay/rounds.md)
+See full documentation: [Rounds →](/en/gameplay/rounds.md)
 
-Быстрый пример:
+Quick example:
 
 ```lua
 fh.RegisterRoundType("golden_madness", "gold_mad", function()
-    -- Выдаём всем по Золотому Фредди
+    -- Give everyone Golden Freddy
     for _, ply in ipairs(player.GetAll()) do
         giveKiller(ply, "pill_wgfreddy2", true)
     end
 end, 3, 6, 32)
 ```
 
-Параметры:
-- `weight = 3` — 3% шанс
-- `minPlayers = 6` — минимум 6 игроков
-- `maxPlayers = 32` — максимум 32
+Parameters:
+- `weight = 3` — 3% chance
+- `minPlayers = 6` — minimum 6 players
+- `maxPlayers = 32` — maximum 32
 
-[Пример: Загранное Измерение для всех](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/gfreddy_custom_round.lua)
+[Example: Outworld Dimension for everyone](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/gfreddy_custom_round.lua)
 
-## Музыка для своего раунда
+## Music for your round
 
 ```lua
 fh.AddRoundMusic(
@@ -48,6 +48,6 @@ fh.AddRoundMusic(
 )
 ```
 
-## Хуки раунда
+## Round hooks
 
-Все хуки, связанные с этапами раунда: [Хуки раунда →](/hooks/round.md)
+All hooks related to round stages: [Round hooks →](/en/hooks/round.md)
