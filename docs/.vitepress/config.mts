@@ -19,8 +19,8 @@ export default defineConfig({
 
     nav: [
       { text: 'Главная', link: '/' },
-      { text: 'Discord', link: 'https://discord.gg/fazbearhunt' },
-      { text: 'GitHub', link: 'https://github.com/s3rgeant/fazbearshunt_docs' },
+      { text: 'Discord', link: 'https://discord.gg/3yFA2pwQJR' },
+      { text: 'GitHub', link: 'https://github.com/rep0rtDev/fazbearshunt_docs' },
     ],
 
     // ОДИН общий сайдбар для всех страниц — Facepunch-style
@@ -80,7 +80,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/s3rgeant/fazbearshunt_docs' },
+      { icon: 'github', link: 'https://github.com/rep0rtDev/fazbearshunt_docs' },
     ],
 
     search: {
