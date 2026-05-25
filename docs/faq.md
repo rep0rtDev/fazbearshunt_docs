@@ -44,7 +44,7 @@
 pill_makePreferable("pill_wfreddy_from_workshop", true)
 ```
 
-См. [Первая модификация →](/guide/first-modification)
+См. [Первая модификация →](/guide/first-modification.md)
 
 ---
 

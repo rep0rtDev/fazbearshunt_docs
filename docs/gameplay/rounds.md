@@ -82,9 +82,9 @@ fh.AddRoundMusic(
 
 ## Связанные хуки
 
-- [`fh_prestartgame`](/hooks/round#fh_prestartgame) — перед выбором раунда
-- [`fh_startgame`](/hooks/round#fh_startgame) — после выбора раунда
-- [`fh_poststartgame`](/hooks/round#fh_poststartgame) — после разморозки аниматроников
-- [`fh_postendgame`](/hooks/round#fh_postendgame) — после окончания раунда
+- [`fh_prestartgame`](/hooks/round.md#fh_prestartgame) — перед выбором раунда
+- [`fh_startgame`](/hooks/round.md#fh_startgame) — после выбора раунда
+- [`fh_poststartgame`](/hooks/round.md#fh_poststartgame) — после разморозки аниматроников
+- [`fh_postendgame`](/hooks/round.md#fh_postendgame) — после окончания раунда
 
-См. также: [Хуки раунда →](/hooks/round)
+См. также: [Хуки раунда →](/hooks/round.md)

@@ -63,6 +63,6 @@ end)
 
 ## См. также
 
-- [`doGiftSpawning()`](/reference/functions#dogiftspawning) — включить появление подарков
-- [`disableGiftSpawning()`](/reference/functions#disablegiftspawning) — отключить появление подарков
-- [`PLAYER:SetGiftOwnership(bool)`](/reference/player-meta#setgiftownership) — установить флаг владения подарком
+- [`doGiftSpawning()`](/reference/functions.md#dogiftspawning) — включить появление подарков
+- [`disableGiftSpawning()`](/reference/functions.md#disablegiftspawning) — отключить появление подарков
+- [`PLAYER:SetGiftOwnership(bool)`](/reference/player-meta.md#setgiftownership) — установить флаг владения подарком
