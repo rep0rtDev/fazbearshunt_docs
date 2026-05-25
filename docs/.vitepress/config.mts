@@ -101,7 +101,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/rep0rtDev/fazbearshunt_docs/edit/main/:path',
+      pattern: 'https://github.com/rep0rtDev/fazbearshunt_docs/edit/main/docs/:path',
       text: 'Редактировать на GitHub'
     },
 
