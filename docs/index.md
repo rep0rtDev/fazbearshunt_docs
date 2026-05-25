@@ -42,7 +42,7 @@
 - [Аниматроники](/reference/animatronics) — управление списками аниматроников
 - [Типы раундов](/reference/round-types) — встроенные и пользовательские
 
-### 🪝 Хуки
+### 🔧 Хуки
 
 Все хуки гейммода с примерами использования.
 
@@ -60,6 +60,6 @@
 
 ## Полезные ссылки
 
-- [Discord-сервер Fazbear's Hunt](https://discord.gg/fazbearhunt)
-- [GitHub репозиторий документации](https://github.com/s3rgeant/fazbearshunt_docs)
+- [Discord-сервер Fazbear's Hunt](https://discord.gg/3yFA2pwQJR)
+- [GitHub репозиторий документации](https://github.com/rep0rtDev/fazbearshunt_docs)
 - [Официальная GMod Wiki](https://wiki.facepunch.com/gmod/)
