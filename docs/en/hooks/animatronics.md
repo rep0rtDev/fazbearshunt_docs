@@ -1,25 +1,25 @@
-# Хуки аниматроников
+# Animatronic Hooks
 
-Хуки, связанные с общим поведением аниматроников: скримеры, Шокер, реплики.
+Hooks related to general animatronic behavior: screamers, the Taser, voice lines.
 
 ## `FH_PlayerShouldJumpscare` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_playershouldjumpscare}
 
-Вызывается **перед** скримером.
+Called **before** a screamer.
 
 ```lua
 hook.Run("FH_PlayerShouldJumpscare", ply, ent, target)
 ```
 
-| Аргумент | Тип | Описание |
+| Argument | Type | Description |
 |---|---|---|
-| `ply` | `Player` | Аниматроник |
-| `ent` | `Entity` | Модель аниматроника |
-| `target` | `Player` | Жертва |
+| `ply` | `Player` | The animatronic |
+| `ent` | `Entity` | The animatronic's model |
+| `target` | `Player` | The victim |
 
-**Возврат `false`** — отменить скример.
+**Return `false`** — cancel the screamer.
 
 ```lua
--- Защитить игроков с маской маньяка (примерная логика)
+-- Protect players with the maniac mask (example logic)
 hook.Add("FH_PlayerShouldJumpscare", "MaskProtect", function(ply, ent, target)
     if target:GetNWBool("HasMaskObsession") then
         return false
@@ -31,13 +31,13 @@ end)
 
 ## `FH_HandleTaserHit` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Вызывается **перед** ударом Шокера по игроку.
+Called **before** a Taser hits a player.
 
 ```lua
 hook.Run("FH_HandleTaserHit", ply)
 ```
 
-**Возврат `false`** — отменить действие Шокера.
+**Return `false`** — cancel the Taser's effect.
 
 ```lua
 hook.Add("FH_HandleTaserHit", "AdminTaserImmune", function(ply)
@@ -49,26 +49,26 @@ end)
 
 ## `FH_AnimatronicJumpscare` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_animatronicjumpscare}
 
-Вызывается **после успешного** скримера.
+Called **after a successful** screamer.
 
 ```lua
 hook.Run("FH_AnimatronicJumpscare", ply, ent, target, data)
 ```
 
-**Структура `data`:**
+**`data` structure:**
 
 ```lua
 {
-    delay = 0.5,           -- через сколько умрёт target
-    char  = "sfreddy",     -- имя аниматроника
-    dist  = 64.2,          -- дистанция в момент скримера
-    wep   = "fh_freddy_h"  -- класс оружия от 1-го лица
+    delay = 0.5,           -- time until target dies
+    char  = "sfreddy",     -- animatronic name
+    dist  = 64.2,          -- distance at screamer moment
+    wep   = "fh_freddy_h"  -- first-person weapon class
 }
 ```
 
 ```lua
 hook.Add("FH_AnimatronicJumpscare", "LogScares", function(ply, ent, target, data)
-    print(string.format("[FH] %s заскримерил %s (дист=%.1f, char=%s)",
+    print(string.format("[FH] %s screamed at %s (dist=%.1f, char=%s)",
         ply:Nick(), target:Nick(), data.dist, data.char))
 end)
 ```
@@ -77,36 +77,36 @@ end)
 
 ## `FH_JumpscareEvent` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_jumpscareevent}
 
-Вызывается **перед** заморозкой игроков в скримере.
+Called **before** freezing players during a screamer.
 
 ```lua
 hook.Run("FH_JumpscareEvent", ply, ent, target, dist)
 ```
 
-| Аргумент | Тип | Описание |
+| Argument | Type | Description |
 |---|---|---|
-| `ply` | `Player` | Аниматроник |
-| `ent` | `Entity` | Модель аниматроника |
-| `target` | `Entity` | Жертва |
-| `dist` | `float` | Дистанция |
+| `ply` | `Player` | The animatronic |
+| `ent` | `Entity` | The animatronic's model |
+| `target` | `Entity` | The victim |
+| `dist` | `float` | Distance |
 
 ---
 
 ## `FH_OverrideVoiceline` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Вызывается **перед** проигрыванием реплики аниматроника. Позволяет заменить реплику.
+Called **before** playing an animatronic's voice line. Allows overriding the line.
 
 ```lua
 hook.Run("FH_OverrideVoiceline", ply, anim, line)
 ```
 
-| Аргумент | Тип | Описание |
+| Argument | Type | Description |
 |---|---|---|
-| `ply` | `Player` | Аниматроник |
-| `anim` | `string` | Имя аниматроника |
-| `line` | `string` | Текущая реплика |
+| `ply` | `Player` | The animatronic |
+| `anim` | `string` | The animatronic's name |
+| `line` | `string` | The current voice line |
 
-**Возврат** новой строки заменит реплику.
+**Return** a new string to override the voice line.
 
 ```lua
 hook.Add("FH_OverrideVoiceline", "FunnyLines", function(ply, anim, line)
