@@ -271,7 +271,7 @@ body {
 /* ========== RIGHT ASIDE (TOC) ========== */
 .VPDocAside {
   padding: 32px 20px 32px 24px !important;
-  min-width: 260px;
+  min-width: 280px;
   width: 260px;
 }
 
