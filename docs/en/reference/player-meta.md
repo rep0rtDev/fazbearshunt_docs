@@ -1,36 +1,36 @@
 # PlayerMeta
 
-Расширения мета-таблицы [Player](https://wiki.facepunch.com/gmod/Player), добавляемые гейммодом Fazbear's Hunt.
+Extensions to the [Player](https://wiki.facepunch.com/gmod/Player) meta-table added by the Fazbear's Hunt gamemode.
 
-## Роль игрока <span class="fh-badge shared">SHARED</span>
+## Player role <span class="fh-badge shared">SHARED</span>
 
 ### `PLAYER:IsSurvivor()`
 
-Возвращает `true`, если игрок — выживший.
+Returns `true` if the player is a survivor.
 
 ```lua
 if ply:IsSurvivor() then
-    print(ply:Nick() .. " — выживший")
+    print(ply:Nick() .. " is a survivor")
 end
 ```
 
 ### `PLAYER:IsAnimatronic()`
 
-Возвращает `true`, если игрок играет за аниматроника.
+Returns `true` if the player is playing as an animatronic.
 
 ```lua
 if ply:IsAnimatronic() then
-    ply:ChatPrint("Удачной охоты!")
+    ply:ChatPrint("Happy hunting!")
 end
 ```
 
 ---
 
-## Спавн и позиция <span class="fh-badge server">SERVER</span>
+## Spawn and position <span class="fh-badge server">SERVER</span>
 
 ### `PLAYER:ReturnToSpawn()`
 
-Меняет позицию игрока на точку спавна. В отличие от [`ENTITY:Spawn()`](https://wiki.facepunch.com/gmod/Entity:Spawn), не пересоздаёт самого игрока — оружие, здоровье и т.д. сохраняются.
+Changes the player's position to the spawn point. Unlike [`ENTITY:Spawn()`](https://wiki.facepunch.com/gmod/Entity:Spawn), does not recreate the player — weapons, health, etc. are preserved.
 
 ```lua
 ply:ReturnToSpawn()
@@ -38,7 +38,7 @@ ply:ReturnToSpawn()
 
 ### `PLAYER:SuppressRagdollSpawn(bool)`
 
-Позволяет отменить спавн посмертного регдолла. После одной попытки спавна автоматически сбрасывается в `false`.
+Allows canceling the spawn of a death ragdoll. Automatically resets to `false` after one spawn attempt.
 
 ```lua
 hook.Add("DoPlayerDeath", "NoRagdoll", function(ply)
@@ -48,15 +48,15 @@ end)
 
 ---
 
-## Застревания <span class="fh-badge server">SERVER</span>
+## Getting stuck <span class="fh-badge server">SERVER</span>
 
 ### `PLAYER:IsStuck()`
 
-Проверяет хитбокс игрока на застревание в геометрии или других сущностях. В отличие от [`ENTITY:IsInWorld()`](https://wiki.facepunch.com/gmod/Entity:IsInWorld), учитывает хитбокс.
+Checks the player's hitbox for getting stuck in geometry or other entities. Unlike [`ENTITY:IsInWorld()`](https://wiki.facepunch.com/gmod/Entity:IsInWorld), accounts for the hitbox.
 
 ### `PLAYER:Unstuck()`
 
-Пытается телепортировать игрока в место, где он не застревает. Используйте вместе с `IsStuck()`:
+Attempts to teleport the player to a place where they are not stuck. Use together with `IsStuck()`:
 
 ```lua
 hook.Add("PlayerSpawn", "CheckStuck", function(ply)
@@ -70,55 +70,55 @@ end)
 
 ---
 
-## Толкания <span class="fh-badge server">SERVER</span>
+## Pushing <span class="fh-badge server">SERVER</span>
 
 ### `PLAYER:SetPushImmune(bool)`
 
-Установка иммунитета к отталкиванию другими игроками.
+Sets immunity to being pushed by other players.
 
 ### `PLAYER:IsPushImmune()`
 
-Имеет ли игрок иммунитет к отталкиваниям?
+Does the player have immunity to being pushed?
 
 ### `PLAYER:SetPushBlocked(bool)`
 
-Может ли игрок толкать других?
+Can the player push others?
 
 ### `PLAYER:IsPushBlocked()`
 
-Запрещено ли игроку толкать других?
+Is the player forbidden from pushing others?
 
 ```lua
--- Сделать аниматроника непробиваемой стеной
+-- Make the animatronic an immovable wall
 ply:SetPushImmune(true)
 ply:SetPushBlocked(true)
 ```
 
 ---
 
-## Голосовой чат <span class="fh-badge server">SERVER</span>
+## Voice chat <span class="fh-badge server">SERVER</span>
 
 ### `PLAYER:SetAudible(bool)`
 
-Слышен ли игрок другими игроками в голосовом чате?
+Is the player audible to other players in voice chat?
 
 ### `PLAYER:GetAudible()`
 
-Возвращает текущий статус слышимости.
+Returns the current audibility status.
 
 ### `PLAYER:ForceListenPlayer(Player)`
 
-Принудительно заставить игрока слышать только указанного игрока (всех остальных — выключить).
+Forces the player to hear only the specified player (disable all others).
 
 ### `PLAYER:ResetListenPlayer()`
 
-Сбросить принудительное прослушивание.
+Resets forced listening.
 
 ```lua
--- Заставить жертву слышать только аниматроника
+-- Force the victim to hear only the animatronic
 victim:ForceListenPlayer(killer)
 
--- Через 10 секунд вернуть нормальное состояние
+-- After 10 seconds, return to normal state
 timer.Simple(10, function()
     if IsValid(victim) then victim:ResetListenPlayer() end
 end)
@@ -126,18 +126,18 @@ end)
 
 ---
 
-## Золотой Фредди <span class="fh-badge server">SERVER</span>
+## Golden Freddy <span class="fh-badge server">SERVER</span>
 
 ### `PLAYER:SetGFreddyImmune(bool)`
 
-Иммунитет к способности Золотого Фредди (Загранное Измерение).
+Immunity to Golden Freddy's ability (Outworld Dimension).
 
 ### `PLAYER:GetGFreddyImmune()`
 
-Возвращает текущий статус иммунитета.
+Returns the current immunity status.
 
 ```lua
--- Все админы иммунны к Золотому Фредди
+-- All admins are immune to Golden Freddy
 hook.Add("PlayerInitialSpawn", "AdminGFImmune", function(ply)
     if ply:IsAdmin() then
         ply:SetGFreddyImmune(true)
@@ -147,22 +147,22 @@ end)
 
 ---
 
-## Подарки <span class="fh-badge server">SERVER</span>
+## Gifts <span class="fh-badge server">SERVER</span>
 
-::: info Уже используется режимом
-Эти функции применяются по умолчанию — игра не выдаёт второй подарок, пока не подобран первый.
+::: info Already used by the mode
+These functions are used by default — the game does not give out a second gift until the first one is picked up.
 :::
 
 ### `PLAYER:SetGiftOwnership(bool)` {#setgiftownership}
 
-Установить флаг владения подарком.
+Sets the gift ownership flag.
 
 ### `PLAYER:GetGiftOwnership()`
 
-Имеет ли игрок несобранный подарок?
+Does the player have an uncollected gift?
 
 ```lua
 if not ply:GetGiftOwnership() then
-    -- спавним новый подарок
+    -- spawn a new gift
 end
 ```
