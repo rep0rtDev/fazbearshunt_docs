@@ -13,8 +13,9 @@
   --vp-font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Layout */
-  --vp-layout-max-width: 1440px;
+  --vp-layout-max-width: 1600px;
   --vp-sidebar-width: 288px;
+  --vp-aside-width: 320px;
   --vp-nav-height: 52px;
 }
 
