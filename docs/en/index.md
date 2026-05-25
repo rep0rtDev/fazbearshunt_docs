@@ -42,7 +42,7 @@ Full technical reference for all functions and methods.
 - [Animatronics](/en/reference/animatronics) — animatronic list management
 - [Round Types](/en/reference/round-types) — built-in and custom types
 
-### 🪝 Hooks
+### 🔧 Hooks
 
 All gamemode hooks with usage examples.
 
