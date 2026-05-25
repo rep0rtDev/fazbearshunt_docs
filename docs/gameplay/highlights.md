@@ -16,25 +16,48 @@
 ```lua
 hook.Add("KeyPress", "MyHighlight", function(ply, key)
     if key == IN_RELOAD and ply:IsAnimatronic() then
-        local ent = pk_pills.getMappedEnt(ply)
-        highlight.ByDistance(ply, ent)
+        local ent = pills.getMappedEnt(ply)
+		if IsValid(ent) then
+			highlight.ByDistance(ply, ent)
+		end
     end
 end)
 ```
 
-### `highlight.Add(ply, players, duration)` <span class="fh-badge server">SERVER</span>
+### `highlight.Add(ply, players, duration, color)` <span class="fh-badge server">SERVER</span>
 
-Просвечивает указанных игроков для `ply` на заданное время.
+Просвечивает указанных игроков для `ply` на заданное время, с указанным цветом.
 
 | Параметр | Тип | Описание |
 |---|---|---|
 | `ply` | `Player` | Кто видит просвет |
 | `players` | `Player` или `table[Player]` | Кого просвечивает |
 | `duration` | `float` | Длительность в секундах |
+| `color` | `color` *(опц.)* | Цвет просвета |
 
 ::: warning Учтите
 Эта функция **не включает звуки** оповещения о просвете. Используйте `highlight.NotifyTarget()` для оповещения.
 :::
+
+### `addAffected(ply, duration, color)` <span class="fh-badge client">CLIENT</span>
+
+Просвечивает указанных игроков для `ply` на заданное время, с указанным цветом на клиенте.
+
+| Параметр | Тип | Описание | Зн. по умолчанию |
+|---|---|---|
+| `ply` | `Player` | Кто просвечен | |
+| `duration` | `float` *(опц.)* | Длительность в секундах | КонВар halo_time |
+| `color` | `color` *(опц.)* | Цвет просвета | Color(255,0,0) |
+| `force` | `bool` *(опц.)* | Насильно просветить, даже если игрок уже просвечен | false |
+
+### `removeAffected(ply, force)` <span class="fh-badge client">CLIENT</span>
+
+Убирает просвет на игроке `ply`.
+
+| Параметр | Тип | Описание | Зн. по умолчанию |
+|---|---|---|
+| `ply` | `Player` | Кто просвечен | |
+| `force` | `bool` *(опц.)* | Насильно выключить просвет, если игрок был насильно просвечен | false |
 
 ## Кулдауны
 
@@ -47,7 +70,7 @@ highlight.Cooldown(ply, 15)  -- 15 секунд КД
 ```
 
 ::: info
-Если у аниматроника изначально не было способности «Просвет» в интерфейсе, она там не появится.
+Если у аниматроника нет способности «Просвет» в интерфейсе, он не узнаёт про КД.
 :::
 
 ### `highlight.GetCooldown(ply)` <span class="fh-badge server">SERVER</span>
@@ -62,7 +85,7 @@ end
 
 ## Звуки просвета
 
-### `highlight.AddVisionSounds(name, snd_affected, snd_unaffected)` <span class="fh-badge shared">SHARED</span>
+### `highlight.AddVisionSounds(name, snd_affected, snd_unaffected)` <span class="fh-badge server">SERVER</span>
 
 Регистрирует звуки просвета для конкретного аниматроника.
 
@@ -75,16 +98,16 @@ highlight.AddVisionSounds(
 ```
 
 ::: tip
-В путях звуков обязательно указывайте полное имя файла, включая расширение.
+В путях звуков обязательно указывайте полный путь до файла, включая расширение.
 :::
 
-### `highlight.GetVisionSound(ent)` <span class="fh-badge shared">SHARED</span>
+### `highlight.GetVisionSound(ent)` <span class="fh-badge server">SERVER</span>
 
 Возвращает таблицу со звуками: `{ affected = "...", unaffected = "..." }`.
 
 ### `highlight.NotifyTarget(target, ent, isAffected)` <span class="fh-badge server">SERVER</span>
 
-Включает звук просвета и накладывает визуальный эффект на игрока.
+Включает звук просвета и накладывает визуальный эффект на экране игрока.
 
 | Параметр | Тип | Описание |
 |---|---|---|
@@ -93,5 +116,5 @@ highlight.AddVisionSounds(
 | `isAffected` | `bool` | `true` — звук успеха, `false` — звук провала |
 
 ```lua
-highlight.NotifyTarget(survivor, animEnt, true)
+highlight.NotifyTarget(survivor, pillEnt, true)
 ```

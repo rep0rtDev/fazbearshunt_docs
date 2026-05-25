@@ -54,17 +54,13 @@ TaseAnimatronic(ply)
 
 ### `fh.GetEarnedKillers(players)` <span class="fh-badge server">SERVER</span>
 
-Возвращает таблицу игроков, "заслуживших" быть аниматроником в этом раунде. Также **запоминает** их на несколько раундов.
-
-::: danger Внимание
-Если вы вызвали эту функцию — **ОБЯЗАТЕЛЬНО выдайте** этим игрокам аниматроника. Иначе они «застрянут» в запоминании, и в следующие раунды их не выберут.
-:::
+Возвращает таблицу игроков, сортируя их сначала по "заслужившим" быть аниматроником в этом раунде.
 
 ```lua
 local candidates = fh.GetEarnedKillers(player.GetAll())
-for _, ply in ipairs(candidates) do
-    giveKiller(ply, "pill_wfreddy2")
-end
+
+giveKiller(candidates[1], "pill_wfreddy2") -- первый игрок в таблице зачастую дольше всех не был аниматроником.
+
 ```
 
 ### `fh.SetRoundType(number)` <span class="fh-badge server">SERVER</span>
@@ -83,16 +79,22 @@ end
 |---|---|
 | `0` | Обычный |
 | `1` | Со Спрингтрапом |
+| `2` | Бонни-Тег |
+| `3` | Раунд-Заражение с Bear5 |
 
 ### `fh.GetActiveUsedKiller(killer)` <span class="fh-badge shared">SHARED</span>
 
-Возвращает `true`, если указанный аниматроник присутствует на карте сейчас.
+Возвращает игрока, которому был выдан указанный аниматроник.
 
 ```lua
 if fh.GetActiveUsedKiller("pill_wbonnie2") then
     print("Бонни уже в игре!")
 end
 ```
+
+::: danger Внимание
+Если аниматроников с именем `killer` больше одного, то функция выдаст того, которого выдали последним.
+:::
 
 ---
 
@@ -102,6 +104,20 @@ end
 Эти функции предназначены для использования внутри **пилл-паков** аниматроников или своих хуков, расширяющих их.
 :::
 
+### `performJumpscare(ply, ent, target, killDelay, [voiceCharacter], [jumpscareDistance], [wepClass])` <span class="fh-badge server">SERVER</span>
+
+Насильно скримерит `target` для `ply`.
+
+| Параметр | Тип | Описание |
+|---|---|---|
+| `ply` | `Player` | Аниматроник |
+| `ent` | `Entity` | Модель аниматроника (`pills.getMappedEnt(ply)`) |
+| `target` | `Player` | Жертва |
+| `killDelay` | `float` | Время убийства |
+| `voiceCharacter` | `string` *(опц.)* | Тех. Имя аниматроника (используется для проигрывания войслайнов) |
+| `jumpscareDistance` | `float` *(опц.)* | Дистанция между аниматроником и жертвой |
+| `wepClass` | `string` *(опц.)* | Класс оружия рук аниматроника, для которой включится анимация **scare** |
+
 ### `jumpscareEvent(ply, ent, target, [dist])` <span class="fh-badge server">SERVER</span>
 
 Замораживает игрока-жертву в скримере. Вызывайте **после** проигрывания анимации.
@@ -109,29 +125,33 @@ end
 | Параметр | Тип | Описание |
 |---|---|---|
 | `ply` | `Player` | Аниматроник |
-| `ent` | `Entity` | Модель аниматроника (см. `pk_pills.getMappedEnt(ply)`) |
+| `ent` | `Entity` | Модель аниматроника (`pills.getMappedEnt(ply)`) |
 | `target` | `Player` | Жертва |
 | `dist` | `float` *(опц.)* | Дистанция между аниматроником и жертвой |
 
-### `HighlightPlayers(ply, ent)` <span class="fh-badge server">SERVER</span>
-
-Используется всеми аниматрониками (кроме Плюштрапа) на бинд `+reload`. Просвечивает игроков в радиусе `halo_radius`.
-
-### `takePlayer(ply, ent)` <span class="fh-badge server">SERVER</span>
+### `endo.grabNeareastPlayer(ply, ent)` <span class="fh-badge server">SERVER</span>
 
 Используется Эндоскелетом для захвата игрока. Автоматически ищет цель поблизости.
 
-### `endoRelease(ply)` <span class="fh-badge server">SERVER</span>
+### `endo.endoRelease(ply)` <span class="fh-badge server">SERVER</span>
 
 Заставляет аниматроника отпустить ранее схваченного игрока.
+
+### `endo.releaseExactPlayer(target)` <span class="fh-badge server">SERVER</span>
+
+Пытается отпустить `target`, если его держит аниматроник с помощью одной из функций выше.
+
+### `endo.isGrabbed(target)` <span class="fh-badge server">SERVER</span>
+
+Возвращает, держит ли кто-то игрока `target`.
 
 ---
 
 ## Поиск целей
 
-### `FindNearestPlayer(origin, radius, ignorePlayer, fov)` <span class="fh-badge server">SERVER</span>
+### `FindNearestPlayer(origin, radius, ignorePlayer, fov)` <span class="fh-badge shared">SHARED</span>
 
-Ищет ближайшего игрока в радиусе.
+Ищет ближайшего выжившего в радиусе.
 
 | Параметр | Тип | Описание |
 |---|---|---|
@@ -142,17 +162,74 @@ end
 
 Идеально подходит для выбора цели атаки.
 
-### `fh_get_nearest_players(origin, radius, ignorePlayer)` <span class="fh-badge server">SERVER</span>
+### `fh_get_nearest_players(origin, radius, ignorePlayer)` <span class="fh-badge shared">SHARED</span>
 
-Возвращает **таблицу** игроков в радиусе. Используется Клоуном при ударе молотом.
+Возвращает **таблицу** выживших в радиусе. Используется Клоуном при ударе молотом.
 
-### `fh_get_nearest_props(origin, radius)` <span class="fh-badge server">SERVER</span>
+### `fh_get_nearest_props(origin, radius)` <span class="fh-badge shared">SHARED</span>
 
 Возвращает таблицу пропов в радиусе.
 
 ---
 
+## Регистрация аниматроников
+
+### `killers.Register(pill, name, fullname, color, category)` <span class="fh-badge shared">SHARED</span>
+
+Регистрирует аниматроника в базу режима. После успешной регистрации аниматроник будет доступен в Админ-Панели.
+
+| Параметр | Тип | Описание |
+|---|---|---|
+| `pill` | `string` | Название пилла |
+| `name` | `string` | Техническое имя |
+| `fullname` | `string` | Полное имя |
+| `color` | `color` | Цвет интерфейса аниматроника |
+| `category` | `string` | Категория аниматроника (Используется для сортировки в Админ-Панели) |
+
+::: info Важно
+Именно здесь режим сохраняет иконки аниматроника (для Tab-меню, или выборки аниматроников), а также портрет аниматроника, который используется в интерфейсе игрока в левом нижнем углу.
+:::
+
+```lua
+-- Код из animatronics/bear5.lua
+killers.Register("bear5_main", "bear5", "Bear 5", Color(0,120,255), "Freaks")
+killers.Register("bear5_clone", "bearling5", "Bearling 5", Color(0,120,255), "Freaks")
+killers.Register("fox4", "fox4", "Fox 4", Color(0,255,20), "Freaks")
+```
+
+### `killers.SetAbilities(name, abilities)` <span class="fh-badge shared">SHARED</span>
+
+Устанавливает способности аниматроника, которые будут отображаться в интерфейсе игрока.
+
+Каждая способность в таблице должна содержать следующие данные:
+
+| Параметр | Тип | Описание |
+|---|---|---|
+| `name` | `string` | Название способности |
+| `key` | `string` | Кнопка спобности |
+| `hidden` | `bool` | Спрятать пока нет КД? |
+| `tokens` | `int` *(опц.)* | Количество токенов способности |
+| `condition` | `function` *(опц.)* | Функция должна возвращать цвет, в который будет красится кнопка. |
+
+::: info Важно
+Ванильный FH нигде не использует таблицу способностей на сервере, но всё равно советуется устанавливать способности с обеих сторон.
+:::
+
+```lua
+-- Код из animatronics/bear5.lua
+killers.SetAbilities("bear5", {
+	{ name = 'highlight', key = 'R' },
+	{ name = 'death', key = 'RMB' },
+})
+```
+
+---
+
 ## Управление списками аниматроников
+
+### `killers.getAll()` <span class="fh-badge shared">SHARED</span>
+
+Все зарегистрированные аниматроники.
 
 ### `killers.getAllSolos()` <span class="fh-badge shared">SHARED</span>
 
@@ -170,9 +247,26 @@ end
 
 Все вторичные аниматроники.
 
-### `killers.getAll()` <span class="fh-badge shared">SHARED</span>
+### `killers.GetName(pill)` <span class="fh-badge shared">SHARED</span>
 
-Все зарегистрированные аниматроники.
+Возвращает имя аниматроника.
+
+```lua
+print(killers.GetName("pill_wfreddy2")) -- freddy
+```
+
+### `killers.GetFullName(pill)` <span class="fh-badge shared">SHARED</span>
+
+Возвращает полное имя аниматроника.
+
+::: info Важно
+Полное имя аниматроника чаще всего хранит ключ к переводу, который можно преобразовать в нормальную строку только на клиенте.
+На сервере советуется получать полное имя аниматроника у модель-энтити (`pills.getMappedEnt(ply)`) через значение `printName`.
+:::
+
+```lua
+print(killers.GetFullName("pill_sfreddy2")) -- fazhunt.animatronics.sfreddy
+```
 
 ### `pill_makePreferable(anim, bool)` <span class="fh-badge shared">SHARED</span>
 
@@ -184,7 +278,7 @@ pill_makePreferable("pill_wfreddy2", true)
 
 ### `pill_makeSecondary(anim, bool)` <span class="fh-badge shared">SHARED</span>
 
-Добавляет/убирает аниматроника из списка вторичных.
+Добавляет/убирает аниматроника из списка вторичных. Чаще всего используется сразу же после регистрации аниматроника.
 
 ```lua
 pill_makeSecondary("pill_wbonnie2", true)

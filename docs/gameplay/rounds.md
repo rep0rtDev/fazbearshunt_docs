@@ -4,9 +4,9 @@
 
 ## Регистрация типа раунда
 
-### `fh.RegisterRoundType(name, id, func, [weight], [minPlayers], [maxPlayers])` <span class="fh-badge shared">SHARED</span>
+### `fh.RegisterRoundType(name, id, func, [weight], [minPlayers], [maxPlayers])` <span class="fh-badge server">SERVER</span>
 
-Регистрирует новый тип раунда.
+Регистрирует новый тип раунда. Возвращает ID и Техническое имя раунда.
 
 **Параметры:**
 
@@ -22,17 +22,19 @@
 **Пример:**
 
 ```lua
-fh.RegisterRoundType("springtrap_madness", "spring_mad", function()
+local id, name = fh.RegisterRoundType("springtrap_madness", "spring_mad", function()
     -- Раздаём всем по Спрингтрапу!
-    for _, ply in ipairs(player.GetAll()) do
-        giveKiller(ply, "pill_wspringtrap2", true)
+    for _, ply in player.Iterator() do
+        giveKiller(ply, "pill_springtrap", true)
     end
 end, 5, 4, 16)  -- 5% шанс, 4–16 игроков
+
+print(id, name) -- 43700	springtrap_madness
 ```
 
 ## Получение информации о раундах
 
-### `fh.GetRoundTypes()` <span class="fh-badge shared">SHARED</span>
+### `fh.GetRoundTypes()` <span class="fh-badge server">SERVER</span>
 
 Возвращает таблицу со всеми ID зарегистрированных раундов.
 
@@ -41,7 +43,7 @@ local all = fh.GetRoundTypes()
 PrintTable(all)
 ```
 
-### `fh.GetRoundTypeByName(name)` <span class="fh-badge shared">SHARED</span>
+### `fh.GetRoundTypeByName(name)` <span class="fh-badge server">SERVER</span>
 
 Возвращает ID раунда по его техническому имени.
 
@@ -50,7 +52,7 @@ local id = fh.GetRoundTypeByName("springtrap_madness")
 print(id)  -- 12345 (например)
 ```
 
-### `fh.GetRoundTypeNameByNumber(id)` <span class="fh-badge shared">SHARED</span>
+### `fh.GetRoundTypeNameByNumber(id)` <span class="fh-badge server">SERVER</span>
 
 Обратная функция — возвращает имя по ID.
 
@@ -61,7 +63,7 @@ print(name)  -- "springtrap"
 
 ## Музыка раунда
 
-### `fh.AddRoundMusic(num, music)` <span class="fh-badge shared">SHARED</span>
+### `fh.AddRoundMusic(num, music)` <span class="fh-badge server">SERVER</span>
 
 Добавляет музыкальную тему для конкретного типа раунда.
 
@@ -76,7 +78,7 @@ fh.AddRoundMusic(
 )
 ```
 
-### `fh.GetRoundMusic(num)` <span class="fh-badge shared">SHARED</span>
+### `fh.GetRoundMusic(num)` <span class="fh-badge server">SERVER</span>
 
 Возвращает путь к музыке раунда. Если для указанного типа музыка не найдена — возвращается музыка обычного раунда.
 

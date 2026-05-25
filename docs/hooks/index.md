@@ -52,7 +52,7 @@ end)
 ```lua
 hook.Add("FH_HandleTaserHit", "BlockTaser", function(ply)
     if ply:IsAdmin() then
-        return false  -- админов Шокер не бьёт
+        return false -- админов Шокер не бьёт
     end
 end)
 ```

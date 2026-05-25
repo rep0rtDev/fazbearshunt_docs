@@ -2,13 +2,9 @@
 
 Хуки, связанные с общим поведением аниматроников: скримеры, Шокер, реплики.
 
-## `FH_PlayerShouldJumpscare` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_playershouldjumpscare}
+## `FH_PlayerShouldJumpscare(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_playershouldjumpscare}
 
 Вызывается **перед** скримером.
-
-```lua
-hook.Run("FH_PlayerShouldJumpscare", ply, ent, target)
-```
 
 | Аргумент | Тип | Описание |
 |---|---|---|
@@ -29,31 +25,23 @@ end)
 
 ---
 
-## `FH_HandleTaserHit` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+## `FH_HandleTaserHit(ply)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
 Вызывается **перед** ударом Шокера по игроку.
-
-```lua
-hook.Run("FH_HandleTaserHit", ply)
-```
 
 **Возврат `false`** — отменить действие Шокера.
 
 ```lua
 hook.Add("FH_HandleTaserHit", "AdminTaserImmune", function(ply)
-    if ply:IsAdmin() then return false end
+    if ply:IsAdmin() then return false end -- Админы не получают удары Шокером.
 end)
 ```
 
 ---
 
-## `FH_AnimatronicJumpscare` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_animatronicjumpscare}
+## `FH_AnimatronicJumpscare(ply, ent, target, data)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_animatronicjumpscare}
 
 Вызывается **после успешного** скримера.
-
-```lua
-hook.Run("FH_AnimatronicJumpscare", ply, ent, target, data)
-```
 
 **Структура `data`:**
 
@@ -62,7 +50,7 @@ hook.Run("FH_AnimatronicJumpscare", ply, ent, target, data)
     delay = 0.5,           -- через сколько умрёт target
     char  = "sfreddy",     -- имя аниматроника
     dist  = 64.2,          -- дистанция в момент скримера
-    wep   = "fh_freddy_h"  -- класс оружия от 1-го лица
+    wep   = "v_freddy"  -- класс оружия от 1-го лица
 }
 ```
 
@@ -75,13 +63,9 @@ end)
 
 ---
 
-## `FH_JumpscareEvent` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_jumpscareevent}
+## `FH_JumpscareEvent(ply, ent, target, dist)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_jumpscareevent}
 
 Вызывается **перед** заморозкой игроков в скримере.
-
-```lua
-hook.Run("FH_JumpscareEvent", ply, ent, target, dist)
-```
 
 | Аргумент | Тип | Описание |
 |---|---|---|
@@ -92,13 +76,9 @@ hook.Run("FH_JumpscareEvent", ply, ent, target, dist)
 
 ---
 
-## `FH_OverrideVoiceline` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+## `FH_OverrideVoiceline(ply, anim, line)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
 Вызывается **перед** проигрыванием реплики аниматроника. Позволяет заменить реплику.
-
-```lua
-hook.Run("FH_OverrideVoiceline", ply, anim, line)
-```
 
 | Аргумент | Тип | Описание |
 |---|---|---|
@@ -109,9 +89,10 @@ hook.Run("FH_OverrideVoiceline", ply, anim, line)
 **Возврат** новой строки заменит реплику.
 
 ```lua
-hook.Add("FH_OverrideVoiceline", "FunnyLines", function(ply, anim, line)
-    if anim == "freddy" and math.random(1, 10) == 1 then
-        return "sound/my_addon/freddy_meme.wav"
+hook.Add("FH_OverrideVoiceline", "Positive", function(ply, anim, line)
+    if line:match("negative") then
+		-- Больше аниматроники не говорят негативные войслайны!
+        return "positive"
     end
 end)
 ```

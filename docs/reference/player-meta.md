@@ -59,7 +59,7 @@ end)
 Пытается телепортировать игрока в место, где он не застревает. Используйте вместе с `IsStuck()`:
 
 ```lua
-hook.Add("PlayerSpawn", "CheckStuck", function(ply)
+hook.Add("CanExitVehicle", "CheckStuck", function(veh, ply)
     timer.Simple(0.5, function()
         if IsValid(ply) and ply:IsStuck() then
             ply:Unstuck()
@@ -89,7 +89,7 @@ end)
 Запрещено ли игроку толкать других?
 
 ```lua
--- Сделать аниматроника непробиваемой стеной
+-- Я его не пну, и он меня не пнёт.
 ply:SetPushImmune(true)
 ply:SetPushBlocked(true)
 ```
@@ -138,7 +138,7 @@ end)
 
 ```lua
 -- Все админы иммунны к Золотому Фредди
-hook.Add("PlayerInitialSpawn", "AdminGFImmune", function(ply)
+hook.Add("PlayerSpawn", "AdminGFImmune", function(ply)
     if ply:IsAdmin() then
         ply:SetGFreddyImmune(true)
     end
@@ -150,7 +150,7 @@ end)
 ## Подарки <span class="fh-badge server">SERVER</span>
 
 ::: info Уже используется режимом
-Эти функции применяются по умолчанию — игра не выдаёт второй подарок, пока не подобран первый.
+Эти функции применяются режимом по умолчанию — они не выдают второй подарок, пока не подобран первый. Используйте, если знаете что делаете.
 :::
 
 ### `PLAYER:SetGiftOwnership(bool)` {#setgiftownership}

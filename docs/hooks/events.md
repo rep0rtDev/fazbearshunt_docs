@@ -6,31 +6,26 @@
 
 Маска Маньяка — особый предмет. Когда выживший её надевает, через некоторое время он получает **одержимость** — после этого аниматроники не могут его заскримерить.
 
-### `FH_KillerObsessed` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
+### `FH_KillerObsessed(ply)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
 
 Вызывается после получения статуса одержимости.
 
 ```lua
-hook.Run("FH_KillerObsessed")
-```
-
-```lua
-hook.Add("FH_KillerObsessed", "ObsessedFX", function()
-    chat.AddText(Color(255, 0, 0), "Ты стал одержимым. Аниматроники тебя не видят.")
-    -- можно запустить визуальный эффект
+hook.Add("FH_KillerObsessed", "ObsessedMsg", function(ply)
+	if ply == LocalPlayer() then
+		chat.AddText(Color(255, 0, 0), "Ты стал одержимым. Убивай всех и вся.")
+	end
 end)
 ```
 
-### `FH_KillerLostObsession` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
+### `FH_KillerLostObsession(ply)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
 
 Вызывается после **потери** статуса одержимости (например, после смерти).
 
 ```lua
-hook.Run("FH_KillerLostObsession")
-```
-
-```lua
-hook.Add("FH_KillerLostObsession", "ObsessionLost", function()
-    chat.AddText(Color(255, 200, 200), "Одержимость пропала.")
+hook.Add("FH_KillerLostObsession", "ObsessionLostMsg", function(ply)
+	if ply == LocalPlayer() then
+		chat.AddText(Color(255, 200, 200), "Одержимость пропала.")
+	end
 end)
 ```

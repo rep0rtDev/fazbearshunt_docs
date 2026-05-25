@@ -2,13 +2,9 @@
 
 Хуки, вызываемые на разных этапах жизни раунда.
 
-## `fh_prestartgame` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_prestartgame}
+## `fh_prestartgame()` <span class="fh-badge hook">HOOK</span> <span class="fh-badge shared">SHARED</span> {#fh_prestartgame}
 
 Вызывается **перед** выбором типа раунда.
-
-```lua
-hook.Run("fh_prestartgame")
-```
 
 **Возврат `false`** — отменить выбор раунда.
 
@@ -51,13 +47,9 @@ end)
 
 ---
 
-## `fh_poststartgame` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_poststartgame}
+## `fh_poststartgame(roundType, animatronics)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge shared">SHARED</span> {#fh_poststartgame}
 
 Вызывается **после** разморозки аниматроников. Самый частый хук для пользовательской логики.
-
-```lua
-hook.Run("fh_poststartgame", roundType, animatronics)
-```
 
 | Аргумент | Тип | Описание |
 |---|---|---|
@@ -66,7 +58,7 @@ hook.Run("fh_poststartgame", roundType, animatronics)
 
 ```lua
 hook.Add("fh_poststartgame", "BuffAnims", function(roundType, anims)
-    for _, ply in ipairs(anims) do
+    for ply, _ in ipairs(anims) do
         ply:SetMaxHealth(150)
         ply:SetHealth(150)
     end
@@ -75,13 +67,9 @@ end)
 
 ---
 
-## `fh_postendgame` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_postendgame}
+## `fh_postendgame(killerVictory, animatronics)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge shared">SHARED</span> {#fh_postendgame}
 
-Вызывается **после** конца раунда, **перед** 10-секундным таймером возврата в лобби.
-
-```lua
-hook.Run("fh_postendgame", killerVictory, animatronics)
-```
+Вызывается **после** конца раунда, **перед** таймером возврата в лобби.
 
 | Аргумент | Тип | Описание |
 |---|---|---|
@@ -90,17 +78,14 @@ hook.Run("fh_postendgame", killerVictory, animatronics)
 
 ```lua
 hook.Add("fh_postendgame", "GiveRewards", function(victory, anims)
-    if victory then
-        -- Аниматроники победили — даём им бонус
-        for _, ply in ipairs(anims) do
-            ply:AddFrags(5)
-        end
-    else
-        -- Выжившие победили — награждаем выживших
-        for _, ply in ipairs(player.GetAll()) do
-            if ply:IsSurvivor() and ply:Alive() then
-                ply:ChatPrint("Вы выжили!")
-            end
+    if not victory then
+        -- Аниматроники проиграли - взрываем их.
+        for ply, _ in ipairs(anims) do
+			local effectdata = EffectData()
+			effectdata:SetOrigin(ply:GetPos())
+			effectdata:SetScale(1)
+			util.Effect("Explosion", effectdata)
+			ply:Kill()
         end
     end
 end)
