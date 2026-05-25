@@ -1,17 +1,17 @@
-# Начало работы
+# Getting Started
 
-Это руководство поможет вам подготовить рабочее окружение для разработки модификаций под Fazbear's Hunt.
+This guide will help you set up a development environment for creating Fazbear's Hunt modifications.
 
-## Требования
+## Requirements
 
-- **Garry's Mod** последней версии
-- Установленный гейммод **Fazbear's Hunt**
-- Любой текстовый редактор ([VS Code](https://code.visualstudio.com/) рекомендуется)
-- Базовое понимание GLua
+- **Garry's Mod** (latest version)
+- The **Fazbear's Hunt** gamemode installed
+- Any text editor ([VS Code](https://code.visualstudio.com/) recommended)
+- Basic understanding of GLua
 
-## Где писать код
+## Where to Write Code
 
-Модификации для FH пишутся в виде обычных аддонов Garry's Mod. Создайте структуру:
+Modifications for FH are written as regular Garry's Mod addons. Create the following structure:
 
 ```
 garrysmod/addons/my_fh_addon/
@@ -24,34 +24,34 @@ garrysmod/addons/my_fh_addon/
         └── my_shared_code.lua
 ```
 
-::: tip Автозагрузка
-Файлы в `lua/autorun/` подгружаются автоматически. Используйте подпапки `server/` и `client/` для разделения серверного и клиентского кода.
+::: tip Auto-loading
+Files in `lua/autorun/` are loaded automatically. Use the `server/` and `client/` subdirectories to separate server and client code.
 :::
 
-## Проверка установки
+## Verifying Your Setup
 
-Создайте файл `lua/autorun/server/fh_test.lua`:
+Create a file at `lua/autorun/server/fh_test.lua`:
 
 ```lua
 hook.Add("fh_poststartgame", "MyFirstHook", function(roundType, animatronics)
-    print("[FH Test] Раунд начался! Тип:", roundType)
-    print("[FH Test] Аниматроники:", #animatronics)
+    print("[FH Test] Round started! Type:", roundType)
+    print("[FH Test] Animatronics:", #animatronics)
 end)
 ```
 
-Запустите сервер с гейммодом FH, начните раунд — в консоли должны появиться сообщения. Если да — всё работает.
+Start a server with the FH gamemode and begin a round — the messages should appear in the console. If they do, everything is working.
 
-## Бейджи в документации
+## Badges in the Documentation
 
-В этой вики используются следующие бейджи:
+This wiki uses the following badges:
 
-<span class="fh-badge server">SERVER</span> — функция только на сервере
-<span class="fh-badge client">CLIENT</span> — функция только на клиенте
-<span class="fh-badge shared">SHARED</span> — функция доступна везде
-<span class="fh-badge hook">HOOK</span> — это хук, его можно ловить
+<span class="fh-badge server">SERVER</span> — server-side only  
+<span class="fh-badge client">CLIENT</span> — client-side only  
+<span class="fh-badge shared">SHARED</span> — available on both sides  
+<span class="fh-badge hook">HOOK</span> — this is a hook you can listen to  
 
-## Следующий шаг
+## Next Step
 
-Готовы? Создадим первую модификацию — добавим аниматроника из Мастерской.
+Ready? Let's create your first modification — adding an animatronic from the Workshop.
 
-[Первая модификация →](/guide/first-modification.md)
+[First Modification →](/en/guide/first-modification.md)
