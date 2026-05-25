@@ -268,37 +268,61 @@ body {
   margin: 0 !important;
 }
 
-/* Right aside (TOC) */
+/* ========== RIGHT ASIDE (TOC) ========== */
 .VPDocAside {
-  padding: 32px 0 !important;
+  padding: 32px 20px 32px 24px !important;
+  min-width: 260px;
+  width: 260px;
+}
+
+.VPDocAsideOutline {
+  position: relative;
+}
+
+.VPDocAsideOutline .content {
+  position: relative;
+  padding-left: 12px;
+  border-left: 1px solid var(--vp-c-divider);
 }
 
 .VPDocAsideOutline .title {
-  font-size: 11px !important;
+  font-size: 12px !important;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--vp-c-text-3) !important;
   font-weight: 700 !important;
-  margin-bottom: 10px !important;
+  margin-bottom: 12px !important;
+  padding-left: 4px;
 }
 
 .VPDocAsideOutline .outline-marker {
   background-color: var(--fh-red) !important;
+  width: 2px !important;
+  left: -1px !important;
+  transition: top 0.25s cubic-bezier(0, 1, 0.5, 1), opacity 0.25s !important;
 }
 
 .VPDocOutlineItem {
-  font-size: 12.5px !important;
-  line-height: 1.5 !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
 }
 
 .VPDocOutlineItem .outline-link {
-  padding: 3px 0 !important;
+  display: block;
+  padding: 4px 4px !important;
   color: var(--vp-c-text-2) !important;
   font-weight: 400 !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+}
+
+.VPDocOutlineItem .outline-link.nested {
+  padding-left: 14px !important;
   font-size: 12.5px !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--vp-c-text-3) !important;
 }
 
 .VPDocOutlineItem .outline-link:hover {
@@ -308,6 +332,16 @@ body {
 .VPDocOutlineItem .outline-link.active {
   color: var(--fh-red) !important;
   font-weight: 500 !important;
+}
+
+.VPDocOutlineItem > ul {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  list-style: none;
+}
+
+.VPDoc .content-container {
+  max-width: 880px !important;
 }
 
 /* ========== TYPOGRAPHY ========== */
