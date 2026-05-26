@@ -8,7 +8,7 @@
 
 **Возврат `false`** — отменить выбор раунда.
 
-**Пример:** замена Спрингтрапа на Золотого Фредди в обычном раунде. См. [готовый пример →](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/gfreddy_custom_round.lua)
+**Пример:** уникальный раунд с отменой ванильного таймера. См. [Бонни-Тег →](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/bonnie_tag.lua)
 
 ```lua
 hook.Add("fh_prestartgame", "CustomLogic", function()
@@ -24,13 +24,9 @@ end)
 
 ---
 
-## `fh_startgame` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_startgame}
+## `fh_startgame(roundType)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_startgame}
 
 Вызывается **после** выбора типа раунда и выполнения базовых функций раунда (раздача ролей, заморозка, выдача Шокера).
-
-```lua
-hook.Run("fh_startgame", roundType)
-```
 
 | Аргумент | Тип | Описание |
 |---|---|---|
@@ -49,7 +45,7 @@ end)
 
 ## `fh_poststartgame(roundType, animatronics)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge shared">SHARED</span> {#fh_poststartgame}
 
-Вызывается **после** разморозки аниматроников. Самый частый хук для пользовательской логики.
+Вызывается **после** разморозки аниматроников.
 
 | Аргумент | Тип | Описание |
 |---|---|---|
@@ -77,7 +73,7 @@ end)
 | `animatronics` | `table[Player]` | Аниматроники этого раунда |
 
 ```lua
-hook.Add("fh_postendgame", "GiveRewards", function(victory, anims)
+hook.Add("fh_postendgame", "RewardAnims", function(victory, anims)
     if not victory then
         -- Аниматроники проиграли - взрываем их.
         for ply, _ in ipairs(anims) do

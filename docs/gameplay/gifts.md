@@ -11,7 +11,7 @@
 | Параметр | Тип | Описание |
 |---|---|---|
 | `name` | `string` | Техническое имя эффекта |
-| `desc` | `string` | Описание для игрока (можно вписать переводимую строка или оставить пустым) |
+| `desc` | `string` | Описание для игрока (можно вписать переводимую строку или оставить пустым) |
 | `num` | `int` | Число для подстановки в `%i` описания (если ≥ 0) |
 | `func` | `function` | Функция, выполняемая при получении эффекта |
 | `req` | `function` *(опц.)* | Условие выдачи эффекта |
@@ -56,7 +56,8 @@ gifts.AddNegativeEffect(
 ```lua
 hook.Add( "PlayerSay", "ChatGift", function( ply, text )
 	if ply:IsAdmin() and string.StartWith( string.lower( text ), "/gift " ) then
-		gifts.GrantEffect(ply, string.sub( text, 7 )) -- Мы написали 7 в string.sub потому что это длина "/gift " + 1
+		gifts.GrantEffect(ply, string.sub( text, 7 )) 
+		-- Мы написали 7 в string.sub потому что это длина "/gift " + 1
 		return ""
 	end
 end )
@@ -70,6 +71,7 @@ end )
 
 ```lua
 hook.Add("FH_ShouldPlayerReceiveGifts", "NoGiftsForAdmins", function(ply)
+	-- Админы не получают подарки.
     if ply:IsAdmin() then return false end
 end)
 ```

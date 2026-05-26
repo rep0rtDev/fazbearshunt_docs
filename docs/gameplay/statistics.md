@@ -59,7 +59,8 @@ print(topPly:Nick() .. " написал вот стока буковок: " .. t
 
 ```lua
 hook.Add("OnGamemodeLoaded", "FhCustomStats", function()
-	if engine.ActiveGamemode() ~= "fazbearshunt" then return end -- надо убедиться что режим сервера - Fazbear's Hunt
+	-- надо убедиться что режим сервера - Fazbear's Hunt
+	if engine.ActiveGamemode() ~= "fazbearshunt" then return end 
 	
 	-- 1. Установить минимум
     stats.SetMin("landed", 200)

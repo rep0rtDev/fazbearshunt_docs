@@ -4,34 +4,37 @@
 
 ## Как устроены аниматроники
 
-Каждый аниматроник в FH — это **Пилл-Пак** ([Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=104604943)) с определённым техническим именем (например, `pill_wfreddy2`).
+Все аниматроники в FH регистрируются таким же методом, как это делается в [Parakeets Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=950845673)), но с небольшими поправками и новвоведениями для Пиллов, которые дают разработчикам больше возможностей.
 
-Гейммод определяет:
-- **Играбельные** — могут быть выбраны как основной аниматроник раунда
-- **Вторичные** — могут появляться как дополнительные
+Режим определяет:
+- **Играбельные** — могут появиться в выборке в начале обычного раунда
+- **Вторичные** — могут появиться в выборке только если аниматроников больше двух.
 
 ## Базовые операции
 
-### Добавить аниматроника в режим
+### Добавить аниматроника в выборку
 
 ```lua
-pill_makePreferable("pill_wfreddy2", true)
+pill_makePreferable("pill_springtrap", true)
 ```
 
 ### Сделать вторичным
 
 ```lua
-pill_makeSecondary("pill_wbonnie2", true)
+pill_makeSecondary("pill_sfreddy2", false) -- Шедоу Фредди появляется в выборке даже если недостаточно аниматроников
 ```
 
 ### Получить модель аниматроника игрока
 
 ```lua
-local ent = pk_pills.getMappedEnt(ply)
+local ent = pills.getMappedEnt(ply)
 if IsValid(ent) then
     print("Модель:", ent:GetModel())
 end
 ```
+:::tip Разница
+Режим добавляет в [`PlayerMeta`](/reference/PlayerMeta.md) функцию `ply:GetPill()`, но она напрямую вызывает `pills.getMappedEnt(ply)`, поэтому рекомендуется использовать именно второй вариант, для оптимизации.
+:::
 
 ## Реакция на способности
 
@@ -40,7 +43,7 @@ end
 | Аниматроник | Хук | Описание |
 |---|---|---|
 | Фредди | [`FH_BlindRageStart`](/hooks/abilities.md#freddy) | Слепая Ярость началась |
-| Бонни | [`FH_YoursMineStart`](/hooks/abilities.md#bonnie) | Чужой Взгляд начался |
+| Бонни | [`FH_YoursMineStart`](/hooks/abilities.md#bonnie) | Чужим Разумом начался |
 | Чика | [`FH_MinePlanted`](/hooks/abilities.md#chica) | Кекс установлен |
 | Шедоу Фредди | [`FH_SFreddySubmergeIn`](/hooks/abilities.md#shadow-freddy) | Уход в невидимость |
 | Золотой Фредди | [`FH_OutworldStart`](/hooks/abilities.md#golden-freddy) | Загранное Измерение |
@@ -58,18 +61,13 @@ end
 ## Создание собственного скримера
 
 ```lua
-hook.Add("KeyPress", "MyJumpscare", function(ply, key)
-    if not ply:IsAnimatronic() then return end
-    if key ~= IN_ATTACK then return end
+function simpleJumpscare(ply, ent)
+	local target = FindNearestPlayer(ply:EyePos(), 120, ply, 36)
+				
+	local success = performJumpscare(ply, ent, target, 1.6)
 
-    local ent = pk_pills.getMappedEnt(ply)
-    if not IsValid(ent) then return end
-
-    local target = FindNearestPlayer(ply:GetPos(), 80, ply, 90)
-    if not IsValid(target) or not target:IsSurvivor() then return end
-
-    -- 1. Проиграть свою анимацию...
-    -- 2. Запустить скример FH
-    jumpscareEvent(ply, ent, target, ply:GetPos():Distance(target:GetPos()))
-end)
+	if success then
+		print( "[TEST] Animatronic " .. ply:Nick() .. " jumpscared " .. target:Nick() )
+	end
+end
 ```

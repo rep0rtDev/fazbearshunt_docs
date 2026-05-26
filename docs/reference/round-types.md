@@ -26,18 +26,32 @@ end
 Быстрый пример:
 
 ```lua
-fh.RegisterRoundType("golden_madness", "gold_mad", function()
-    -- Выдаём всем по Золотому Фредди
-    for _, ply in ipairs(player.GetAll()) do
-        giveKiller(ply, "pill_wgfreddy2", true)
-    end
-end, 3, 6, 32)
+fh.RegisterRoundType("golden_madness", "GFmadness", function()
+	local players = player.GetAll()
+		
+	players = fh.GetEarnedKillers(players)
+	
+	if players then
+		local chosenPlayer = players[1]
+		
+		-- Спавним Голову Золотого Фредди
+		giveKiller(chosenPlayer, "pill_wgfreddyhead2", true)
+		
+		chosenPlayer.lobbyFreeze = true
+		chosenPlayer:ReturnToSpawn()
+	end
+	
+	RandomTaser()
+	
+	freezeAnimatronics()
+end, 3, 6, 18)
+
 ```
 
 Параметры:
 - `weight = 3` — 3% шанс
 - `minPlayers = 6` — минимум 6 игроков
-- `maxPlayers = 32` — максимум 32
+- `maxPlayers = 18` — максимум 18
 
 ## Музыка для своего раунда
 

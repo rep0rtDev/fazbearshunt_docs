@@ -5,7 +5,7 @@
 ## Требования
 
 - **Garry's Mod** последней версии
-- Установленный гейммод **Fazbear's Hunt**
+- Установленный режим **Fazbear's Hunt**
 - Любой текстовый редактор ([VS Code](https://code.visualstudio.com/) рекомендуется)
 - Базовое понимание GLua
 
@@ -27,6 +27,10 @@ garrysmod/addons/my_fh_addon/
 ::: tip Автозагрузка
 Файлы в `lua/autorun/` подгружаются автоматически. Используйте подпапки `server/` и `client/` для разделения серверного и клиентского кода.
 :::
+::: danger Осторожно
+Автозагрузка файлов работает так, что сначала подгружаются файлы `lua/autorun/`, а только затем файлы самого режима, это значит что методы и функции могут не существовать на момент подгрузки вашей логики.
+Советуется использовать способ представленный в [Первая модификация](/guide/first-modification.md)
+:::
 
 ## Проверка установки
 
@@ -35,7 +39,7 @@ garrysmod/addons/my_fh_addon/
 ```lua
 hook.Add("fh_poststartgame", "MyFirstHook", function(roundType, animatronics)
     print("[FH Test] Раунд начался! Тип:", roundType)
-    print("[FH Test] Аниматроники:", #animatronics)
+    print("[FH Test] Аниматроники:", table.Count(animatronics))
 end)
 ```
 

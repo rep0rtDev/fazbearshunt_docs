@@ -32,6 +32,17 @@ end, 5, 4, 16)  -- 5% шанс, 4–16 игроков
 print(id, name) -- 43700	springtrap_madness
 ```
 
+## Управление раундами
+
+### `fh.SetRoundTypeBlocked(id, block)` <span class="fh-badge server">SERVER</span>
+
+Блокирует раунд по ID, и не даёт игре его выбрать.
+
+```lua
+-- Блокируем раунд со Спрингтрапом
+fh.SetRoundTypeBlocked(1, true)
+```
+
 ## Получение информации о раундах
 
 ### `fh.GetRoundTypes()` <span class="fh-badge server">SERVER</span>

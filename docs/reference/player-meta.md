@@ -1,28 +1,32 @@
 # PlayerMeta
 
-Расширения мета-таблицы [Player](https://wiki.facepunch.com/gmod/Player), добавляемые гейммодом Fazbear's Hunt.
+Расширения мета-таблицы [Player](https://wiki.facepunch.com/gmod/Player), добавляемые режимом Fazbear's Hunt.
 
 ## Роль игрока <span class="fh-badge shared">SHARED</span>
 
 ### `PLAYER:IsSurvivor()`
 
-Возвращает `true`, если игрок — выживший.
+Возвращает `true`, если игрок - выживший.
 
 ```lua
 if ply:IsSurvivor() then
-    print(ply:Nick() .. " — выживший")
+    print(ply:Nick() .. " - выживший")
 end
 ```
 
 ### `PLAYER:IsAnimatronic()`
 
-Возвращает `true`, если игрок играет за аниматроника.
+Возвращает `true`, если игрок - аниматроник.
 
 ```lua
 if ply:IsAnimatronic() then
     ply:ChatPrint("Удачной охоты!")
 end
 ```
+
+::: tip Важно
+Если засунуть выжившего в команду `TEAM_PILLS` *(или 2701)*, то игра здесь будет выдавать `true`.
+:::
 
 ---
 
@@ -59,7 +63,7 @@ end)
 Пытается телепортировать игрока в место, где он не застревает. Используйте вместе с `IsStuck()`:
 
 ```lua
-hook.Add("CanExitVehicle", "CheckStuck", function(veh, ply)
+hook.Add("PlayerLeaveVehicle", "CheckStuck", function(ply, ply)
     timer.Simple(0.5, function()
         if IsValid(ply) and ply:IsStuck() then
             ply:Unstuck()

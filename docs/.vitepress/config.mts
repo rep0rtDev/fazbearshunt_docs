@@ -84,10 +84,11 @@ export default defineConfig({
                 collapsed: true,
                 items: [
                   { text: 'Обзор', link: '/gameplay/rounds' },
-                  { text: 'fh.RegisterRoundType', link: '/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-shared' },
-                  { text: 'fh.GetRoundTypes', link: '/gameplay/rounds#fh-getroundtypes-shared' },
-                  { text: 'fh.GetRoundTypeByName', link: '/gameplay/rounds#fh-getroundtypebyname-name-shared' },
-                  { text: 'fh.AddRoundMusic', link: '/gameplay/rounds#fh-addroundmusic-num-music-shared' },
+                  { text: 'fh.RegisterRoundType', link: '/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-server' },
+                  { text: 'fh.SetRoundTypeBlocked', link: '/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
+                  { text: 'fh.GetRoundTypes', link: '/gameplay/rounds#fh-getroundtypes-server' },
+                  { text: 'fh.GetRoundTypeByName', link: '/gameplay/rounds#fh-getroundtypebyname-name-server' },
+                  { text: 'fh.AddRoundMusic', link: '/gameplay/rounds#fh-addroundmusic-num-music-server' },
                 ]
               },
               {
@@ -97,6 +98,7 @@ export default defineConfig({
                   { text: 'Обзор', link: '/gameplay/gifts' },
                   { text: 'gifts.AddPositiveEffect', link: '/gameplay/gifts#gifts-addpositiveeffect-name-desc-num-func-req-server' },
                   { text: 'gifts.AddNegativeEffect', link: '/gameplay/gifts#gifts-addnegativeeffect-name-desc-num-func-server' },
+                  { text: 'gifts.GrantEffect', link: '/gameplay/gifts#gifts-addnegativeeffect-ply-name-server' },
                   { text: 'FH_ShouldPlayerReceiveGifts', link: '/gameplay/gifts#fh-shouldplayerreceivegifts-hook-server' },
                 ]
               },
@@ -108,7 +110,7 @@ export default defineConfig({
                   { text: 'highlight.ByDistance', link: '/gameplay/highlights#highlight-bydistance-ply-ent-server' },
                   { text: 'highlight.Add', link: '/gameplay/highlights#highlight-add-ply-players-duration-server' },
                   { text: 'highlight.Cooldown', link: '/gameplay/highlights#highlight-cooldown-ply-duration-server' },
-                  { text: 'highlight.AddVisionSounds', link: '/gameplay/highlights#highlight-addvisionsounds-name-snd-affected-snd-unaffected-shared' },
+                  { text: 'highlight.AddVisionSounds', link: '/gameplay/highlights#highlight-addvisionsounds-name-snd-affected-snd-unaffected-server' },
                   { text: 'highlight.NotifyTarget', link: '/gameplay/highlights#highlight-notifytarget-target-ent-isaffected-server' },
                 ]
               },
@@ -153,12 +155,11 @@ export default defineConfig({
                   { text: 'restoreAnimatronics', link: '/reference/functions#restoreanimatronics-server' },
                   { text: 'doGiftSpawning', link: '/reference/functions#dogiftspawning' },
                   { text: 'disableGiftSpawning', link: '/reference/functions#disablegiftspawning' },
-                  { text: 'fh.GetRoundCount', link: '/reference/functions#fh-getroundcount-shared' },
+                  { text: 'fh.GetRoundCount', link: '/reference/functions#fh-getroundcount-server' },
                   { text: 'fh.GetEarnedKillers', link: '/reference/functions#fh-getearnedkillers-players-server' },
                   { text: 'fh.SetRoundType', link: '/reference/functions#fh-setroundtype-number-server' },
-                  { text: 'fh.GetRoundType', link: '/reference/functions#fh-getroundtype-shared' },
+                  { text: 'fh.GetRoundType', link: '/reference/functions#fh-getroundtype-server' },
                   { text: 'jumpscareEvent', link: '/reference/functions#jumpscareevent-ply-ent-target-dist-server' },
-                  { text: 'HighlightPlayers', link: '/reference/functions#highlightplayers-ply-ent-server' },
                   { text: 'takePlayer / endoRelease', link: '/reference/functions#takeplayer-ply-ent-server' },
                   { text: 'FindNearestPlayer', link: '/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-server' },
                 ]
@@ -212,7 +213,9 @@ export default defineConfig({
                   { text: 'Бонни', link: '/hooks/abilities#bonnie' },
                   { text: 'Чика', link: '/hooks/abilities#chica' },
                   { text: 'Шедоу Фредди', link: '/hooks/abilities#shadow-freddy' },
+                  { text: 'Эндоскелет', link: '/hooks/abilities#endo02' },
                   { text: 'Золотой Фредди', link: '/hooks/abilities#golden-freddy' },
+                  { text: 'Той Чика', link: '/hooks/abilities#toy-chica' },
                 ]
               },
               {
@@ -257,7 +260,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/en/' },
-          { text: 'Discord', link: 'https://discord.gg/3yFA2pwQJR' },
+          { text: 'Discord', link: 'https://discord.gg/3fSG5k2NFX' },
           { text: 'GitHub', link: 'https://github.com/rep0rtDev/fazbearshunt_docs' },
         ],
 
@@ -280,10 +283,11 @@ export default defineConfig({
                 collapsed: true,
                 items: [
                   { text: 'Overview', link: '/en/gameplay/rounds' },
-                  { text: 'fh.RegisterRoundType', link: '/en/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-shared' },
-                  { text: 'fh.GetRoundTypes', link: '/en/gameplay/rounds#fh-getroundtypes-shared' },
-                  { text: 'fh.GetRoundTypeByName', link: '/en/gameplay/rounds#fh-getroundtypebyname-name-shared' },
-                  { text: 'fh.AddRoundMusic', link: '/en/gameplay/rounds#fh-addroundmusic-num-music-shared' },
+                  { text: 'fh.RegisterRoundType', link: '/en/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-server' },
+                  { text: 'fh.SetRoundTypeBlocked', link: '/en/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
+                  { text: 'fh.GetRoundTypes', link: '/en/gameplay/rounds#fh-getroundtypes-server' },
+                  { text: 'fh.GetRoundTypeByName', link: '/en/gameplay/rounds#fh-getroundtypebyname-name-server' },
+                  { text: 'fh.AddRoundMusic', link: '/en/gameplay/rounds#fh-addroundmusic-num-music-server' },
                 ]
               },
               {
@@ -293,6 +297,7 @@ export default defineConfig({
                   { text: 'Overview', link: '/en/gameplay/gifts' },
                   { text: 'gifts.AddPositiveEffect', link: '/en/gameplay/gifts#gifts-addpositiveeffect-name-desc-num-func-req-server' },
                   { text: 'gifts.AddNegativeEffect', link: '/en/gameplay/gifts#gifts-addnegativeeffect-name-desc-num-func-server' },
+                  { text: 'gifts.GrantEffect', link: '/en/gameplay/gifts#gifts-addnegativeeffect-ply-name-server' },
                   { text: 'FH_ShouldPlayerReceiveGifts', link: '/en/gameplay/gifts#fh-shouldplayerreceivegifts-hook-server' },
                 ]
               },
@@ -304,7 +309,7 @@ export default defineConfig({
                   { text: 'highlight.ByDistance', link: '/en/gameplay/highlights#highlight-bydistance-ply-ent-server' },
                   { text: 'highlight.Add', link: '/en/gameplay/highlights#highlight-add-ply-players-duration-server' },
                   { text: 'highlight.Cooldown', link: '/en/gameplay/highlights#highlight-cooldown-ply-duration-server' },
-                  { text: 'highlight.AddVisionSounds', link: '/en/gameplay/highlights#highlight-addvisionsounds-name-snd-affected-snd-unaffected-shared' },
+                  { text: 'highlight.AddVisionSounds', link: '/en/gameplay/highlights#highlight-addvisionsounds-name-snd-affected-snd-unaffected-server' },
                   { text: 'highlight.NotifyTarget', link: '/en/gameplay/highlights#highlight-notifytarget-target-ent-isaffected-server' },
                 ]
               },
@@ -349,14 +354,13 @@ export default defineConfig({
                   { text: 'restoreAnimatronics', link: '/en/reference/functions#restoreanimatronics-server' },
                   { text: 'doGiftSpawning', link: '/en/reference/functions#dogiftspawning' },
                   { text: 'disableGiftSpawning', link: '/en/reference/functions#disablegiftspawning' },
-                  { text: 'fh.GetRoundCount', link: '/en/reference/functions#fh-getroundcount-shared' },
+                  { text: 'fh.GetRoundCount', link: '/en/reference/functions#fh-getroundcount-server' },
                   { text: 'fh.GetEarnedKillers', link: '/en/reference/functions#fh-getearnedkillers-players-server' },
                   { text: 'fh.SetRoundType', link: '/en/reference/functions#fh-setroundtype-number-server' },
-                  { text: 'fh.GetRoundType', link: '/en/reference/functions#fh-getroundtype-shared' },
+                  { text: 'fh.GetRoundType', link: '/en/reference/functions#fh-getroundtype-server' },
                   { text: 'jumpscareEvent', link: '/en/reference/functions#jumpscareevent-ply-ent-target-dist-server' },
-                  { text: 'HighlightPlayers', link: '/en/reference/functions#highlightplayers-ply-ent-server' },
                   { text: 'takePlayer / endoRelease', link: '/en/reference/functions#takeplayer-ply-ent-server' },
-                  { text: 'FindNearestPlayer', link: '/en/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-server' },
+                  { text: 'FindNearestPlayer', link: '/en/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-shared' },
                 ]
               },
               {
@@ -408,7 +412,9 @@ export default defineConfig({
                   { text: 'Bonnie', link: '/en/hooks/abilities#bonnie' },
                   { text: 'Chica', link: '/en/hooks/abilities#chica' },
                   { text: 'Shadow Freddy', link: '/en/hooks/abilities#shadow-freddy' },
+                  { text: 'Endo02', link: '/en/hooks/abilities#endo02' },
                   { text: 'Golden Freddy', link: '/en/hooks/abilities#golden-freddy' },
+                  { text: 'Toy Chica', link: '/en/hooks/abilities#toy-chica' },
                 ]
               },
               {
