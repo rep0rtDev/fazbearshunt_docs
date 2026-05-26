@@ -15,9 +15,9 @@
 **Возврат `false`** — отменить скример.
 
 ```lua
--- Защитить игроков с маской маньяка (примерная логика)
+-- Запретить скримерить админов в ноуклипе
 hook.Add("FH_PlayerShouldJumpscare", "MaskProtect", function(ply, ent, target)
-    if target:GetNWBool("HasMaskObsession") then
+    if target:IsAdmin() and target:GetMoveType() == MOVETYPE_NOCLIP then
         return false
     end
 end)
@@ -33,7 +33,7 @@ end)
 
 ```lua
 hook.Add("FH_HandleTaserHit", "AdminTaserImmune", function(ply)
-    if ply:IsAdmin() then return false end -- Админы не получают удары Шокером.
+    if ply:IsAdmin() then return false end -- Админы не получают удары Шокером
 end)
 ```
 
@@ -47,10 +47,10 @@ end)
 
 ```lua
 {
-    delay = 0.5,           -- через сколько умрёт target
-    char  = "sfreddy",     -- имя аниматроника
-    dist  = 64.2,          -- дистанция в момент скримера
-    wep   = "v_freddy"  -- класс оружия от 1-го лица
+    delay = 0.5,		-- через сколько умрёт target
+    char  = "sfreddy",	-- имя аниматроника
+    dist  = 64.2,		-- дистанция в момент скримера
+    wep   = "v_freddy"	-- класс оружия от 1-го лица
 }
 ```
 
@@ -89,9 +89,9 @@ end)
 **Возврат** новой строки заменит реплику.
 
 ```lua
-hook.Add("FH_OverrideVoiceline", "Positive", function(ply, anim, line)
+hook.Add("FH_OverrideVoiceline", "PositiveOnly", function(ply, anim, line)
     if line:match("negative") then
-		-- Больше аниматроники не говорят негативные войслайны!
+		-- Больше аниматроники не говорят негативные войслайны
         return "positive"
     end
 end)

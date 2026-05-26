@@ -2,35 +2,38 @@
 
 Unique hooks for each animatronic with their own mechanics.
 
+## General {#general}
+
+### `fh_animatronic_break_prop(ply, ent, tr)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+
+Called inside `AnimatronicBreakProp(ply,ent)` for animatronics with a jumpscare. `tr` uses the [`TraceResult`](https://wiki.facepunch.com/gmod/Structures/TraceResult) structure.
+Return `false` — the animatronic cannot attack.
+
+### `fh_animatronic_post_break_prop(ply, ent, tr)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+
+Called after `AnimatronicBreakProp(ply,ent)`.
+
 ## Freddy {#freddy}
 
-### `FH_BlindRageStart` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+### `FH_BlindRageStart(ply, ent, victim)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Freddy has started searching for a target through Blind Rage.
+Freddy started searching for a target using Blind Rage.
 
-```lua
-hook.Run("FH_BlindRageStart", ply, ent, victim)
-```
+### `FH_BlindRageFailed(ply, ent, victim)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-### `FH_BlindRageFailed` <span class="fh-badge hook">HOOK</span>
+The target avoided Blind Rage, the ability was canceled.
 
-Blind Rage failed to find a target.
+### `FH_BlindRageSuccess(ply, ent, victim)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-```lua
-hook.Run("FH_BlindRageFailed", ply, ent, victim)
-```
+A Blind Rage target was successfully selected.
 
-### `FH_BlindRageSuccess` <span class="fh-badge hook">HOOK</span>
+### `FH_HandleBlindRageTarget(ply, victim)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-The Blind Rage target has been successfully selected.
+Determines whether `victim` can become a potential target for Blind Rage. Return `false` — the player is immune to Blind Rage target selection.
 
 ```lua
-hook.Run("FH_BlindRageSuccess", ply, ent, victim)
-```
-
-```lua
-hook.Add("FH_BlindRageSuccess", "RageBonus", function(freddy, ent, victim)
-    victim:ChatPrint("Freddy has spotted you!")
+hook.Add("FH_BlindRageSuccess", "RageChatPrint", function(freddy, ent, victim)
+    victim:ChatPrint("Freddy is targeting you!")
 end)
 ```
 
@@ -38,52 +41,36 @@ end)
 
 ## Bonnie {#bonnie}
 
-### `FH_YoursMineStart` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+### `FH_YoursMineStart(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Bonnie has activated the **"Through Your Eyes"** ability.
+Bonnie activated the **"Your Mind Is Mine"** ability.
 
-```lua
-hook.Run("FH_YoursMineStart", ply, ent, target)
-```
+### `FH_YoursMineSpectating(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-### `FH_YoursMineSpectating` <span class="fh-badge hook">HOOK</span>
+Bonnie started controlling the target.
 
-Bonnie has started spectating the target.
+### `FH_YoursMineEnd(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-```lua
-hook.Run("FH_YoursMineSpectating", ply, ent, target)
-```
-
-### `FH_YoursMineEnd` <span class="fh-badge hook">HOOK</span>
-
-Bonnie has stopped spectating.
-
-```lua
-hook.Run("FH_YoursMineEnd", ply, ent, target)
-```
+Bonnie stopped controlling the target.
 
 ---
 
 ## Chica {#chica}
 
-### `FH_MinePlanted` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+### `FH_MinePlanted(ply, ent, cupcake)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Chica has successfully planted a cupcake mine.
+Chica successfully planted a cupcake mine.
 
-```lua
-hook.Run("FH_MinePlanted", ply, ent, cupcake)
-```
-
-| Argument | Type | Description |
-|---|---|---|
-| `ply` | `Player` | Chica |
-| `ent` | `Entity` | Chica's model |
+| Argument  | Type     | Description         |
+| --------- | -------- | ------------------- |
+| `ply`     | `Player` | Chica               |
+| `ent`     | `Entity` | Chica's model       |
 | `cupcake` | `Entity` | The planted cupcake |
 
 ```lua
 hook.Add("FH_MinePlanted", "BigCupcake", function(ply, ent, cupcake)
-    -- Make cupcakes 2 times bigger
-    cupcake:SetModelScale(2, 0.5)
+    -- Make cupcakes 2 times larger
+    cupcake:SetModelScale(2, 0.01)
 end)
 ```
 
@@ -91,58 +78,56 @@ end)
 
 ## Shadow Freddy {#shadow-freddy}
 
-### `FH_SFreddySubmergeIn` <span class="fh-badge hook">HOOK</span>
+### `FH_SFreddySubmergeIn(ply, ent)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Shadow Freddy **started** fading into invisibility.
+Shadow Freddy **started** becoming invisible.
 
-```lua
-hook.Run("FH_SFreddySubmergeIn", ply, ent)
-```
+### `FH_SFreddySubmergePostIn(ply, ent)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-### `FH_SFreddySubmergePostIn` <span class="fh-badge hook">HOOK</span>
+Shadow Freddy has **fully** become invisible.
 
-Shadow Freddy has **fully** faded into invisibility.
+### `FH_SFreddySubmergeOut(ply, ent)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-```lua
-hook.Run("FH_SFreddySubmergePostIn", ply, ent)
-```
+Shadow Freddy emerged from invisibility.
 
-### `FH_SFreddySubmergeOut` <span class="fh-badge hook">HOOK</span>
+---
 
-Shadow Freddy has emerged from invisibility.
+## Endoskeleton {#endo02}
 
-```lua
-hook.Run("FH_SFreddySubmergeOut", ply, ent)
-```
+### `FH_HandlePlayerGrab(ply, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+
+The Endoskeleton is attempting to grab a player. Return `false` — the player cannot be grabbed.
+
+### `fh_endo_release(ply, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+
+The Endoskeleton released `target`.
 
 ---
 
 ## Golden Freddy {#golden-freddy}
 
-### `FH_OutworldStart` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+### `FH_OutworldStart(wgfreddy, victim)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Golden Freddy has selected a target for the Outworld Dimension.
+Golden Freddy selected a target for the Outworld.
 
-```lua
-hook.Run("FH_OutworldStart", wgfreddy, victim)
-```
+### `FH_OutworldEnd(wgfreddy, victim)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-### `FH_OutworldEnd` <span class="fh-badge hook">HOOK</span>
+The Outworld has ended.
 
-The Outworld Dimension has been disabled.
+## Toy Chica {#toy-chica}
 
-```lua
-hook.Run("FH_OutworldEnd", wgfreddy, victim)
-```
+### `FH_HandlePlayerHold(ply, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+
+Toy Chica is attempting to grab a player. Return `false` — the player cannot be grabbed.
 
 ::: danger Always check validity
-The Outworld Dimension may be disabled because one of the players disconnected from the server. Always check `IsValid()`:
+Animatronic abilities may end because one of the players left the server. Always use `IsValid()`:
 
 ```lua
-hook.Add("FH_OutworldEnd", "Cleanup", function(gfreddy, victim)
+hook.Add("FH_OutworldEnd", "OutworldEndWelcome", function(gfreddy, victim)
     if IsValid(victim) then
         victim:ChatPrint("You have returned to the real world.")
     end
 end)
-)
 ```
+:::

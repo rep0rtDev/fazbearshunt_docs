@@ -27,7 +27,9 @@ end)
 Для работы вашей модификации, нужно чтобы сначала подгрузился сам режим, а только затем наш код (пример выше). К сожалению используя этот метод придётся перезапускать карту каждый раз, для проверки изменений.
 :::
 
-## Шаг 3. Создаём кастомного Фредди без Слепой Ярости
+В качестве примера будем использовать Пилл-Пак [Bon The Rabbit](https://steamcommunity.com/sharedfiles/filedetails/?id=950845673)
+
+## Шаг 3. Создаём Кролика Бона как аниматроника
 
 Для регистрации аниматроника в базу Pills можно использовать нудную огромную функцию `pills.register("custom_animatronic", { ... (очень большая таблица) ... } )`, но FH предлагает особый метод создания аниматроника с использованием шаблона таблицы Пилла:
 
@@ -74,27 +76,26 @@ BON.moveSpeed={
 BON.hull=Vector(32,32,90),
 
 BON.camera={
-	-- Оффсет камеры аниматроника от первого лица (старайтесь делать чуть ниже высоты хитбокса)
+	-- Оффсет камеры аниматроника от первого лица
 	offset = Vector(0, 0, 88),
-	-- Расстояние от аниматроника от третьего лица
-	dist = 120
+	dist = 120 -- Дистанция камеры от игрока от третьего лица
 },
 
--- Если offset вашей камеры 90, а duckBy стоит 70, то вприсяди камера персонажа будет
+-- Если offset вашей камеры 90, а duckBy стоит 70, то
+-- вприсяди камера будет находится в 20 юнитах от пола (90 - 70 = 20)
 BON.duckBy=70,
 
 -- "Модель" рук аниматроников. Здесь указывается имя SWEP'а,
 -- который вы должны подготовить сами.
--- Можно убрать эту строку, если у вас его нет.
 BON.viewmodel={ weapon="v_bon" }
 
--- startFunction срабатывает как только аниматроник выдаётся игроку.
+-- Срабатывает как только аниматроник выдаётся игроку.
 BON.startFunction=function(ply,ent) 
 	-- Эта функция включает встроенные войслайны погони.
 	chaseVoicelineChecker(ply, ent, "freddy") 
 end
 
--- Условие скримера: даёт знать когда игроку на клиенте показывать значок убийства у курсора.
+-- Даёт знать когда игроку на клиенте показывать значок убийства у курсора.
 BON.killCondition=function(ply,ent) 
 	local target = FindNearestPlayer(ply:EyePos(), 125, ply, 36)
 	
@@ -108,14 +109,15 @@ end
 BON.attack={ 
 	mode="trigger",
 	func=function(ply,ent)
-	-- Если аниматроник держал проп, ничего не делаем.
+		-- Если аниматроник держал проп, ничего не делаем.
 		if IsValid(ply:GetEntityInUse()) then return end 
 		-- Ищем ближайшего выжившего от глаз, на расстоянии 125, с FOV 36
 		local target = FindNearestPlayer(ply:EyePos(), 125, ply, 36)
 		
-		local jumpscare = performJumpscare(ply, ent, target, 1.6, "freddy", 50, "v_freddy")
+		local success = performJumpscare(ply, ent, target, 1.6, "freddy", 50, "v_freddy")
 		
-		if !IsValid(target) or not jumpscare then -- Если не нашли цель, или скример не произошёл
+		-- Если не нашли цель, или скример не произошёл, пытаемся сломать что-нибудь перед игроком
+		if !IsValid(target) or not success then
 			AnimatronicBreakProp(ply, ent)
 		end
 	end
@@ -141,17 +143,18 @@ end
 -- Регистрируем аниматроника в базу pills
 pills.register("custom_bon", BON) 
 
+-- Регистрация аниматроника в базу FH
+-- после этого его можно найти в Админ-Панели и сделать играбельным!
 killers.Register("custom_bon", "bon", "fazhunt.animatronics.bon", Color(93, 135, 135), "Walten Files") 
--- Регистрация аниматроника в базу FH, после этого его можно найти в Админ-Панели и сделать играбельным!
 
--- Добавляем 
+-- Добавляем способности аниматронику, которые будут отображаться в интерфейсе
 killers.SetAbilities("bon", {
 	{ name = 'highlight', key = 'R', duration = 0 },
 	{ name = 'kill', key = 'LMB', duration = 0, hidden = true },
 })
 ```
 
-Так как третьим аргументов в `killers.Register(...)` мы ввели `fazhunt.animatronics.bon`, нужно создать файл перевода с этим ключём (например `resource/localization/ru/fhbon.properties`):
+*(опц.)* Так как третьим аргументов в `killers.Register(...)` мы ввели `fazhunt.animatronics.bon`, нужно создать файл перевода с этим ключём (например `resource/localization/ru/fhbon.properties`):
 
 ```properties
 fazhunt.animatronics.bon=Бон

@@ -4,33 +4,28 @@ Hooks related to special items and game events.
 
 ## Maniac Mask <span class="fh-badge client">CLIENT</span>
 
-The Maniac Mask is a special item. When a survivor wears it, after some time they gain **obsession** — after which animatronics cannot screamer them.
+The Killer's Mask is a special item. When a survivor puts it on, after a short time they gain **obsession** — after this, animatronics cannot jumpscare them.
 
-### `FH_KillerObsessed` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
+### `FH_KillerObsessed(ply)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
 
 Called after gaining the obsessed status.
 
 ```lua
-hook.Run("FH_KillerObsessed")
-```
-
-```lua
-hook.Add("FH_KillerObsessed", "ObsessedFX", function()
-    chat.AddText(Color(255, 0, 0), "You have become obsessed. Animatronics cannot see you.")
-    -- can trigger a visual effect
+hook.Add("FH_KillerObsessed", "ObsessedMsg", function(ply)
+	if ply == LocalPlayer() then
+		chat.AddText(Color(255, 0, 0), "You have become obsessed. Kill everyone and everything.")
+	end
 end)
 ```
 
-### `FH_KillerLostObsession` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
+### `FH_KillerLostObsession(ply)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
 
 Called after **losing** the obsessed status (e.g., after death).
 
 ```lua
-hook.Run("FH_KillerLostObsession")
-```
-
-```lua
-hook.Add("FH_KillerLostObsession", "ObsessionLost", function()
-    chat.AddText(Color(255, 200, 200), "Obsession is gone.")
+hook.Add("FH_KillerLostObsession", "ObsessionLostMsg", function()
+	if ply == LocalPlayer() then
+		chat.AddText(Color(255, 200, 200), "Obsession is gone.")
+	end
 end)
 ```

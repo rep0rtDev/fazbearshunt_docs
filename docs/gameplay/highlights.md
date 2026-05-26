@@ -92,12 +92,12 @@ end
 ```lua
 highlight.AddVisionSounds(
     "pill_wgfreddy2",
-    "sounds/my_anim/highlight_success.wav",
-    "sounds/my_anim/highlight_fail.wav"
+    "my_anim/highlight_success.wav",
+    "my_anim/highlight_fail.wav"
 )
 ```
 
-::: tip
+::: tip Важно
 В путях звуков обязательно указывайте полный путь до файла, включая расширение.
 :::
 

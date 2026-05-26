@@ -145,6 +145,7 @@ export default defineConfig({
                   { text: 'Gift Ownership', link: '/reference/player-meta#setgiftownership' },
                 ]
               },
+              { text: 'Аниматроники', link: '/reference/animatronics' },
               {
                 text: 'Функции FH',
                 collapsed: true,
@@ -157,23 +158,9 @@ export default defineConfig({
                   { text: 'disableGiftSpawning', link: '/reference/functions#disablegiftspawning' },
                   { text: 'fh.GetRoundCount', link: '/reference/functions#fh-getroundcount-server' },
                   { text: 'fh.GetEarnedKillers', link: '/reference/functions#fh-getearnedkillers-players-server' },
-                  { text: 'fh.SetRoundType', link: '/reference/functions#fh-setroundtype-number-server' },
                   { text: 'fh.GetRoundType', link: '/reference/functions#fh-getroundtype-server' },
                   { text: 'jumpscareEvent', link: '/reference/functions#jumpscareevent-ply-ent-target-dist-server' },
-                  { text: 'takePlayer / endoRelease', link: '/reference/functions#takeplayer-ply-ent-server' },
                   { text: 'FindNearestPlayer', link: '/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-server' },
-                ]
-              },
-              {
-                text: 'Аниматроники',
-                collapsed: true,
-                items: [
-                  { text: 'Обзор', link: '/reference/animatronics' },
-                  { text: 'pill_makePreferable', link: '/reference/functions#pill-makepreferable-anim-bool-shared' },
-                  { text: 'pill_makeSecondary', link: '/reference/functions#pill-makesecondary-anim-bool-shared' },
-                  { text: 'killers.getAllPreferables', link: '/reference/functions#killers-getallpreferables-secondaries-shared' },
-                  { text: 'killers.getAllSecondaries', link: '/reference/functions#killers-getallsecondaries-shared' },
-                  { text: 'killers.getAll', link: '/reference/functions#killers-getall-shared' },
                 ]
               },
               { text: 'Типы раундов', link: '/reference/round-types' },
@@ -344,6 +331,7 @@ export default defineConfig({
                   { text: 'Gift Ownership', link: '/en/reference/player-meta#setgiftownership' },
                 ]
               },
+              { text: 'Animatronics', link: '/en/reference/animatronics' },
               {
                 text: 'FH Functions',
                 collapsed: true,
@@ -356,23 +344,9 @@ export default defineConfig({
                   { text: 'disableGiftSpawning', link: '/en/reference/functions#disablegiftspawning' },
                   { text: 'fh.GetRoundCount', link: '/en/reference/functions#fh-getroundcount-server' },
                   { text: 'fh.GetEarnedKillers', link: '/en/reference/functions#fh-getearnedkillers-players-server' },
-                  { text: 'fh.SetRoundType', link: '/en/reference/functions#fh-setroundtype-number-server' },
                   { text: 'fh.GetRoundType', link: '/en/reference/functions#fh-getroundtype-server' },
                   { text: 'jumpscareEvent', link: '/en/reference/functions#jumpscareevent-ply-ent-target-dist-server' },
-                  { text: 'takePlayer / endoRelease', link: '/en/reference/functions#takeplayer-ply-ent-server' },
                   { text: 'FindNearestPlayer', link: '/en/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-shared' },
-                ]
-              },
-              {
-                text: 'Animatronics',
-                collapsed: true,
-                items: [
-                  { text: 'Overview', link: '/en/reference/animatronics' },
-                  { text: 'pill_makePreferable', link: '/en/reference/functions#pill-makepreferable-anim-bool-shared' },
-                  { text: 'pill_makeSecondary', link: '/en/reference/functions#pill-makesecondary-anim-bool-shared' },
-                  { text: 'killers.getAllPreferables', link: '/en/reference/functions#killers-getallpreferables-secondaries-shared' },
-                  { text: 'killers.getAllSecondaries', link: '/en/reference/functions#killers-getallsecondaries-shared' },
-                  { text: 'killers.getAll', link: '/en/reference/functions#killers-getall-shared' },
                 ]
               },
               { text: 'Round types', link: '/en/reference/round-types' },

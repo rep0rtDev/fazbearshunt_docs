@@ -43,19 +43,19 @@ end)
 
 ### `FH_YoursMineStart(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Бонни активировал способность **«Чужим Взглядом»**.
+Бонни активировал способность **«Чужим Разумом»**.
 
 ### `FH_YoursMineSpectating(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Бонни начал следить за целью.
+Бонни начал управлять целью.
 
 ### `FH_YoursMineEnd(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Бонни закончил слежку.
+Бонни закончил управлять целью.
 
 ---
 
-## Чика {#chica} <span class="fh-badge server">SERVER</span>
+## Чика {#chica}
 
 ### `FH_MinePlanted(ply, ent, cupcake)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
@@ -114,11 +114,15 @@ end)
 
 Загранное Измерение отключилось.
 
+---
+
 ## Той Чика {#toy-chica}
 
 ### `FH_HandlePlayerHold(ply, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
 Той чика пытается схватить игрока. Возврат `false` — игрока нельзя схватить.
+
+---
 
 ::: danger Всегда проверяйте валидность
 Способности аниматроников могут отключиться из-за того, что один из игроков покинул сервер. Обязательно используйте `IsValid()`:

@@ -71,25 +71,6 @@ local candidates = fh.GetEarnedKillers(player.GetAll())
 giveKiller(candidates[1], "pill_wfreddy2")
 ```
 
-### `fh.SetRoundType(number)` <span class="fh-badge server">SERVER</span>
-
-Устанавливает тип раунда. Режим вызывает это сам в начале раунда.
-
-::: warning Аккуратно
-Используйте только если точно знаете, что делаете.
-:::
-
-### `fh.GetRoundType()` <span class="fh-badge server">SERVER</span>
-
-Возвращает текущий тип раунда.
-
-| Значение | Тип раунда |
-|---|---|
-| `0` | Обычный |
-| `1` | Со Спрингтрапом |
-| `2` | Бонни-Тег |
-| `3` | Раунд-Заражение с Bear5 |
-
 ### `fh.GetActiveUsedKiller(killer)` <span class="fh-badge server">SERVER</span>
 
 Возвращает игрока, которому был выдан указанный аниматроник.
@@ -241,7 +222,7 @@ killers.SetAbilities("bear5", {
 
 ### `killers.getAllSolos()` <span class="fh-badge shared">SHARED</span>
 
-Все аниматроники без вторичности. 
+Все **не вторичные** аниматроники. 
 
 ::: warning Важно
 Не проверяет играбельность

@@ -8,20 +8,6 @@
 
 **Возврат `false`** — отменить выбор раунда.
 
-**Пример:** уникальный раунд с отменой ванильного таймера. См. [Бонни-Тег →](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/bonnie_tag.lua)
-
-```lua
-hook.Add("fh_prestartgame", "CustomLogic", function()
-    if math.random(1, 100) <= 5 then
-        -- Раз в 20 раундов делаем спецсобытие
-        for _, ply in ipairs(player.GetAll()) do
-            giveKiller(ply, "pill_wgfreddy2", true)
-        end
-        return false  -- отменяем стандартный выбор
-    end
-end)
-```
-
 ---
 
 ## `fh_startgame(roundType)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_startgame}
@@ -33,6 +19,8 @@ end)
 | `roundType` | `int` | ID типа раунда |
 
 **Возврат `false`** — отменить запуск таймера, музыки и т.д.
+
+**Пример:** уникальный раунд с заменой таймера. См. [Бонни-Тег →](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/bonnie_tag.lua)
 
 ```lua
 hook.Add("fh_startgame", "AnnounceRound", function(roundType)
@@ -55,8 +43,8 @@ end)
 ```lua
 hook.Add("fh_poststartgame", "BuffAnims", function(roundType, anims)
     for ply, _ in ipairs(anims) do
-        ply:SetMaxHealth(150)
-        ply:SetHealth(150)
+        ply:SetMaxHealth(150000)
+        ply:SetHealth(150000)
     end
 end)
 ```
