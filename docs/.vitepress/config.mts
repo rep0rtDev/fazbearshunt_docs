@@ -70,7 +70,7 @@ export default defineConfig({
             text: 'Руководство',
             collapsed: false,
             items: [
-              { text: 'О режиме', link: '/guide/introduction' },
+              { text: 'О режиме', link: '/guide/about' },
               { text: 'Начало работы', link: '/guide/getting-started' },
               { text: 'Первая модификация', link: '/guide/first-modification' },
             ]
@@ -256,7 +256,7 @@ export default defineConfig({
             text: 'Guide',
             collapsed: false,
             items: [
-              { text: 'About the gamemode', link: '/en/guide/introduction' },
+              { text: 'About the gamemode', link: '/en/guide/about' },
               { text: 'Getting started', link: '/en/guide/getting-started' },
               { text: 'First modification', link: '/en/guide/first-modification' },
             ]

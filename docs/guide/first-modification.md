@@ -1,10 +1,10 @@
-# Первая модификация
+# Первая модификация (Порт)
 
 В этом гайде мы добавим в Fazbear's Hunt аниматроника из чужого Пилл-Пака из Мастерской Steam в качестве полноценного аниматроника режима.
 
 ## Шаг 1. Найдите Пилл-Пак
 
-Зайдите в Steam Workshop, найдите Пилл-Пак с аниматроником, которую хотите использовать. Можно заранее распаковать файлы аддона, чтобы знать путь до модели аниматроника, и названия его анимаций.
+Зайдите в Steam Workshop, найдите Пилл-Пак с аниматроником, который хотите использовать. Можно заранее распаковать файлы аддона, чтобы знать путь до модели аниматроника, и названия его анимаций.
 
 ::: warning Внимание
 Пилл-Пак должен быть установлен на сервере и клиенте, иначе игра не сможет использовать его модель.
@@ -31,7 +31,7 @@ end)
 
 ## Шаг 3. Создаём Кролика Бона как аниматроника
 
-Для регистрации аниматроника в базу Pills можно использовать нудную огромную функцию `pills.register("custom_animatronic", { ... (очень большая таблица) ... } )`, но FH предлагает особый метод создания аниматроника с использованием шаблона таблицы Пилла:
+Для регистрации аниматроника в базу Pills будем использовать метод `GetPillTemplate()`
 
 ```lua
 -- Таблица с данными, которые одинаковы у большинства аниматроников
@@ -44,13 +44,13 @@ BON.anims={
 		idle="idle",
 		walk="walk",
 		run="run",
-		-- Анимация скримера должна называться именно scare, если вы используете performJumpscare()
-		scare="kill",	
 		crouch="Crouch",
 		crouch_walk="CrawlMovement",
 		jump="jump",
 		glide="fall",
 		land="land",
+		-- Анимация скримера должна называться именно scare, если вы используете performJumpscare()
+		scare="kill",	
 		-- Анимация удара по аниматронику Шокером.
 		stun="stun",
 	},
@@ -62,7 +62,7 @@ BON.anims={
 	speedCap={
 		walk = 60,
 		run = 400,
-		ducked=40,
+		ducked = 40,
 	},
 }
 -- Скорость передвижения
@@ -132,6 +132,7 @@ end
 -- Приземление аниматроника
 BON.land=function(ply,ent)
 	if ply:WaterLevel() < 2 then
+		-- Умная проверка, взятая из кода ванильных аниматроников.
 		if ply._wereJumpingPill or not ply._wereJumpingPill and ply:GetVelocity().z < -270 then
 			if not ply._jumpPosPill or ply._jumpPosPill and ply:GetPos():Distance(ply._jumpPosPill) > 150 then
 				ent:PillAnim("land",true)
@@ -144,8 +145,8 @@ end
 pills.register("custom_bon", BON) 
 
 -- Регистрация аниматроника в базу FH
--- после этого его можно найти в Админ-Панели и сделать играбельным!
-killers.Register("custom_bon", "bon", "fazhunt.animatronics.bon", Color(93, 135, 135), "Walten Files") 
+-- после этого его можно найти в Админ-Панели и сделать играбельным
+killers.Register("custom_bon", "bon", "fh.custom.animatronics.bon", Color(93, 135, 135), "Walten Files") 
 
 -- Добавляем способности аниматронику, которые будут отображаться в интерфейсе
 killers.SetAbilities("bon", {
@@ -154,10 +155,12 @@ killers.SetAbilities("bon", {
 })
 ```
 
-*(опц.)* Так как третьим аргументов в `killers.Register(...)` мы ввели `fazhunt.animatronics.bon`, нужно создать файл перевода с этим ключём (например `resource/localization/ru/fhbon.properties`):
+См. [Полное обьяснение структуры Пилла →](/guide/animatronics/pill-structure-registration.md)
+
+*(опц.)* Так как третьим аргументом в `killers.Register(...)` мы ввели `fh.custom.animatronics.bon`, нужно создать файл перевода с этим ключём (например `resource/localization/ru/fhbon.properties`):
 
 ```properties
-fazhunt.animatronics.bon=Бон
+fh.custom.animatronics.bon=Бон
 ```
 
 См. [Функции FH →](/reference/functions.md)
