@@ -154,7 +154,6 @@ export default defineConfig({
                   { text: 'Gift Ownership', link: '/reference/player-meta#setgiftownership' },
                 ]
               },
-              { text: 'Аниматроники', link: '/reference/animatronics' },
               {
                 text: 'Функции FH',
                 collapsed: true,
@@ -172,6 +171,7 @@ export default defineConfig({
                   { text: 'FindNearestPlayer', link: '/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-server' },
                 ]
               },
+              { text: 'Аниматроники', link: '/reference/animatronics' },
               { text: 'Типы раундов', link: '/reference/round-types' },
             ]
           },
@@ -340,7 +340,6 @@ export default defineConfig({
                   { text: 'Gift Ownership', link: '/en/reference/player-meta#setgiftownership' },
                 ]
               },
-              { text: 'Animatronics', link: '/en/reference/animatronics' },
               {
                 text: 'FH Functions',
                 collapsed: true,
@@ -358,6 +357,7 @@ export default defineConfig({
                   { text: 'FindNearestPlayer', link: '/en/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-shared' },
                 ]
               },
+              { text: 'Animatronics', link: '/en/reference/animatronics' },
               { text: 'Round types', link: '/en/reference/round-types' },
             ]
           },

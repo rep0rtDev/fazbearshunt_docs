@@ -11,7 +11,7 @@
 | `printName` 		| `string` 					| Полное имя |
 | `model` 			| `string` 					| Путь до модели (должен начинаться с `"models/"`) |
 | `type` 			| `string` 	 				| **Всегда должен указывать `ply`** |
-| `hull` 			| `[Vector](https://wiki.facepunch.com/gmod/Global.Vector)` 				| Хитбокс (третий аргумент - высота) |
+| `hull` 			| [Vector](https://wiki.facepunch.com/gmod/Global.Vector) 				| Хитбокс (третий аргумент - высота) |
 | `duckBy` 			| `float` 					| На сколько юнитов Пилл присаживается |
 | `health` 			| `float` 					| Максимальное здоровье (Если не указать - включается бессмертие) |
 | `jumpPower` 		| `float` 					| Сила прыжка |
@@ -25,7 +25,7 @@
 | `land` 			| `function(ply, ent)`		| Приземление |
 
 :::tip На заметку
-Все параметры используется или вызываются только на сервере, кроме подмеченных бейджиком <span class="fh-badge client">CLIENT</span> или <span class="fh-badge shared">SHARED</span>.
+Все параметры используются или вызываются только на сервере, кроме подмеченных бейджиком <span class="fh-badge client">CLIENT</span> или <span class="fh-badge shared">SHARED</span>.
 :::
 
 Также есть дополнительные параметры:
@@ -39,12 +39,12 @@
 | `muteSteps` 			| `bool`  	 		| Приглушить ходьбу игрока? |
 | `noFallDamage` 		| `bool`  	 		| Отключить урон от падения? |
 | `movePoseMode` 		| `string`  	 	| Если модель поддерживает параметры поз `move_x` и `move_y`, то впишите `xy`. *Параметр `move_yaw` пока не проверен на работоспособность* |
-| `aim`  				| `table[...]`  	| Указывает какие параметры поз использовать для поворота тела Пилла вместе с камерой игрока | <span class="fh-badge client">CLIENT</span>
+| `aim` <span class="fh-badge client">CLIENT</span> 		| `table[...]`  	| Указывает какие параметры поз использовать для поворота тела Пилла вместе с камерой игрока | 
 | `collisionGroup`  	| `int`  			| Группа коллизии *(См. Enum [COLLISION_GROUP](https://wiki.facepunch.com/gmod/Enums/COLLISION_GROUP))* |
-| `killCondition`  		| `function(ply, ent)`  			| Если есть, и возвращает `true`, то рисует значок убийства у курсора игрока | <span class="fh-badge client">CLIENT</span>
+| `killCondition` <span class="fh-badge client">CLIENT</span>  	| `function(ply, ent)`  			| Если есть, и возвращает `true`, то рисует значок убийства у курсора игрока |
 | `startFunction`  		| `function(ply, ent)`  			| Срабатывает после того как игрок стал Пиллом |
-| `onRemove`  			| `function(ent, formTable, ply)`  	| Срабатывает после удаления Пилла (т.е. игрок сменил Пилл, или стал выжившим) | class="fh-badge shared">SHARED</span>
-| `onRemovePost`  		| `function(ent, formTable, ply)`  	| Тоже самое что и сверху | class="fh-badge shared">SHARED</span>
+| `onRemove`  class="fh-badge shared">SHARED</span> 		| `function(ent, formTable, ply)`  	| Срабатывает после удаления Пилла (т.е. игрок сменил Пилл, или стал выжившим) |
+| `onRemovePost` class="fh-badge shared">SHARED</span>		| `function(ent, formTable, ply)`  	| Тоже самое что и сверху |
 | `restore`  			| `function(ent, formTable, ply)`  	| Тоже самое что и сверху, но не вызывается если игрока **СМЕНИЛ ПИЛЛ** |
 | `taunt`  				| `function(ply, ent, act)`  		| Срабатывает, при использовании игроком команды `act` |
 | `moveMod`  			| `function(ply, ent, mv, cmd)`  	| Позволяет обработать передвижение Пилла внутри `SetupMove` |
@@ -58,26 +58,26 @@
 | `flashlight` 			| `function(ply, ent)` 		| Вызывается когда фонарик **включается** (Если игрок **выключает** фонарик - не вызывается) |
 | `glideThink` 			| `function(ply, ent)` 		| Вызывается пока игрок не на земле |
 | `die` 				| `function(ply, ent)` 		| После смерти игрока, владеющим Пиллом |
-| `visColor` 			| `[Color](https://wiki.facepunch.com/gmod/Global.Color)` 		| Красит модель Пилла в данный цвет |
+| `visColor` 			| [Color](https://wiki.facepunch.com/gmod/Global.Color) 		| Красит модель Пилла в данный цвет |
 | `visColorRandom` 		| `bool` 					| Красит модель Пилла в случайный цвет |
 | `flies` 				| `bool` 					| Пилл должен летать, а не ходить? |
 | `boneMorphs` 			| `table[...]` 				| Используется для изменения позиции, поворота и размера костей |
 | `cloak` 				| `table[...]` 				| Встроенная в базу система невидимости, скорее всего **НЕ РАБОТАЕТ** |
-| `loadout` 			| `table[Weapon]` 			| Выдаёт оружие из таблицы **(МОЖЕТ БЫТЬ УДАЛЕНО В СЛЕДУЮЩИХ ОБНОВЛЕНИЯХ)** |
-| `ammo` 				| `table[...]` 				| Выдаёт патроны из таблицы **(МОЖЕТ БЫТЬ УДАЛЕНО В СЛЕДУЮЩИХ ОБНОВЛЕНИЯХ)** |
+| `loadout` 			| `table[Weapon]` 			| Выдаёт оружие из таблицы `(МОЖЕТ БЫТЬ УДАЛЕНО В СЛЕДУЮЩИХ ОБНОВЛЕНИЯХ)` |
+| `ammo` 				| `table[...]` 				| Выдаёт патроны из таблицы `(МОЖЕТ БЫТЬ УДАЛЕНО В СЛЕДУЮЩИХ ОБНОВЛЕНИЯХ)` |
 
-Альтернативные варианты `attack`, `attack2` и `reload`:
+Альтернативные <span class="fh-badge shared">SHARED</span> варианты `attack`, `attack2` и `reload`:
 
 | Параметр | Тип | Описание |
 |---|---|---|
-| `attack_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `attack` | <span class="fh-badge shared">SHARED</span>
-| `attack2_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `attack2` | <span class="fh-badge shared">SHARED</span>
-| `reload_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `reload` | <span class="fh-badge shared">SHARED</span>
-| `attack_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `attack`, но без Лаг Компенсации | <span class="fh-badge shared">SHARED</span>
-| `attack2_sh_nolc` 	| `function(ply, ent)` 		| Тоже самое, что и `attack2`, но без Лаг Компенсации | <span class="fh-badge shared">SHARED</span>
-| `reload_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `reload`, но без Лаг Компенсации | <span class="fh-badge shared">SHARED</span>
+| `attack_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `attack` |
+| `attack2_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `attack2` |
+| `reload_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `reload` |
+| `attack_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `attack`, но без Лаг Компенсации |
+| `attack2_sh_nolc` 	| `function(ply, ent)` 		| Тоже самое, что и `attack2`, но без Лаг Компенсации |
+| `reload_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `reload`, но без Лаг Компенсации |
 
-:::warning
+:::tip На заметку
 Вместо версий без Лаг Компенсации можно просто использовать версии <span class="fh-badge shared">SHARED</span> и самостоятельно выключать её с помощью [Player:LagCompensation(false)](https://wiki.facepunch.com/gmod/Player:LagCompensation)
 :::
 
@@ -235,7 +235,7 @@ PrintTable(MY_PILL)
 
 Вывод:
 
-```lua
+```
 ["aim"]:
 		["xPose"]	=	aim_yaw
 		["yPose"]	=	aim_pitch
