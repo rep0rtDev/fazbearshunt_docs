@@ -76,9 +76,9 @@ export default defineConfig({
                 text: 'Аниматроники',
                 collapsed: true,
                 items: [
-                  { text: 'База Pills', link: '/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-server' },
-                  { text: 'fh.SetRoundTypeBlocked', link: '/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
-                  { text: 'fh.GetRoundTypes', link: '/gameplay/rounds#fh-getroundtypes-server' },
+                  { text: 'База Pills', link: '/guide/animatronics/pills-base' },
+                  { text: 'Структура и Регистрация Пилла', link: '/guide/animatronics/pill-structure-registration' },
+                  { text: 'Регистрация аниматроников', link: '/guide/animatronics/fh-registration' },
                 ]
               },
               { text: 'Первая модификация', link: '/guide/first-modification' },
