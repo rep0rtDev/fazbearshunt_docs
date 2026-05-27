@@ -72,6 +72,15 @@ export default defineConfig({
             items: [
               { text: 'О режиме', link: '/guide/about' },
               { text: 'Начало работы', link: '/guide/getting-started' },
+              {
+                text: 'Аниматроники',
+                collapsed: true,
+                items: [
+                  { text: 'База Pills', link: '/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-server' },
+                  { text: 'fh.SetRoundTypeBlocked', link: '/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
+                  { text: 'fh.GetRoundTypes', link: '/gameplay/rounds#fh-getroundtypes-server' },
+                ]
+              },
               { text: 'Первая модификация', link: '/guide/first-modification' },
             ]
           },
