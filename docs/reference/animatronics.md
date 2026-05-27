@@ -37,6 +37,20 @@ if IsValid(ent) then
     print("Модель:", ent:GetModel())
 end
 ```
+
+Также можно получить структуру Пилла
+
+```lua
+local ent = pills.getMappedEnt(ply)
+if IsValid(ent) then
+    if ent.formTable.reload then
+		print("Пилл имеет способность на бинд +reload!")
+	else
+		print("Пилл не имеет способности на +reload")
+	end
+end
+```
+
 :::tip Разница
 Режим добавляет в [`PlayerMeta`](/reference/PlayerMeta.md) функцию `ply:GetPill()`, но она напрямую вызывает `pills.getMappedEnt(ply)`, поэтому рекомендуется использовать именно второй вариант, для оптимизации.
 :::

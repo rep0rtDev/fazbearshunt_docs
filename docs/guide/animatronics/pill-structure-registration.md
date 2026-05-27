@@ -32,7 +32,7 @@
 
 | Параметр | Тип | Описание |
 |---|---|---|
-| `camera` 				| `table[...]` 		| Настройки камера от первого, и третьего лица |
+| `camera` 				| `table[...]` 		| Настройки камера от первого и третьего лица |
 | `viewmodel` 			| `table[...]` 		| Класс и настройки SWEP'а который будет служить Пиллу руками от первого лица |
 | `modelScale` 			| `string`  	 	| Размер модели |
 | `bloodType` 			| `int`  	 		| Тип крови *(См. Enum [BLOOD_COLOR](https://wiki.facepunch.com/gmod/Enums/BLOOD_COLOR))* |

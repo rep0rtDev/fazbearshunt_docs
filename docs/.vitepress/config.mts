@@ -67,6 +67,13 @@ export default defineConfig({
 
         sidebar: [
           {
+            text: 'Дополнительно',
+            collapsed: false,
+            items: [
+              { text: 'FAQ', link: '/faq' },
+            ]
+          },
+          {
             text: 'Руководство',
             collapsed: false,
             items: [
@@ -224,13 +231,6 @@ export default defineConfig({
               },
             ]
           },
-          {
-            text: 'Дополнительно',
-            collapsed: false,
-            items: [
-              { text: 'FAQ', link: '/faq' },
-            ]
-          },
         ],
 
         outline: {
@@ -261,6 +261,13 @@ export default defineConfig({
         ],
 
         sidebar: [
+          {
+            text: 'Other',
+            collapsed: false,
+            items: [
+              { text: 'FAQ', link: '/en/faq' },
+            ]
+          },
           {
             text: 'Guide',
             collapsed: false,
@@ -408,13 +415,6 @@ export default defineConfig({
                   { text: 'FH_KillerLostObsession', link: '/en/hooks/events#fh-killerlostobsession' },
                 ]
               },
-            ]
-          },
-          {
-            text: 'Other',
-            collapsed: false,
-            items: [
-              { text: 'FAQ', link: '/en/faq' },
             ]
           },
         ],
