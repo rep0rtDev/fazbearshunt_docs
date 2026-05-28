@@ -194,7 +194,7 @@ export default defineConfig({
               },
               { text: 'Аниматроники', link: '/reference/animatronics' },
               { text: 'Темы погони', link: '/reference/terror-radius' },
-              { text: 'Viewmodel аниматроника', link: '/reference/viewmodels' },
+              { text: 'ViewModel аниматроника', link: '/reference/viewmodels' },
               { text: 'Типы раундов', link: '/reference/round-types' },
             ]
           },
