@@ -26,7 +26,7 @@ garrysmod/addons/my_fh_addon/
 			└── chase.wav
 ```
 
-Следующим этапом будет зацикливание музыки, это вы можете сделать через программы `Wavosaur` или `FL Studio`.
+Следующим этапом будет зацикливание музыки, это вы можете сделать через программы **Wavosaur** или **FL Studio**.
 
 См. [Зацикливание Звуков](https://wiki.facepunch.com/gmod/Creating_Looping_Sounds)
 
