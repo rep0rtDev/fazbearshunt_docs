@@ -71,6 +71,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: 'FAQ', link: '/faq' },
+              { text: 'Hammer', link: '/hammer' },
             ]
           },
           {
@@ -162,6 +163,18 @@ export default defineConfig({
                 ]
               },
               {
+                text: 'PillCostumeMeta',
+                collapsed: true,
+                items: [
+                  { text: 'Основные', link: '/reference/pillcostume-meta#main' },
+                  { text: 'Вспомогательные', link: '/reference/pillcostume-meta#helpies' },
+                  { text: 'Анимации', link: '/reference/pillcostume-meta#animations' },
+                  { text: 'Звуки', link: '/reference/pillcostume-meta#sounds' },
+                  { text: 'Скорость', link: '/reference/pillcostume-meta#speed' },
+                  { text: 'Отсоединение от игрока', link: '/reference/pillcostume-meta#detaching' },
+                ]
+              },
+              {
                 text: 'Функции FH',
                 collapsed: true,
                 items: [
@@ -174,11 +187,13 @@ export default defineConfig({
                   { text: 'fh.GetRoundCount', link: '/reference/functions#fh-getroundcount-server' },
                   { text: 'fh.GetEarnedKillers', link: '/reference/functions#fh-getearnedkillers-players-server' },
                   { text: 'fh.GetRoundType', link: '/reference/functions#fh-getroundtype-server' },
-                  { text: 'jumpscareEvent', link: '/reference/functions#jumpscareevent-ply-ent-target-dist-server' },
-                  { text: 'FindNearestPlayer', link: '/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-server' },
+                  { text: 'performJumpscare', link: '/reference/functions#performjumpscare' },
+                  { text: 'FindNearestPlayer', link: '/reference/functions#findnearestplayer' },
+                  { text: 'killers.Register', link: '/reference/functions#killersregister' },
                 ]
               },
               { text: 'Аниматроники', link: '/reference/animatronics' },
+              { text: 'Темы погони', link: '/reference/terror-radius' },
               { text: 'Типы раундов', link: '/reference/round-types' },
             ]
           },

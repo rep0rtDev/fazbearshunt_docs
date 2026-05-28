@@ -114,7 +114,7 @@ BON.attack={
 		-- Ищем ближайшего выжившего от глаз, на расстоянии 125, с FOV 36
 		local target = FindNearestPlayer(ply:EyePos(), 125, ply, 36)
 		
-		local success = performJumpscare(ply, ent, target, 1.6, "freddy", 50, "v_freddy")
+		local success = performJumpscare(ply, ent, target, 1.6, "bon", 50, "v_bon")
 		
 		-- Если не нашли цель, или скример не произошёл, пытаемся сломать что-нибудь перед игроком
 		if !IsValid(target) or not success then
@@ -180,7 +180,8 @@ end
 
 Теперь, когда у вас есть аниматроник, изучите:
 
-- **[Функции FH](/reference/functions.md)** — для глубокого изменения поведения
+- **[PillCostumeMeta](/reference/pillcostume-meta.md)** — узнать как проигрываются анимации, звуки на Пилле
+- **[Функции FH](/reference/functions.md)** — встроенные функции скримера и т.д.
 - **[Хуки аниматроников](/hooks/animatronics.md)** — для перехвата скримеров и т.д.
 - **[Способности аниматроников](/hooks/abilities.md)** — хуки конкретных способностей
 

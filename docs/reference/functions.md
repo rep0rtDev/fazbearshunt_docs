@@ -93,9 +93,9 @@ end
 Эти функции предназначены для использования внутри **пилл-паков** аниматроников или своих хуков, расширяющих их.
 :::
 
-### `performJumpscare(ply, ent, target, killDelay, [voiceCharacter], [jumpscareDistance], [wepClass])` <span class="fh-badge server">SERVER</span>
+### `performJumpscare(ply, ent, target, killDelay, [voiceCharacter], [jumpscareDistance], [wepClass])` <span class="fh-badge server">SERVER</span> {#performjumpscare}
 
-Насильно скримерит `target` для `ply`.
+Насильно скримерит `target` для `ply`. Возвращает `true` если скример произошёл, а `false` - если нет.
 
 | Параметр | Тип | Описание |
 |---|---|---|
@@ -107,9 +107,9 @@ end
 | `jumpscareDistance` | `float` *(опц.)* | Дистанция между аниматроником и жертвой |
 | `wepClass` | `string` *(опц.)* | Класс оружия рук аниматроника, для которой включится анимация **scare** |
 
-### `jumpscareEvent(ply, ent, target, [dist])` <span class="fh-badge server">SERVER</span>
+### `jumpscareEvent(ply, ent, target, [dist])` <span class="fh-badge server">SERVER</span> {#jumpscarevent}
 
-Замораживает игрока-жертву в скримере. Вызывайте **после** проигрывания анимации.
+Замораживает игрока и жертву в скримере. Вызывайте **после** проигрывания анимации.
 
 | Параметр | Тип | Описание |
 |---|---|---|
@@ -138,7 +138,7 @@ end
 
 ## Поиск целей
 
-### `FindNearestPlayer(origin, radius, ignorePlayer, fov)` <span class="fh-badge shared">SHARED</span>
+### `FindNearestPlayer(origin, radius, ignorePlayer, fov)` <span class="fh-badge shared">SHARED</span> {#findnearestplayer}
 
 Ищет ближайшего выжившего в радиусе.
 
@@ -163,7 +163,7 @@ end
 
 ## Регистрация аниматроников
 
-### `killers.Register(pill, name, fullname, color, category)` <span class="fh-badge shared">SHARED</span>
+### `killers.Register(pill, name, fullname, color, category)` <span class="fh-badge shared">SHARED</span> {#killersregister}
 
 Регистрирует аниматроника в базу режима. После успешной регистрации аниматроник будет доступен в Админ-Панели.
 

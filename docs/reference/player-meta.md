@@ -28,6 +28,37 @@ end
 Если засунуть выжившего в команду `TEAM_PILLS` *(или 2701)*, то игра здесь будет выдавать `true`.
 :::
 
+### `PLAYER:GetPill()`
+
+Возвращает Пилл-Энтити игрока.
+
+```lua
+local ent = ply:GetPill()
+if IsValid(ent) then
+	print("Пилл присутствует!")
+end
+```
+
+:::tip Важно
+Этот метод напрямую вызывает `pills.getMappedEnt(ply)`, поэтому рекомендуется использовать именно второй вариант, ради оптимизации.
+:::
+
+---
+
+## События <span class="fh-badge shared">SHARED</span>
+
+### `PLAYER:IsJumpscared()`
+
+Скримерят ли прямо сейчас игрока?
+
+### `PLAYER:SetJumpscared()`
+
+Устанавливает скримерят ли сейчас игрока.
+
+:::tip На заметку
+Эта функция уже автоматически используется внутри (performJumpscare)[/reference/functions#performjumpscare]
+:::
+
 ---
 
 ## Спавн и позиция <span class="fh-badge server">SERVER</span>

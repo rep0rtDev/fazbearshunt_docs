@@ -2,15 +2,15 @@
 
 **Структурой Пилла** мы называем таблицу, второй аргумент в регистрации через `pills.register(name, {...})`, которая имеет все сведения о нашем Пилле: модель, способности, анимации, скорость, звуки и т.д.
 
-## Все параметры структуры
+## Все основные параметры структуры
 
-Чтобы ваш Пилл работал, следующие параметры должны быть обязательно включены в таблицу:
+Чаще всего в Пилле необходимы именно следующие параметры:
 
 | Параметр | Тип | Описание |
 |---|---|---|
-| `printName` 		| `string` 					| Полное имя |
+| `printName` 		| `string` 					| Полное имя `ОБЯЗАТЕЛЕН` |
 | `model` 			| `string` 					| Путь до модели (должен начинаться с `"models/"`) |
-| `type` 			| `string` 	 				| **Всегда должен указывать `ply`** |
+| `type` 			| `string` 	 				| `ОБЯЗАТЕЛЕН И ВСЕГДА ДОЛЖЕН УКАЗЫВАТЬ ply` |
 | `hull` 			| [Vector](https://wiki.facepunch.com/gmod/Global.Vector) 				| Хитбокс (третий аргумент - высота) |
 | `duckBy` 			| `float` 					| На сколько юнитов Пилл присаживается |
 | `health` 			| `float` 					| Максимальное здоровье (Если не указать - включается бессмертие) |
@@ -24,10 +24,6 @@
 | `jump` 			| `function(ply, ent)`		| Прыжок |
 | `land` 			| `function(ply, ent)`		| Приземление |
 
-:::tip На заметку
-Все параметры используются или вызываются только на сервере, кроме подмеченных бейджиком <span class="fh-badge client">CLIENT</span> или <span class="fh-badge shared">SHARED</span>.
-:::
-
 Также есть дополнительные параметры:
 
 | Параметр | Тип | Описание |
@@ -38,18 +34,26 @@
 | `bloodType` 			| `int`  	 		| Тип крови *(См. Enum [BLOOD_COLOR](https://wiki.facepunch.com/gmod/Enums/BLOOD_COLOR))* |
 | `muteSteps` 			| `bool`  	 		| Приглушить ходьбу игрока? |
 | `noFallDamage` 		| `bool`  	 		| Отключить урон от падения? |
+| `chaseTheme` 			| `string`  	 	| Тема погони (Например, `default`) |
 | `movePoseMode` 		| `string`  	 	| Если модель поддерживает параметры поз `move_x` и `move_y`, то впишите `xy`. *Параметр `move_yaw` пока не проверен на работоспособность* |
-| `aim` <span class="fh-badge client">CLIENT</span> 		| `table[...]`  	| Указывает какие параметры поз использовать для поворота тела Пилла вместе с камерой игрока | 
+| `aim` 		 		| `table[...]`  	| Указывает какие параметры поз использовать для поворота тела Пилла вместе с камерой игрока | 
 | `collisionGroup`  	| `int`  			| Группа коллизии *(См. Enum [COLLISION_GROUP](https://wiki.facepunch.com/gmod/Enums/COLLISION_GROUP))* |
-| `killCondition` <span class="fh-badge client">CLIENT</span>  	| `function(ply, ent)`  			| Если есть, и возвращает `true`, то рисует значок убийства у курсора игрока |
+| `killCondition` 		| `function(ply, ent)`  			| Если есть, и возвращает `true`, то рисует значок убийства у курсора игрока |
 | `startFunction`  		| `function(ply, ent)`  			| Срабатывает после того как игрок стал Пиллом |
-| `onRemove`  class="fh-badge shared">SHARED</span> 		| `function(ent, formTable, ply)`  	| Срабатывает после удаления Пилла (т.е. игрок сменил Пилл, или стал выжившим) |
-| `onRemovePost` class="fh-badge shared">SHARED</span>		| `function(ent, formTable, ply)`  	| Тоже самое что и сверху |
+| `onRemove`   			| `function(ent, formTable, ply)`  	| Срабатывает после удаления Пилла (т.е. игрок сменил Пилл, или стал выжившим) |
+| `onRemovePost` 		| `function(ent, formTable, ply)`  	| Тоже самое что и сверху |
 | `restore`  			| `function(ent, formTable, ply)`  	| Тоже самое что и сверху, но не вызывается если игрока **СМЕНИЛ ПИЛЛ** |
 | `taunt`  				| `function(ply, ent, act)`  		| Срабатывает, при использовании игроком команды `act` |
 | `moveMod`  			| `function(ply, ent, mv, cmd)`  	| Позволяет обработать передвижение Пилла внутри `SetupMove` |
-| `animStopped`  		| `function(ply, ent, anim)`  		| Вызывается после того как закончилась анимаций (Не вызывается если закончился слоёная анимация) |
+| `animStopped`  		| `function(ply, ent, anim)`  		| Вызывается после того как закончилась анимация (Не вызывается если закончился слоёная анимация) |
 | `animEvent`  			| `function(ply, ent, eventName, time, cycle, type, options)`  		| Вызывается в `ENT:HandleAnimEvent(...)` |
+| `boneMorphs` 			| `table[...]` 		| Используется для изменения позиции, поворота и размера костей |
+
+:::warning
+`onRemove` и `onRemovePost` вызываются как на сервере, так и на клиенте. Также учтите что аргументы в функции не начинаются как можно привыкнуть с игрока, тут у нас `(ent, formTable, ply)`
+
+`killCondition` вызывается только на клиенте.
+:::
 
 Параметры, которые не используются нигде в режиме, но они есть:
 
@@ -61,7 +65,6 @@
 | `visColor` 			| [Color](https://wiki.facepunch.com/gmod/Global.Color) 		| Красит модель Пилла в данный цвет |
 | `visColorRandom` 		| `bool` 					| Красит модель Пилла в случайный цвет |
 | `flies` 				| `bool` 					| Пилл должен летать, а не ходить? |
-| `boneMorphs` 			| `table[...]` 				| Используется для изменения позиции, поворота и размера костей |
 | `cloak` 				| `table[...]` 				| Встроенная в базу система невидимости, скорее всего **НЕ РАБОТАЕТ** |
 | `loadout` 			| `table[Weapon]` 			| Выдаёт оружие из таблицы `(МОЖЕТ БЫТЬ УДАЛЕНО В СЛЕДУЮЩИХ ОБНОВЛЕНИЯХ)` |
 | `ammo` 				| `table[...]` 				| Выдаёт патроны из таблицы `(МОЖЕТ БЫТЬ УДАЛЕНО В СЛЕДУЮЩИХ ОБНОВЛЕНИЯХ)` |
@@ -73,12 +76,12 @@
 | `attack_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `attack` |
 | `attack2_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `attack2` |
 | `reload_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `reload` |
-| `attack_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `attack`, но без Лаг Компенсации |
-| `attack2_sh_nolc` 	| `function(ply, ent)` 		| Тоже самое, что и `attack2`, но без Лаг Компенсации |
-| `reload_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `reload`, но без Лаг Компенсации |
+| `attack_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `attack`, но без Лаг-Компенсации |
+| `attack2_sh_nolc` 	| `function(ply, ent)` 		| Тоже самое, что и `attack2`, но без Лаг-Компенсации |
+| `reload_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `reload`, но без Лаг-Компенсации |
 
 :::tip На заметку
-Вместо версий без Лаг Компенсации можно просто использовать версии <span class="fh-badge shared">SHARED</span> и самостоятельно выключать её с помощью [Player:LagCompensation(false)](https://wiki.facepunch.com/gmod/Player:LagCompensation)
+Вместо версий без Лаг-Компенсации можно просто использовать версии <span class="fh-badge shared">SHARED</span> и самостоятельно выключать её с помощью [Player:LagCompensation(false)](https://wiki.facepunch.com/gmod/Player:LagCompensation)
 :::
 
 # Подробнее о параметрах
