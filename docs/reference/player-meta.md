@@ -59,6 +59,16 @@ end
 Эта функция уже автоматически используется внутри (performJumpscare)[/reference/functions#performjumpscare]
 :::
 
+### `ENTITY:IsInvisible()`
+
+Невидимый-ли игрок?
+
+:::tip На заметку
+Чтобы вернуло `true`, энтити должно иметь материал `models/null` или быть `:GetNoDraw() == true`.
+
+Эта функция общая для PLAYER и ENTITY.
+:::
+
 ---
 
 ## Спавн и позиция <span class="fh-badge server">SERVER</span>

@@ -64,4 +64,4 @@ Yes, through return values. For example, returning `false` in `FH_PlayerShouldJu
 
 ### Do addons conflict with each other?
 
-If multiple addons modify the same thing — yes, conflicts can occur. Use **unique names** for hook handlers and check the load order.
+If multiple addons modify the same thing — yes, conflicts can occur. Use **unique names** for hooks and check the load order.

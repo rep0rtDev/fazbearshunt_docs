@@ -59,6 +59,16 @@ Sets whether the player is currently being screamed.
 This function is already used automatically inside [performJumpscare](/en/reference/functions.md#performjumpscare)
 :::
 
+### `ENTITY:IsInvisible()`
+
+Is the player invisible?
+
+:::tip Note
+For it to return `true`, entity must have `models/null` material, or have `:GetNoDraw() == true`.
+
+This function can be used on both PLAYER and ENTITY.
+:::
+
 ---
 
 ## Spawn and position <span class="fh-badge server">SERVER</span>

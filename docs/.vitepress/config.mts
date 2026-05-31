@@ -282,6 +282,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: 'FAQ', link: '/en/faq' },
+              { text: 'Hammer', link: '/en/hammer' },
             ]
           },
           {
@@ -290,6 +291,15 @@ export default defineConfig({
             items: [
               { text: 'About the gamemode', link: '/en/guide/about' },
               { text: 'Getting started', link: '/en/guide/getting-started' },
+              {
+                text: 'Аниматроники',
+                collapsed: true,
+                items: [
+                  { text: 'Pills Base', link: '/en/guide/animatronics/pills-base' },
+                  { text: 'Pill Structure & Registration', link: '/en/guide/animatronics/pill-structure-registration' },
+                  { text: 'Animatronic registration', link: '/en/guide/animatronics/fh-registration' },
+                ]
+              },
               { text: 'First modification', link: '/en/guide/first-modification' },
             ]
           },
@@ -303,6 +313,7 @@ export default defineConfig({
                 items: [
                   { text: 'Overview', link: '/en/gameplay/rounds' },
                   { text: 'fh.RegisterRoundType', link: '/en/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-server' },
+                  { text: 'fh.SetRoundTypeBlocked', link: '/en/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
                   { text: 'fh.SetRoundTypeBlocked', link: '/en/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
                   { text: 'fh.GetRoundTypes', link: '/en/gameplay/rounds#fh-getroundtypes-server' },
                   { text: 'fh.GetRoundTypeByName', link: '/en/gameplay/rounds#fh-getroundtypebyname-name-server' },
@@ -357,10 +368,22 @@ export default defineConfig({
                   { text: 'IsAnimatronic', link: '/en/reference/player-meta#player-isanimatronic' },
                   { text: 'ReturnToSpawn', link: '/en/reference/player-meta#player-returntospawn' },
                   { text: 'IsStuck / Unstuck', link: '/en/reference/player-meta#stuck-server' },
-                  { text: 'Push (toлкания)', link: '/en/reference/player-meta#pushing-server' },
+                  { text: 'Player Push', link: '/en/reference/player-meta#pushing-server' },
                   { text: 'Voice Chat', link: '/en/reference/player-meta#voice-chat-server' },
                   { text: 'GFreddy Immune', link: '/en/reference/player-meta#golden-freddy-server' },
                   { text: 'Gift Ownership', link: '/en/reference/player-meta#setgiftownership' },
+                ]
+              },
+              {
+                text: 'PillCostumeMeta',
+                collapsed: true,
+                items: [
+                  { text: 'Main', link: '/en/reference/pillcostume-meta#main' },
+                  { text: 'Helpers', link: '/en/reference/pillcostume-meta#helpies' },
+                  { text: 'Animations', link: '/en/reference/pillcostume-meta#animations' },
+                  { text: 'Sounds', link: '/en/reference/pillcostume-meta#sounds' },
+                  { text: 'Speed', link: '/en/reference/pillcostume-meta#speed' },
+                  { text: 'Deattaching', link: '/en/reference/pillcostume-meta#detaching' },
                 ]
               },
               {
@@ -376,11 +399,14 @@ export default defineConfig({
                   { text: 'fh.GetRoundCount', link: '/en/reference/functions#fh-getroundcount-server' },
                   { text: 'fh.GetEarnedKillers', link: '/en/reference/functions#fh-getearnedkillers-players-server' },
                   { text: 'fh.GetRoundType', link: '/en/reference/functions#fh-getroundtype-server' },
-                  { text: 'jumpscareEvent', link: '/en/reference/functions#jumpscareevent-ply-ent-target-dist-server' },
-                  { text: 'FindNearestPlayer', link: '/en/reference/functions#findnearestplayer-origin-radius-ignoreplayer-fov-shared' },
+                  { text: 'performJumpscare', link: '/en/reference/functions#performjumpscare' },
+                  { text: 'FindNearestPlayer', link: '/en/reference/functions#findnearestplayer' },
+                  { text: 'killers.Register', link: '/en/reference/functions#killersregister' },
                 ]
               },
               { text: 'Animatronics', link: '/en/reference/animatronics' },
+              { text: 'Chase themes', link: '/en/reference/terror-radius' },
+              { text: 'Pills ViewModels', link: '/en/reference/viewmodels' },
               { text: 'Round types', link: '/en/reference/round-types' },
             ]
           },
