@@ -292,7 +292,7 @@ export default defineConfig({
               { text: 'About the gamemode', link: '/en/guide/about' },
               { text: 'Getting started', link: '/en/guide/getting-started' },
               {
-                text: 'Аниматроники',
+                text: 'Animatronics',
                 collapsed: true,
                 items: [
                   { text: 'Pills Base', link: '/en/guide/animatronics/pills-base' },
