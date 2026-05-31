@@ -4,34 +4,56 @@ A quick reference for working with animatronics in Fazbear's Hunt.
 
 ## How animatronics work
 
-Each animatronic in FH is a **Pill Pack** ([Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=104604943)) with a specific technical name (e.g., `pill_wfreddy2`).
+All animatronics in FH are registered using the same method as in [Parakeets Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=950845943), but with small adjustments and new features for Pills that give developers more capabilities.
 
 The gamemode defines:
-- **Playable** — can be selected as the main animatronic of the round
-- **Secondary** — can appear as additional ones
+- **Playable** — can appear in the selection at the start of a normal round
+- **Secondary** — can appear in the selection only if there are more than two animatronics
 
 ## Basic operations
 
-### Add an animatronic to the mode
+### Add an animatronic to the selection
 
 ```lua
-pill_makePreferable("pill_wfreddy2", true)
+pill_makePreferable("pill_springtrap", true)
 ```
+
+:::tip Avoid
+Avoid dynamically changing an animatronic's playability, as playability can be changed at any time in the Admin Panel.
+:::
 
 ### Make secondary
 
 ```lua
-pill_makeSecondary("pill_wbonnie2", true)
+-- Shadow Freddy now appears in the selection even if there aren't enough animatronics
+pill_makeSecondary("pill_sfreddy2", false)
 ```
 
 ### Get a player's animatronic model
 
 ```lua
-local ent = pk_pills.getMappedEnt(ply)
+local ent = pills.getMappedEnt(ply)
 if IsValid(ent) then
     print("Model:", ent:GetModel())
 end
 ```
+
+You can also get the Pill structure
+
+```lua
+local ent = pills.getMappedEnt(ply)
+if IsValid(ent) then
+    if ent.formTable.reload then
+		print("Pill has a +reload bind ability!")
+	else
+		print("Pill does not have a +reload ability")
+	end
+end
+```
+
+:::tip Difference
+The gamemode adds a `ply:GetPill()` function to [`PlayerMeta`](/en/reference/player-meta.md), but it directly calls `pills.getMappedEnt(ply)`, so it is recommended to use the latter for optimization.
+:::
 
 ## Reacting to abilities
 
@@ -40,7 +62,7 @@ Use hooks to react to animatronic actions:
 | Animatronic | Hook | Description |
 |---|---|---|
 | Freddy | [`FH_BlindRageStart`](/en/hooks/abilities.md#freddy) | Blind Rage started |
-| Bonnie | [`FH_YoursMineStart`](/en/hooks/abilities.md#bonnie) | Through Your Eyes started |
+| Bonnie | [`FH_YoursMineStart`](/en/hooks/abilities.md#bonnie) | Through Your Mind started |
 | Chica | [`FH_MinePlanted`](/en/hooks/abilities.md#chica) | Cupcake planted |
 | Shadow Freddy | [`FH_SFreddySubmergeIn`](/en/hooks/abilities.md#shadow-freddy) | Fading into invisibility |
 | Golden Freddy | [`FH_OutworldStart`](/en/hooks/abilities.md#golden-freddy) | Outworld Dimension |
@@ -58,18 +80,13 @@ A screamer is the animatronic's climax action. Intercepting screamers is done vi
 ## Creating a custom screamer
 
 ```lua
-hook.Add("KeyPress", "MyJumpscare", function(ply, key)
-    if not ply:IsAnimatronic() then return end
-    if key ~= IN_ATTACK then return end
+function simpleJumpscare(ply, ent)
+	local target = FindNearestPlayer(ply:EyePos(), 120, ply, 36)
+				
+	local success = performJumpscare(ply, ent, target, 1.6)
 
-    local ent = pk_pills.getMappedEnt(ply)
-    if not IsValid(ent) then return end
-
-    local target = FindNearestPlayer(ply:GetPos(), 80, ply, 90)
-    if not IsValid(target) or not target:IsSurvivor() then return end
-
-    -- 1. Play your own animation...
-    -- 2. Trigger FH screamer
-    jumpscareEvent(ply, ent, target, ply:GetPos():Distance(target:GetPos()))
-end)
+	if success then
+		print( "[TEST] Animatronic " .. ply:Nick() .. " jumpscared " .. target:Nick() )
+	end
+end
 ```

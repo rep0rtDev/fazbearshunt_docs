@@ -52,7 +52,7 @@ Many FH hooks allow you to **cancel an action** by returning `false`:
 ```lua
 hook.Add("FH_HandleTaserHit", "BlockTaser", function(ply)
     if ply:IsAdmin() then
-        return false  -- Taser does not hit admins
+        return false -- Taser does not hit admins
     end
 end)
 ```

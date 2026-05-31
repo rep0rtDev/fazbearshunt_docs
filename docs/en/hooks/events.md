@@ -4,7 +4,7 @@ Hooks related to special items and game events.
 
 ## Maniac Mask <span class="fh-badge client">CLIENT</span>
 
-The Killer's Mask is a special item. When a survivor puts it on, after a short time they gain **obsession** — after this, animatronics cannot jumpscare them.
+The Maniac Mask is a special item. When a survivor wears it, after some time they gain **obsession** — after which animatronics cannot screamer them.
 
 ### `FH_KillerObsessed(ply)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge client">CLIENT</span>
 
@@ -23,7 +23,7 @@ end)
 Called after **losing** the obsessed status (e.g., after death).
 
 ```lua
-hook.Add("FH_KillerLostObsession", "ObsessionLostMsg", function()
+hook.Add("FH_KillerLostObsession", "ObsessionLostMsg", function(ply)
 	if ply == LocalPlayer() then
 		chat.AddText(Color(255, 200, 200), "Obsession is gone.")
 	end

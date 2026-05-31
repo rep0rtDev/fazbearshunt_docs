@@ -4,9 +4,9 @@ The round system is the core of Fazbear's Hunt. With update **3.0.0**, creating 
 
 ## Registering a round type
 
-### `fh.RegisterRoundType(name, id, func, [weight], [minPlayers], [maxPlayers])` <span class="fh-badge shared">SHARED</span>
+### `fh.RegisterRoundType(name, id, func, [weight], [minPlayers], [maxPlayers])` <span class="fh-badge server">SERVER</span>
 
-Registers a new round type.
+Registers a new round type. Returns the ID and technical name of the round.
 
 **Parameters:**
 
@@ -22,17 +22,49 @@ Registers a new round type.
 **Example:**
 
 ```lua
-fh.RegisterRoundType("springtrap_madness", "spring_mad", function()
+local id, name = fh.RegisterRoundType("springtrap_madness", "spring_mad", function()
     -- Give everyone Springtrap!
-    for _, ply in ipairs(player.GetAll()) do
-        giveKiller(ply, "pill_wspringtrap2", true)
+    for _, ply in player.Iterator() do
+        giveKiller(ply, "pill_springtrap", true)
     end
 end, 5, 4, 16)  -- 5% chance, 4–16 players
+
+print(id, name) -- 43700 springtrap_madness
+```
+
+## Round management
+
+### `fh.SetRoundTypeBlocked(id, block)` <span class="fh-badge server">SERVER</span>
+
+Blocks a round by ID, preventing the game from selecting it.
+
+```lua
+-- Block the Springtrap round
+fh.SetRoundTypeBlocked(1, true)
 ```
 
 ## Getting round information
 
-### `fh.GetRoundTypes()` <span class="fh-badge shared">SHARED</span>
+### `fh.SetRoundType(number)` <span class="fh-badge server">SERVER</span>
+
+Sets the round type. The mode calls this itself at the start of a round.
+
+::: warning Be careful
+Use only if you know exactly what you're doing.
+:::
+
+### `fh.GetRoundType()` <span class="fh-badge server">SERVER</span>
+
+Returns the current round type.
+
+| Value | Round type |
+|---|---|
+| `0` | Normal |
+| `1` | Springtrap |
+| `2` | Bonnie-Tag |
+| `3` | Infection round with Bear5 |
+
+### `fh.GetRoundTypes()` <span class="fh-badge server">SERVER</span>
 
 Returns a table with all registered round IDs.
 
@@ -41,7 +73,7 @@ local all = fh.GetRoundTypes()
 PrintTable(all)
 ```
 
-### `fh.GetRoundTypeByName(name)` <span class="fh-badge shared">SHARED</span>
+### `fh.GetRoundTypeByName(name)` <span class="fh-badge server">SERVER</span>
 
 Returns the round ID by its technical name.
 
@@ -50,7 +82,7 @@ local id = fh.GetRoundTypeByName("springtrap_madness")
 print(id)  -- 12345 (for example)
 ```
 
-### `fh.GetRoundTypeNameByNumber(id)` <span class="fh-badge shared">SHARED</span>
+### `fh.GetRoundTypeNameByNumber(id)` <span class="fh-badge server">SERVER</span>
 
 Inverse function — returns the name by ID.
 
@@ -61,9 +93,9 @@ print(name)  -- "springtrap"
 
 ## Round music
 
-### `fh.AddRoundMusic(num, music)` <span class="fh-badge shared">SHARED</span>
+### `fh.AddRoundMusic(num, music)` <span class="fh-badge server">SERVER</span>
 
-Adds a music theme for a specific round type.
+Adds a music theme for the start of a specific round type.
 
 ::: warning Override not possible
 Already registered music cannot be overridden.
@@ -76,9 +108,9 @@ fh.AddRoundMusic(
 )
 ```
 
-### `fh.GetRoundMusic(num)` <span class="fh-badge shared">SHARED</span>
+### `fh.GetRoundMusic(num)` <span class="fh-badge server">SERVER</span>
 
-Returns the path to the round music. If no music is found for the specified type, returns the normal round music.
+Returns the path to the round start music. If no music is found for the specified type, returns the normal round music.
 
 ## Related hooks
 

@@ -11,7 +11,7 @@ Registers a **positive** gift effect.
 | Parameter | Type | Description |
 |---|---|---|
 | `name` | `string` | Technical name of the effect |
-| `desc` | `string` | Description for the player (can be a translatable string or empty) |
+| `desc` | `string` | Description for the player (can be a translatable string or left empty) |
 | `num` | `int` | Number to substitute into `%i` in the description (if ≥ 0) |
 | `func` | `function` | Function executed when the effect is received |
 | `req` | `function` *(opt.)* | Condition for granting the effect |
@@ -49,6 +49,20 @@ gifts.AddNegativeEffect(
 )
 ```
 
+### `gifts.GrantEffect(ply, name)` <span class="fh-badge server">SERVER</span>
+
+Grants a positive gift effect to a player.
+
+```lua
+hook.Add( "PlayerSay", "ChatGift", function( ply, text )
+	if ply:IsAdmin() and string.StartWith( string.lower( text ), "/gift " ) then
+		gifts.GrantEffect(ply, string.sub( text, 7 )) 
+		-- We wrote 7 in string.sub because that's the length of "/gift " + 1
+		return ""
+	end
+end )
+```
+
 ## Hooks
 
 ### `FH_ShouldPlayerReceiveGifts` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
@@ -57,6 +71,7 @@ Called before spawning a gift for a player. Returning `false` means the player w
 
 ```lua
 hook.Add("FH_ShouldPlayerReceiveGifts", "NoGiftsForAdmins", function(ply)
+	-- Admins do not receive gifts.
     if ply:IsAdmin() then return false end
 end)
 ```

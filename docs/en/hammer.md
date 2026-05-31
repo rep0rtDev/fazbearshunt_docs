@@ -1,64 +1,64 @@
-# Справка про Hammer для картоделов
+# Hammer Reference for Mappers
 
-**Fazbear's Hunt** может играться на практически любой карте, однако пользователи могут делать свои карты специализированные для игры в наш режим.
+**Fazbear's Hunt** can be played on almost any map, however users can make their own maps specifically for our gamemode.
 
-Для формулы хорошей карты следует придерживаться следующих правил:
+For a good map formula, you should follow these rules:
 
-- `Достаточно высокие дверные проёмы` - Аниматроники имеют увеличенный хитбокс, и должны без проблем пробегать дверные проёмы.
-- `Избавление от тупиковости` - Карта не должна иметь много тупиков. Если игрок забегает в комнату, то в этой комнате зачастую должен быть второй выход, хоть это дверной проём или вентиляция.
-- `Запоминающийся лейаут` - Помещения карты должны быть уникальными, с разным интерьером, освещением и геймплейной состовляющей, для того чтобы обе команды могли продумывать тактики игры. Если карта однотипная и повторяющаяся - на ней легко заблудиться.
-- `Интерактивные элементы` - Карта чаще всего привлекает игроков своей интерактивностью. На карты добавляют механические двери которые можно закрывать только с одной стороны, вентиляции, мусоросжигатели куда можно завести в ловушку выживших, генераторы выключающие свет во всём здании и т.п.
-- `Геймплейная проработанность` - Некоторые аниматроники хорошо играются только на открытых картах, или наоборот - только на закрытых. Стоит удерживать баланс: создавайте как открытые участки карты, так и закрытые, чтобы всем хватило.
-- `Спавны аниматроников и ивенты` - А вот про это - чуть ниже!
+- `Sufficiently high doorways` - Animatronics have an increased hitbox and must be able to run through doorways without issue.
+- `Avoid dead ends` - The map should not have many dead ends. If a player runs into a room, that room should generally have a second exit, whether a doorway or ventilation.
+- `Memorable layout` - Map rooms should be unique, with different interiors, lighting, and gameplay elements so both teams can strategize. If the map is monotonous and repetitive, players can easily get lost.
+- `Interactive elements` - Maps are often attractive to players due to their interactivity. Add mechanical doors that can only be closed from one side, ventilation, trash compactors where survivors can be lured into a trap, generators that turn off lights throughout the building, etc.
+- `Gameplay refinement` - Some animatronics play well only on open maps, or conversely, only on closed maps. Balance should be maintained: create both open and closed areas on the map so everyone has their place.
+- `Animatronic spawns and events` - More on this below!
 
 ---
 
 ## Fazbear's Hunt FGD
 
-Для своей карты вы можете использовать кастомные энтити из нашего [FGD](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/fh.fgd)
+For your map, you can use custom entities from our [FGD](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/fh.fgd)
 
-Ниже их полный список:
+Here is the full list:
 
 ### `info_player_killer`
 
-На этом месте будут спавнится аниматроники. Можно указать `Animatronic Name`, например, `pill_wchica2`, и тогда здесь будет спавнится определённый аниматроник, и никакой другой.
+Animatronics will spawn at this location. You can specify an `Animatronic Name`, e.g., `pill_wchica2`, and then a specific animatronic will spawn here, and no other.
 
 ### `info_killer_win`
 
-Это место используется как победная позиция аниматроников при победе. Здесь проигрываются победные танцы Спрингтрапа и BEAR5.
+This location is used as the victory position for animatronics upon winning. Springtrap and BEAR5 play their victory dances here.
 
 ### `fh_win_camera`
 
-Служит камерой `info_killer_win`, которая должна находиться внутри `info_killer_win` на расстоянии головы аниматроника от пола, и смотреть в ту же сторону куда смотрит `info_killer_win`.
+Serves as the camera for `info_killer_win`, which should be located inside `info_killer_win` at the animatronic's head height from the ground, facing the same direction as `info_killer_win`.
 
-:::warning Внимание
-Эту энтити можно не ставить, так как игра автоматически её спавнит при отсутствии.
+:::warning Attention
+This entity can be omitted, as the game automatically spawns it when missing.
 :::
 
 ### `filter_activator_team`
 
-Работает как фильтр для триггеров. Триггер сработает только для команды указанной в фильтре.
+Works as a filter for triggers. The trigger will only activate for the team specified in the filter.
 
-В `Filter Team Number` указывается одно из двух:
+In `Filter Team Number`, specify one of:
 - `Survivor`
 - `Animatronic`
 
 ### `func_dissolve`
 
-Используется для Brush-поверхностей. Любой проп проходящий через этот Brush будет испепелён.
+Used for brush surfaces. Any prop passing through this brush will be dissolved.
 
-:::tip Важно
-Триггер не испепелит проп если его держит аниматроник.
+:::tip Important
+The trigger will not dissolve a prop if it is being held by an animatronic.
 :::
 
 ### `round_director`
 
-Позволяет перехватывать ивенты раунда, такие как начало раунда, разморозка аниматроников, победа определённой команды и сокращение таймера.
+Allows intercepting round events, such as round start, animatronic unfreeze, a team's victory, and timer reduction.
 
-| Ивенты | Описание |
+| Events | Description |
 |---|---|
-| `OnStartRound` 			| Вызывается по началу раунда |
-| `OnPostStartRound` 		| Вызывается после разморозки аниматроников |
-| `OnEndGameKillers` 		| Вызывается под конец раунда, когда выигрывают аниматроников |
-| `OnEndGameSurvivors` 		| Вызывается под конец раунда, когда выигрывают выжившие |
-| `OnTimerCutback` 			| Вызывается когда сокращается таймер, когда остаётся последний выживший |
+| `OnStartRound` | Called at round start |
+| `OnPostStartRound` | Called after animatronics are unfrozen |
+| `OnEndGameKillers` | Called towards the end of the round when animatronics win |
+| `OnEndGameSurvivors` | Called towards the end of the round when survivors win |
+| `OnTimerCutback` | Called when the timer is reduced when the last survivor remains |

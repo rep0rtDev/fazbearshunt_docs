@@ -2,13 +2,9 @@
 
 Hooks related to general animatronic behavior: screamers, the Taser, voice lines.
 
-## `FH_PlayerShouldJumpscare` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_playershouldjumpscare}
+## `FH_PlayerShouldJumpscare(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_playershouldjumpscare}
 
 Called **before** a screamer.
-
-```lua
-hook.Run("FH_PlayerShouldJumpscare", ply, ent, target)
-```
 
 | Argument | Type | Description |
 |---|---|---|
@@ -19,9 +15,9 @@ hook.Run("FH_PlayerShouldJumpscare", ply, ent, target)
 **Return `false`** — cancel the screamer.
 
 ```lua
--- Protect players with the maniac mask (example logic)
+-- Prevent screaming at admins in noclip
 hook.Add("FH_PlayerShouldJumpscare", "MaskProtect", function(ply, ent, target)
-    if target:GetNWBool("HasMaskObsession") then
+    if target:IsAdmin() and target:GetMoveType() == MOVETYPE_NOCLIP then
         return false
     end
 end)
@@ -29,40 +25,32 @@ end)
 
 ---
 
-## `FH_HandleTaserHit` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+## `FH_HandleTaserHit(ply)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
 Called **before** a Taser hits a player.
-
-```lua
-hook.Run("FH_HandleTaserHit", ply)
-```
 
 **Return `false`** — cancel the Taser's effect.
 
 ```lua
 hook.Add("FH_HandleTaserHit", "AdminTaserImmune", function(ply)
-    if ply:IsAdmin() then return false end
+    if ply:IsAdmin() then return false end -- Admins do not get hit by the Taser
 end)
 ```
 
 ---
 
-## `FH_AnimatronicJumpscare` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_animatronicjumpscare}
+## `FH_AnimatronicJumpscare(ply, ent, target, data)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_animatronicjumpscare}
 
 Called **after a successful** screamer.
-
-```lua
-hook.Run("FH_AnimatronicJumpscare", ply, ent, target, data)
-```
 
 **`data` structure:**
 
 ```lua
 {
-    delay = 0.5,           -- time until target dies
-    char  = "sfreddy",     -- animatronic name
-    dist  = 64.2,          -- distance at screamer moment
-    wep   = "fh_freddy_h"  -- first-person weapon class
+    delay = 0.5,		-- time until target dies
+    char  = "sfreddy",	-- animatronic name
+    dist  = 64.2,		-- distance at screamer moment
+    wep   = "v_freddy"	-- first-person weapon class
 }
 ```
 
@@ -75,13 +63,9 @@ end)
 
 ---
 
-## `FH_JumpscareEvent` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_jumpscareevent}
+## `FH_JumpscareEvent(ply, ent, target, dist)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_jumpscareevent}
 
 Called **before** freezing players during a screamer.
-
-```lua
-hook.Run("FH_JumpscareEvent", ply, ent, target, dist)
-```
 
 | Argument | Type | Description |
 |---|---|---|
@@ -92,13 +76,9 @@ hook.Run("FH_JumpscareEvent", ply, ent, target, dist)
 
 ---
 
-## `FH_OverrideVoiceline` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
+## `FH_OverrideVoiceline(ply, anim, line)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
 Called **before** playing an animatronic's voice line. Allows overriding the line.
-
-```lua
-hook.Run("FH_OverrideVoiceline", ply, anim, line)
-```
 
 | Argument | Type | Description |
 |---|---|---|
@@ -109,9 +89,10 @@ hook.Run("FH_OverrideVoiceline", ply, anim, line)
 **Return** a new string to override the voice line.
 
 ```lua
-hook.Add("FH_OverrideVoiceline", "FunnyLines", function(ply, anim, line)
-    if anim == "freddy" and math.random(1, 10) == 1 then
-        return "sound/my_addon/freddy_meme.wav"
+hook.Add("FH_OverrideVoiceline", "PositiveOnly", function(ply, anim, line)
+    if line:match("negative") then
+		-- Animatronics no longer say negative voicelines
+        return "positive"
     end
 end)
 ```

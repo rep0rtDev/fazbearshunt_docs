@@ -8,6 +8,8 @@ Reference for built-in round types and instructions for creating your own.
 |---|---|---|
 | `0` | `normal` | Normal round |
 | `1` | `springtrap` | One player gets Springtrap |
+| `2` | `bonnie_tag` | Half of the players become Bonnie. After a screamer, players swap roles |
+| `3` | `bear5` | Infection round with Bear5 |
 
 Get the current round type:
 
@@ -24,22 +26,34 @@ See full documentation: [Rounds →](/en/gameplay/rounds.md)
 Quick example:
 
 ```lua
-fh.RegisterRoundType("golden_madness", "gold_mad", function()
-    -- Give everyone Golden Freddy
-    for _, ply in ipairs(player.GetAll()) do
-        giveKiller(ply, "pill_wgfreddy2", true)
-    end
-end, 3, 6, 32)
+fh.RegisterRoundType("golden_madness", "GFmadness", function()
+	local players = player.GetAll()
+		
+	players = fh.GetEarnedKillers(players)
+	
+	if players then
+		local chosenPlayer = players[1]
+		
+		-- Spawn Golden Freddy Head
+		giveKiller(chosenPlayer, "pill_wgfreddyhead2", true)
+		
+		chosenPlayer.lobbyFreeze = true
+		chosenPlayer:ReturnToSpawn()
+	end
+	
+	RandomTaser()
+	
+	freezeAnimatronics()
+end, 3, 6, 18)
+
 ```
 
 Parameters:
 - `weight = 3` — 3% chance
 - `minPlayers = 6` — minimum 6 players
-- `maxPlayers = 32` — maximum 32
+- `maxPlayers = 18` — maximum 18
 
-[Example: Outworld Dimension for everyone](https://github.com/s3rgeant/fazbearshunt_docs/blob/main/examples/gfreddy_custom_round.lua)
-
-## Music for your round
+## Round start music
 
 ```lua
 fh.AddRoundMusic(

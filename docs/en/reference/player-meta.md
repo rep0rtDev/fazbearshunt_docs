@@ -16,13 +16,48 @@ end
 
 ### `PLAYER:IsAnimatronic()`
 
-Returns `true` if the player is playing as an animatronic.
+Returns `true` if the player is an animatronic.
 
 ```lua
 if ply:IsAnimatronic() then
     ply:ChatPrint("Happy hunting!")
 end
 ```
+
+::: tip Important
+If you put a survivor into the `TEAM_PILLS` team (or 2701), the game will return `true` here.
+:::
+
+### `PLAYER:GetPill()`
+
+Returns the player's Pill entity.
+
+```lua
+local ent = ply:GetPill()
+if IsValid(ent) then
+	print("Pill is present!")
+end
+```
+
+:::tip Important
+This method directly calls `pills.getMappedEnt(ply)`, so it is recommended to use the latter for optimization.
+:::
+
+---
+
+## Events <span class="fh-badge shared">SHARED</span>
+
+### `PLAYER:IsJumpscared()`
+
+Is the player currently being screamed?
+
+### `PLAYER:SetJumpscared()`
+
+Sets whether the player is currently being screamed.
+
+:::tip Note
+This function is already used automatically inside [performJumpscare](/en/reference/functions.md#performjumpscare)
+:::
 
 ---
 
@@ -59,7 +94,7 @@ Checks the player's hitbox for getting stuck in geometry or other entities. Unli
 Attempts to teleport the player to a place where they are not stuck. Use together with `IsStuck()`:
 
 ```lua
-hook.Add("PlayerSpawn", "CheckStuck", function(ply)
+hook.Add("PlayerLeaveVehicle", "CheckStuck", function(ply, ply)
     timer.Simple(0.5, function()
         if IsValid(ply) and ply:IsStuck() then
             ply:Unstuck()
@@ -89,7 +124,7 @@ Can the player push others?
 Is the player forbidden from pushing others?
 
 ```lua
--- Make the animatronic an immovable wall
+-- I won't push them, and they won't push me.
 ply:SetPushImmune(true)
 ply:SetPushBlocked(true)
 ```
@@ -138,7 +173,7 @@ Returns the current immunity status.
 
 ```lua
 -- All admins are immune to Golden Freddy
-hook.Add("PlayerInitialSpawn", "AdminGFImmune", function(ply)
+hook.Add("PlayerSpawn", "AdminGFImmune", function(ply)
     if ply:IsAdmin() then
         ply:SetGFreddyImmune(true)
     end
@@ -149,8 +184,8 @@ end)
 
 ## Gifts <span class="fh-badge server">SERVER</span>
 
-::: info Already used by the mode
-These functions are used by default — the game does not give out a second gift until the first one is picked up.
+::: info Already used by the gamemode
+These functions are used by the gamemode by default — they do not give out a second gift until the first one is picked up. Use them if you know what you are doing.
 :::
 
 ### `PLAYER:SetGiftOwnership(bool)` {#setgiftownership}

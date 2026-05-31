@@ -7,7 +7,7 @@ To add your own statistics, you must first register a translation string.
 
 ## Preparation: translation file
 
-Create a localization file (e.g., `resource/localization/en/fh_stats.properties`).
+Create a localization file (e.g., `resource/localization/ru/fh_custom_stats.properties`).
 
 ::: warning Important
 All keys must start with `fazhunt.stats.` and **not duplicate** existing ones.
@@ -16,7 +16,7 @@ All keys must start with `fazhunt.stats.` and **not duplicate** existing ones.
 Example string:
 
 ```properties
-fazhunt.stats.jumped=jumped %i time(s).
+fazhunt.stats.letters=wrote %i letter(s).
 ```
 
 - The player's name is prepended to the text.
@@ -31,7 +31,7 @@ fazhunt.stats.jumped=jumped %i time(s).
 Sets the minimum value of interest. If a player doesn't reach this number, the statistic won't be shown in chat.
 
 ```lua
-stats.SetMin("jumped", 10)  -- fewer than 10 jumps — don't display
+stats.SetMin("letters", 10)  -- fewer than 10 letters — don't display
 ```
 
 ### `stats.Add(ply, statName, value)` <span class="fh-badge server">SERVER</span>
@@ -39,9 +39,9 @@ stats.SetMin("jumped", 10)  -- fewer than 10 jumps — don't display
 Adds a value to the player's statistic.
 
 ```lua
-hook.Add("KeyPress", "CountJumps", function(ply, key)
-    if key == IN_JUMP then
-        stats.Add(ply, "jumped", 1)
+hook.Add("PlayerSay", "CountLetters", function(ply, text )
+    if ply:Alive() and text:len() > 0 then
+        stats.Add(ply, "letters", text:len())
     end
 end)
 ```
@@ -51,29 +51,31 @@ end)
 Returns the leader for a statistic and their value.
 
 ```lua
-local topPly, topValue = stats.GetTop("jumped")
-print(topPly:Nick() .. " jumped " .. topValue .. " times")
+local topPly, topValue = stats.GetTop("letters")
+print(topPly:Nick() .. " wrote this many letters: " .. topValue)
 ```
 
-## Example: full cycle
+## Example: Counting landings
 
 ```lua
--- 1. Set the minimum
-hook.Add("Initialize", "MyStatsInit", function()
-    stats.SetMin("destroyed_props", 5)
-end)
-
--- 2. Count actions
-hook.Add("EntityRemoved", "CountDestroyed", function(ent)
-    local attacker = ent.LastAttacker
-    if IsValid(attacker) and attacker:IsPlayer() then
-        stats.Add(attacker, "destroyed_props", 1)
-    end
+hook.Add("OnGamemodeLoaded", "FhCustomStats", function()
+	-- make sure the server gamemode is Fazbear's Hunt
+	if engine.ActiveGamemode() ~= "fazbearshunt" then return end 
+	
+	-- 1. Set the minimum
+    stats.SetMin("landed", 200)
+	
+	-- 2. Count actions
+	hook.Add("OnPlayerHitGround", "CountLands", function(ply, inWater, onFloater, speed)
+		if not inWater then
+			stats.Add(ply, "landed", 1)
+		end
+	end)
 end)
 ```
 
 Don't forget to add to the translation file:
 
 ```properties
-fazhunt.stats.destroyed_props=destroyed %i prop(s).
+fazhunt.stats.landed=landed %i time(s).
 ```

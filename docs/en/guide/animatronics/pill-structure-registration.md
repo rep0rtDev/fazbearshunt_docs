@@ -1,129 +1,129 @@
-# Что такое Структура Пилла
+# What is Pill Structure
 
-**Структурой Пилла** мы называем таблицу, второй аргумент в регистрации через `pills.register(name, {...})`, которая имеет все сведения о нашем Пилле: модель, способности, анимации, скорость, звуки и т.д.
+**Pill Structure** is what we call the table, the second argument in registration via `pills.register(name, {...})`, which contains all the information about our Pill: model, abilities, animations, speed, sounds, etc.
 
-## Все основные параметры структуры
+## All main structure parameters
 
-Чаще всего в Пилле необходимы именно следующие параметры:
+The following parameters are most commonly needed in a Pill:
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `printName` 		| `string` 					| Полное имя `ОБЯЗАТЕЛЕН` |
-| `model` 			| `string` 					| Путь до модели (должен начинаться с `"models/"`) |
-| `type` 			| `string` 	 				| `ОБЯЗАТЕЛЕН И ВСЕГДА ДОЛЖЕН УКАЗЫВАТЬ ply` |
-| `hull` 			| [Vector](https://wiki.facepunch.com/gmod/Global.Vector) 				| Хитбокс (третий аргумент - высота) |
-| `duckBy` 			| `float` 					| На сколько юнитов Пилл присаживается |
-| `health` 			| `float` 					| Максимальное здоровье (Если не указать - включается бессмертие) |
-| `jumpPower` 		| `float` 					| Сила прыжка |
-| `anims` 			| `table[...]` 				| Анимации модели |
-| `sounds` 			| `table[...]` 				| Звуки |
-| `moveSpeed` 		| `table[...]` 				| Скорость передвижения |
-| `attack` 			| `table[...]`				| ЛКМ Пилла |
-| `attack2` 		| `table[...]`				| ПКМ Пилла |
-| `reload` 			| `function(ply, ent)`		| Бинд +reload Пилла |
-| `jump` 			| `function(ply, ent)`		| Прыжок |
-| `land` 			| `function(ply, ent)`		| Приземление |
+| `printName` | `string` | Full name **REQUIRED** |
+| `model` | `string` | Path to the model (must start with `"models/"`) |
+| `type` | `string` | **REQUIRED AND MUST ALWAYS BE `ply`** |
+| `hull` | [Vector](https://wiki.facepunch.com/gmod/Global.Vector) | Hitbox (third argument is height) |
+| `duckBy` | `float` | How many units the Pill crouches |
+| `health` | `float` | Maximum health (If not specified — immortality is enabled) |
+| `jumpPower` | `float` | Jump power |
+| `anims` | `table[...]` | Model animations |
+| `sounds` | `table[...]` | Sounds |
+| `moveSpeed` | `table[...]` | Movement speed |
+| `attack` | `table[...]` | Pill LMB |
+| `attack2` | `table[...]` | Pill RMB |
+| `reload` | `function(ply, ent)` | Pill +reload bind |
+| `jump` | `function(ply, ent)` | Jump |
+| `land` | `function(ply, ent)` | Landing |
 
-Также есть дополнительные параметры:
+There are also additional parameters:
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `camera` 				| `table[...]` 		| Настройки камера от первого и третьего лица |
-| `viewmodel` 			| `table[...]` 		| Класс и настройки SWEP'а который будет служить Пиллу руками от первого лица |
-| `modelScale` 			| `string`  	 	| Размер модели |
-| `bloodType` 			| `int`  	 		| Тип крови *(См. Enum [BLOOD_COLOR](https://wiki.facepunch.com/gmod/Enums/BLOOD_COLOR))* |
-| `muteSteps` 			| `bool`  	 		| Приглушить ходьбу игрока? |
-| `noFallDamage` 		| `bool`  	 		| Отключить урон от падения? |
-| `chaseTheme` 			| `string`  	 	| Тема погони (Например, `default`) |
-| `movePoseMode` 		| `string`  	 	| Если модель поддерживает параметры поз `move_x` и `move_y`, то впишите `xy`. *Параметр `move_yaw` пока не проверен на работоспособность* |
-| `aim` 		 		| `table[...]`  	| Указывает какие параметры поз использовать для поворота тела Пилла вместе с камерой игрока | 
-| `collisionGroup`  	| `int`  			| Группа коллизии *(См. Enum [COLLISION_GROUP](https://wiki.facepunch.com/gmod/Enums/COLLISION_GROUP))* |
-| `killCondition` 		| `function(ply, ent)`  			| Если есть, и возвращает `true`, то рисует значок убийства у курсора игрока |
-| `startFunction`  		| `function(ply, ent)`  			| Срабатывает после того как игрок стал Пиллом |
-| `onRemove`   			| `function(ent, formTable, ply)`  	| Срабатывает после удаления Пилла (т.е. игрок сменил Пилл, или стал выжившим) |
-| `onRemovePost` 		| `function(ent, formTable, ply)`  	| Тоже самое что и сверху |
-| `restore`  			| `function(ent, formTable, ply)`  	| Тоже самое что и сверху, но не вызывается если игрока **СМЕНИЛ ПИЛЛ** |
-| `taunt`  				| `function(ply, ent, act)`  		| Срабатывает, при использовании игроком команды `act` |
-| `moveMod`  			| `function(ply, ent, mv, cmd)`  	| Позволяет обработать передвижение Пилла внутри `SetupMove` |
-| `animStopped`  		| `function(ply, ent, anim)`  		| Вызывается после того как закончилась анимация (Не вызывается если закончился слоёная анимация) |
-| `animEvent`  			| `function(ply, ent, eventName, time, cycle, type, options)`  		| Вызывается в `ENT:HandleAnimEvent(...)` |
-| `boneMorphs` 			| `table[...]` 		| Используется для изменения позиции, поворота и размера костей |
+| `camera` | `table[...]` | First-person and third-person camera settings |
+| `viewmodel` | `table[...]` | SWEP class and settings that will serve as the Pill's first-person hands |
+| `modelScale` | `string` | Model scale |
+| `bloodType` | `int` | Blood type *(See Enum [BLOOD_COLOR](https://wiki.facepunch.com/gmod/Enums/BLOOD_COLOR))* |
+| `muteSteps` | `bool` | Mute player footsteps? |
+| `noFallDamage` | `bool` | Disable fall damage? |
+| `chaseTheme` | `string` | Chase theme (e.g., `default`) |
+| `movePoseMode` | `string` | If the model supports `move_x` and `move_y` pose parameters, enter `xy`. *The `move_yaw` parameter has not been tested for functionality yet* |
+| `aim` | `table[...]` | Specifies which pose parameters to use for rotating the Pill's body along with the player's camera |
+| `collisionGroup` | `int` | Collision group *(See Enum [COLLISION_GROUP](https://wiki.facepunch.com/gmod/Enums/COLLISION_GROUP))* |
+| `killCondition` | `function(ply, ent)` | If present and returns `true`, draws a kill icon on the player's cursor |
+| `startFunction` | `function(ply, ent)` | Triggers after the player becomes the Pill |
+| `onRemove` | `function(ent, formTable, ply)` | Triggers after the Pill is removed (i.e., the player changed Pill, or became a survivor) |
+| `onRemovePost` | `function(ent, formTable, ply)` | Same as above |
+| `restore` | `function(ent, formTable, ply)` | Same as above, but **NOT CALLED** if the player **CHANGED PILL** |
+| `taunt` | `function(ply, ent, act)` | Triggers when the player uses the `act` command |
+| `moveMod` | `function(ply, ent, mv, cmd)` | Allows handling Pill movement inside `SetupMove` |
+| `animStopped` | `function(ply, ent, anim)` | Called after an animation ends (Not called if a layered animation ends) |
+| `animEvent` | `function(ply, ent, eventName, time, cycle, type, options)` | Called in `ENT:HandleAnimEvent(...)` |
+| `boneMorphs` | `table[...]` | Used to change bone position, rotation, and scale |
 
 :::warning
-`onRemove` и `onRemovePost` вызываются как на сервере, так и на клиенте. Также учтите что аргументы в функции не начинаются как можно привыкнуть с игрока, тут у нас `(ent, formTable, ply)`
+`onRemove` and `onRemovePost` are called on both the server and the client. Also note that the arguments in the function are not what you might be used to starting with the player; here we have `(ent, formTable, ply)`
 
-`killCondition` вызывается только на клиенте.
+`killCondition` is called only on the client.
 :::
 
-Параметры, которые не используются нигде в режиме, но они есть:
+Parameters that are not used anywhere in the gamemode, but exist:
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `flashlight` 			| `function(ply, ent)` 		| Вызывается когда фонарик **включается** (Если игрок **выключает** фонарик - не вызывается) |
-| `glideThink` 			| `function(ply, ent)` 		| Вызывается пока игрок не на земле |
-| `die` 				| `function(ply, ent)` 		| После смерти игрока, владеющим Пиллом |
-| `visColor` 			| [Color](https://wiki.facepunch.com/gmod/Global.Color) 		| Красит модель Пилла в данный цвет |
-| `visColorRandom` 		| `bool` 					| Красит модель Пилла в случайный цвет |
-| `flies` 				| `bool` 					| Пилл должен летать, а не ходить? |
-| `cloak` 				| `table[...]` 				| Встроенная в базу система невидимости, скорее всего **НЕ РАБОТАЕТ** |
-| `loadout` 			| `table[Weapon]` 			| Выдаёт оружие из таблицы `(МОЖЕТ БЫТЬ УДАЛЕНО В СЛЕДУЮЩИХ ОБНОВЛЕНИЯХ)` |
-| `ammo` 				| `table[...]` 				| Выдаёт патроны из таблицы `(МОЖЕТ БЫТЬ УДАЛЕНО В СЛЕДУЮЩИХ ОБНОВЛЕНИЯХ)` |
+| `flashlight` | `function(ply, ent)` | Called when the flashlight is **turned on** (If the player **turns off** the flashlight — not called) |
+| `glideThink` | `function(ply, ent)` | Called while the player is not on the ground |
+| `die` | `function(ply, ent)` | After the player controlling the Pill dies |
+| `visColor` | [Color](https://wiki.facepunch.com/gmod/Global.Color) | Colors the Pill model with the given color |
+| `visColorRandom` | `bool` | Colors the Pill model with a random color |
+| `flies` | `bool` | Should the Pill fly instead of walk? |
+| `cloak` | `table[...]` | Built-in invisibility system in the database, most likely **DOES NOT WORK** |
+| `loadout` | `table[Weapon]` | Gives weapons from the table `(MAY BE REMOVED IN FUTURE UPDATES)` |
+| `ammo` | `table[...]` | Gives ammo from the table `(MAY BE REMOVED IN FUTURE UPDATES)` |
 
-Альтернативные <span class="fh-badge shared">SHARED</span> варианты `attack`, `attack2` и `reload`:
+Alternative <span class="fh-badge shared">SHARED</span> versions of `attack`, `attack2`, and `reload`:
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `attack_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `attack` |
-| `attack2_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `attack2` |
-| `reload_sh` 			| `function(ply, ent)` 		| Тоже самое, что и `reload` |
-| `attack_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `attack`, но без Лаг-Компенсации |
-| `attack2_sh_nolc` 	| `function(ply, ent)` 		| Тоже самое, что и `attack2`, но без Лаг-Компенсации |
-| `reload_sh_nolc` 		| `function(ply, ent)` 		| Тоже самое, что и `reload`, но без Лаг-Компенсации |
+| `attack_sh` | `function(ply, ent)` | Same as `attack` |
+| `attack2_sh` | `function(ply, ent)` | Same as `attack2` |
+| `reload_sh` | `function(ply, ent)` | Same as `reload` |
+| `attack_sh_nolc` | `function(ply, ent)` | Same as `attack`, but without Lag Compensation |
+| `attack2_sh_nolc` | `function(ply, ent)` | Same as `attack2`, but without Lag Compensation |
+| `reload_sh_nolc` | `function(ply, ent)` | Same as `reload`, but without Lag Compensation |
 
-:::tip На заметку
-Вместо версий без Лаг-Компенсации можно просто использовать версии <span class="fh-badge shared">SHARED</span> и самостоятельно выключать её с помощью [Player:LagCompensation(false)](https://wiki.facepunch.com/gmod/Player:LagCompensation)
+:::tip Note
+Instead of versions without Lag Compensation, you can simply use the <span class="fh-badge shared">SHARED</span> versions and disable it yourself using [Player:LagCompensation(false)](https://wiki.facepunch.com/gmod/Player:LagCompensation)
 :::
 
-# Подробнее о параметрах
+# More about parameters
 
-Скорее всего вы заметили, многие параметры требуют таблицу `table[...]`, но что это такое? - Это таблицы с динамичными ключами и значениями. Далее мы разберём поподробнее как устроены эти таблицы.
+You may have noticed that many parameters require a `table[...]`, but what is that? - These are tables with dynamic keys and values. Next, we'll take a closer look at how these tables are structured.
 
 ### anims
 
 ```lua
 anims={
-	-- Внутри default хранятся все анимации Пилла
-	-- кроме слоёных, они будут ниже
+	-- Inside default are all the Pill's animations
+	-- except layered ones, those will be below
 	default={
-		-- Следующие анимации переключаются автоматически
-		-- Справа должны быть названия анимаций самой модели,
-		-- А слева строго указанные названия
+		-- The following animations switch automatically
+		-- On the right must be the names of the model's animations,
+		-- On the left are strictly specified names
 		idle = "Idle_01",
 		walk = "Walking",
 		run = "Running",
 		jump = "Jump_1",
-		glide = "Air_01", -- В воздухе
-		swim = "Swim_01", -- В воде
+		glide = "Air_01", -- In air
+		swim = "Swim_01", -- In water
 		crouch = "Crawl",
 		crouch_walk = "CrawlMovement",
-		noclip = "Air_02", -- В ноуклипе
+		noclip = "Air_02", -- In noclip
 		
-		-- Также можно добавить свои анимации,
-		-- Которые можно будет включить с помощью
+		-- You can also add your own animations,
+		-- which can be played using
 		-- ent:PillAnim(name, freeze)
 		stun = "TaserStun",
 		land = "LandHard",
 	},
-	-- Слоёные анимации, которые можно будет
-	-- включить с помощью
+	-- Layered animations that can be
+	-- played using
 	-- ent:PillGesture(name, priority, rate, blendin, blendout, startFrame)
 	gestures={
 		melee = "Melee_01",
 		land = "LandSoft",
 		taken_damage = "body_Flinch01",
 	},
-	-- Следующие значения заставляют анимации
-	-- Ускоряться, если скорость Пилла их превышает.
+	-- The following values cause animations
+	-- to speed up if the Pill's speed exceeds them.
 	speedCap={
 		walk = 160,
 		run = 500,
@@ -136,11 +136,11 @@ anims={
 
 ```lua
 sounds={
-	-- Слева название звука, а справа - путь к звуку
+	-- Left side is the sound name, right side is the path to the sound
 	scream = "fnaf2/bonniescream.wav",
 	melee = "fnaf2/xscream2.wav",
 }
--- Можно воспроизвести с помощью
+-- Can be played using
 -- ent:PillSound("melee", false)
 ```
 
@@ -148,9 +148,9 @@ sounds={
 
 ```lua
 moveSpeed={
-	walk = 160, -- Ходьба
-	run = 500, -- Бег
-	ducked = 90, -- Вприсяди
+	walk = 160, -- Walking
+	run = 500, -- Running
+	ducked = 90, -- Crouching
 }
 ```
 
@@ -158,11 +158,11 @@ moveSpeed={
 
 ```lua
 attack={
-	-- режим "trigger" Обозначает что функция ниже сработает при единичном нажатии
-	-- однако других режимов у параметра нет.
+	-- "trigger" mode means the function below triggers on a single press
+	-- however there are no other modes for this parameter.
 	mode="trigger",
-	-- Функция при срабатывании параметра
-	-- Первый аргумент это игрок носящий Пилл, второй это сам Пилл
+	-- Function that triggers when the parameter activates
+	-- First argument is the player wearing the Pill, second is the Pill itself
 	func=function(ply,ent)
 		local target = FindNearestPlayer(ent:GetPos(), 130, ply, 32)
 		if not IsValid(target) then return end
@@ -177,9 +177,9 @@ attack={
 
 ```lua
 camera = {
-	-- Оффсет камеры от первого лица
-	offset = Vector(0, 0, 90), -- (третий аргумент - высота)
-	-- Дистанция камеры от Пилла от третьего лица
+	-- First-person camera offset
+	offset = Vector(0, 0, 90), -- (third argument is height)
+	-- Third-person camera distance from the Pill
 	dist = 150
 }
 ```
@@ -188,11 +188,11 @@ camera = {
 
 ```lua
 viewmodel={
-	weapon = "v_bear", -- класс SWEP'а
-	skin = 5, -- Скин
-	bodyGroup = "Microphone", -- Бодигруп (меняет его значение на 1)
-	func = function(wep) -- Функция при выдаче
-		print("[TEST] Мы выдали игроку " .. wep:GetClass())
+	weapon = "v_bear", -- SWEP class
+	skin = 5, -- Skin
+	bodyGroup = "Microphone", -- Bodygroup (changes its value to 1)
+	func = function(wep) -- Function when given
+		print("[TEST] We gave the player " .. wep:GetClass())
 	end
 },
 ```
@@ -201,20 +201,20 @@ viewmodel={
 
 ```lua
 aim={
-	xPose = "aim_yaw", -- Параметр позы если Пилл крутит камерой влево-вправо
-	yPose = "aim_pitch", -- Параметр позы если Пилл крутит камерой вверх-вниз
+	xPose = "aim_yaw", -- Pose parameter if the Pill rotates the camera left-right
+	yPose = "aim_pitch", -- Pose parameter if the Pill rotates the camera up-down
 	
-	xInvert = true, -- Инвертировать лево-право
-	yInvert = true -- Инвертировать вверх-вниз
+	xInvert = true, -- Invert left-right
+	yInvert = true -- Invert up-down
 },
 ```
 
-### boneMorphs`
+### boneMorphs
 
 ```lua
 boneMorphs={
-	-- Слева название кости, справа параметры в таблице
-	-- Параметрами могут быть scale, pos и ang
+	-- Left side is bone name, right side is parameters in a table
+	-- Parameters can be scale, pos, and ang
 	["bip_eye_R"] = {scale = Vector(0.5,0.5,0.5)},
 	["bip_eye_L"] = {scale = Vector(0.5,0.5,0.5)},
 	["bip_EyeLid_0_R"] = {scale = Vector(0,0,0)},
@@ -224,11 +224,11 @@ boneMorphs={
 },
 ```
 
-# Шаблон Пилла + Регистрация
+# Pill Template + Registration
 
-Так как прописывание всех этих параметров вручную может показаться муторным (оно так и есть), FH предлагает вам шаблон, в котором есть все основные параметры!
+Since writing out all these parameters manually can seem tedious (and it is), FH provides you with a template that contains all the main parameters!
 
-Функция:
+Function:
 
 ```lua
 local MY_PILL = GetPillTemplate()
@@ -236,7 +236,7 @@ local MY_PILL = GetPillTemplate()
 PrintTable(MY_PILL)
 ```
 
-Вывод:
+Output:
 
 ```
 ["aim"]:
@@ -261,7 +261,7 @@ PrintTable(MY_PILL)
 ["type"]	=	ply
 ```
 
-После того как использовали шаблон, можно добавлять, или изменять параметры:
+After using the template, you can add or modify parameters:
 
 ```lua
 local MY_PILL = GetPillTemplate()
@@ -289,28 +289,27 @@ MY_PILL.moveSpeed={
 MY_PILL.viewmodel={	weapon="v_freddy" }
 ```
 
-И как финальный этап, теперь мы можем зарегистрировать наш Пилл, в конце нашего кода:
+And as the final step, we can now register our Pill at the end of our code:
 
 ```lua
 pills.register("super_jump_freddy", MY_PILL)
 ```
 
-:::warning Внимание
-Убедитесь, что наш код загружается после того как загружается режим. Проще всего это сделать так:
+:::warning Attention
+Make sure our code loads after the gamemode loads. The easiest way to do this is:
 
 ```lua
 hook.Add("OnGamemodeLoaded", "fh_mycustom_anim", function()
-	-- надо убедиться что режим сервера - Fazbear's Hunt
+	-- make sure the server gamemode is Fazbear's Hunt
 	if engine.ActiveGamemode() ~= "fazbearshunt" then return end
     
-	-- Сюда пишем код
+	-- Put your code here
 end)
 ```
 :::
 
-Если никаких ошибок нет, то теперь спокойно заходите на любую карту, затем открывайте Админ-Панель *(на Q)* и заходите в раздел **Аниматроники**. В категории "Неизвестные" должен лежать ваш Пилл.
+If there are no errors, then calmly join any map, then open the Admin Panel *(press Q)* and go to the **Animatronics** section. Your Pill should be in the "Unknown" category.
 
-
-::: tip Следующий шаг
-Перейдите к разделу [Регистрация в базу FH →](/guide/animatronics/fh-registration.md), чтобы узнать, как зарегистрировать аниматроника в базу FH.
+::: tip Next step
+Go to the [Registration into FH database →](/en/guide/animatronics/fh-registration.md) section to learn how to register an animatronic into the FH database.
 :::

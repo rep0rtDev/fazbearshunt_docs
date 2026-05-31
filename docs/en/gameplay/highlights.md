@@ -16,25 +16,48 @@ Automatically highlights all survivors within the radius set by the console comm
 ```lua
 hook.Add("KeyPress", "MyHighlight", function(ply, key)
     if key == IN_RELOAD and ply:IsAnimatronic() then
-        local ent = pk_pills.getMappedEnt(ply)
-        highlight.ByDistance(ply, ent)
+        local ent = pills.getMappedEnt(ply)
+        if IsValid(ent) then
+            highlight.ByDistance(ply, ent)
+        end
     end
 end)
 ```
 
-### `highlight.Add(ply, players, duration)` <span class="fh-badge server">SERVER</span>
+### `highlight.Add(ply, players, duration, color)` <span class="fh-badge server">SERVER</span>
 
-Highlights specified players for `ply` for a given duration.
+Highlights specified players for `ply` for a given duration, with the specified color.
 
 | Parameter | Type | Description |
 |---|---|---|
 | `ply` | `Player` | Who sees the highlight |
 | `players` | `Player` or `table[Player]` | Who gets highlighted |
 | `duration` | `float` | Duration in seconds |
+| `color` | `Color` *(opt.)* | Highlight color |
 
 ::: warning Note
 This function **does not play** highlight notification sounds. Use `highlight.NotifyTarget()` for notifications.
 :::
+
+### `addAffected(ply, duration, color)` <span class="fh-badge client">CLIENT</span>
+
+Highlights `ply` for the local player for a given duration, with the specified color.
+
+| Parameter | Type | Description | Default |
+|---|---|---|---|
+| `ply` | `Player` | Who is highlighted | |
+| `duration` | `float` *(opt.)* | Duration in seconds | `ConVar halo_time` |
+| `color` | `Color` *(opt.)* | Highlight color | `Color(255,0,0)` |
+| `force` | `bool` *(opt.)* | Force highlight even if the player is already highlighted | `false` |
+
+### `removeAffected(ply, force)` <span class="fh-badge client">CLIENT</span>
+
+Removes the highlight for the local player on `ply`.
+
+| Parameter | Type | Description | Default |
+|---|---|---|---|
+| `ply` | `Player` | Who is highlighted | |
+| `force` | `bool` *(opt.)* | Force disable highlight if the player was force highlighted | `false` |
 
 ## Cooldowns
 
@@ -47,7 +70,7 @@ highlight.Cooldown(ply, 15)  -- 15 second cooldown
 ```
 
 ::: info
-If the animatronic didn't originally have the "Highlight" ability in the UI, it won't appear there.
+If the animatronic doesn't have the "Highlight" ability in the UI, they won't know about the cooldown.
 :::
 
 ### `highlight.GetCooldown(ply)` <span class="fh-badge server">SERVER</span>
@@ -62,29 +85,29 @@ end
 
 ## Highlight sounds
 
-### `highlight.AddVisionSounds(name, snd_affected, snd_unaffected)` <span class="fh-badge shared">SHARED</span>
+### `highlight.AddVisionSounds(name, snd_affected, snd_unaffected)` <span class="fh-badge server">SERVER</span>
 
 Registers highlight sounds for a specific animatronic.
 
 ```lua
 highlight.AddVisionSounds(
     "pill_wgfreddy2",
-    "sounds/my_anim/highlight_success.wav",
-    "sounds/my_anim/highlight_fail.wav"
+    "my_anim/highlight_success.wav",
+    "my_anim/highlight_fail.wav"
 )
 ```
 
-::: tip
-Always specify the full file name including the extension in sound paths.
+::: tip Important
+Always specify the full path to the file including the extension in sound paths.
 :::
 
-### `highlight.GetVisionSound(ent)` <span class="fh-badge shared">SHARED</span>
+### `highlight.GetVisionSound(ent)` <span class="fh-badge server">SERVER</span>
 
 Returns a table with sounds: `{ affected = "...", unaffected = "..." }`.
 
 ### `highlight.NotifyTarget(target, ent, isAffected)` <span class="fh-badge server">SERVER</span>
 
-Plays the highlight sound and applies a visual effect to the player.
+Plays the highlight sound and applies a visual effect on the player's screen.
 
 | Parameter | Type | Description |
 |---|---|---|
@@ -93,5 +116,5 @@ Plays the highlight sound and applies a visual effect to the player.
 | `isAffected` | `bool` | `true` — success sound, `false` — fail sound |
 
 ```lua
-highlight.NotifyTarget(survivor, animEnt, true)
+highlight.NotifyTarget(survivor, pillEnt, true)
 ```

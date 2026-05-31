@@ -1,32 +1,31 @@
-# База Pills
+# Pills Base
 
-**Fazbear's Hunt** использует [Parakeets Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=950845673) как основу базы Pills для регистрации аниматроников. 
-Таким образом, аниматроники в режиме представляют из себя Пиллы, далее именно так мы их и будем называть.
+**Fazbear's Hunt** uses [Parakeets Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=950845673) as the basis for the Pills database for registering animatronics. Thus, animatronics in the gamemode are Pills, and that is exactly what we will call them from now on.
 
-# Отличия Parakeets Pill Pack от FH Pills
+# Differences between Parakeets Pill Pack and FH Pills
 
-- База переименова с `pk_pills` в `pills`.
-- Энтити Пилла переименово с `pill_ent_costume` в `pill_costume`.
-- Поддержка слойных анимаций: проигрывайте анимации повверх других, например замахи, удары и т.д.
-- Добавлена Лаг-Компенсация для способностей `attack`, `attack2` и `reload`.
-- Больше не надо использовать `ent:GetPuppet()`, можно напрямую использовать сам Пилл.
-- Удалена поддержка "Физичных" Пиллов.
+- The database has been renamed from `pk_pills` to `pills`.
+- The Pill entity has been renamed from `pill_ent_costume` to `pill_costume`.
+- Support for layered animations: play animations on top of others, e.g., wind-ups, attacks, etc.
+- Added Lag Compensation for `attack`, `attack2`, and `reload` abilities.
+- No longer need to use `ent:GetPuppet()`, you can use the Pill itself directly.
+- Removed support for "Physical" Pills.
 
-## Для опытных пользователей
+## For experienced users
 
-Если вы уже знакомы с базой [Parakeets Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=950845673), то портирование пилла оттуда может быть выполнено в несколько шагов:
+If you are already familiar with the [Parakeets Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=950845673) base, porting a Pill from there can be done in a few steps:
 
-- Скопируйте код регистрации вашего Пилла.
-- Оберните его в хук `OnGamemodeLoaded` и сделайте проверку на название режима с помощью `engine.ActiveGamemode()`.
-- Переименуйте `pk_pills` в `pills` везде.
-- Сохраните скрипт, зайдите на любую карту, зайдите в Админ-Панель *(на Q)* в раздел **Аниматроники**. В категории "Неизвестные" должен лежать ваш Пилл.
+- Copy your Pill's registration code.
+- Wrap it in the `OnGamemodeLoaded` hook and check the gamemode name using `engine.ActiveGamemode()`.
+- Rename `pk_pills` to `pills` everywhere.
+- Save the script, join any map, open the Admin Panel *(press Q)* and go to the **Animatronics** section. Your Pill should be in the "Unknown" category.
 
-Если всё работает, то можете перейти к одному из разделов:
-- [Структура и Регистрация Пилла →](/guide/animatronics/pill-structure-registration.md) (Так как в структуру Пилла были внесены изменения)
-- [Регистрация в базу FH →](/guide/animatronics/fh-registration.md) (Если уже хотите добавить ваш Пилл играбельным)
+If everything works, you can proceed to one of the sections:
+- [Pill Structure and Registration →](/en/guide/animatronics/pill-structure-registration.md) (Since changes have been made to the Pill structure)
+- [Registration into FH database →](/en/guide/animatronics/fh-registration.md) (If you already want to make your Pill playable)
 
-## Что новичков
+## For beginners
 
-Чтобы портировать, или даже создать свой собственный Пилл, придётся ознакомиться со следующим разделом, который расскажет о регистрации Пилла.
+To port, or even create your own Pill, you will need to read the following section, which explains Pill registration.
 
-[Структура и Регистрация Пилла →](/guide/animatronics/pill-structure-registration.md)
+[Pill Structure and Registration →](/en/guide/animatronics/pill-structure-registration.md)

@@ -1,27 +1,27 @@
-# Что такое Viewmodel
+# What is Viewmodel
 
-**Viewmodel** - это модель оружия, которую держит игрок, но от первого лица. То есть, можно сказать что аниматроники при спавне получают оружие, но с моделью своих рук и логикой произведения анимаций при передвижении, скримере и т.д.
+**Viewmodel** is the weapon model that the player holds in first-person view. You could say that animatronics receive a weapon upon spawning, but with their own hand model and logic for playing animations during movement, screaming, etc.
 
-В этом разделе мы **НЕ расскажем** что такое **SWEP** или как создать модель рук, мы лишь расскажем как подготовить свою **Viewmodel** для аниматроника.
+In this section, we will **NOT** explain what a **SWEP** is or how to create a hand model. We will only explain how to prepare your own **Viewmodel** for an animatronic.
 
 ---
 
 # v_base
 
-**v_base** - Это база для SWEP, которая хранит в себе удобные функции для добавления и управления анимациями. Используя её, игра сама будет включать анимации ходьбы, бега, прыжков, приземлений и т.д. Но перед тем как сесть за программирование нужно уточнить пару деталей.
+**v_base** is a base for SWEPs that contains convenient functions for adding and managing animations. Using it, the game will automatically play walking, running, jumping, landing animations, etc. But before sitting down to code, a few details need to be clarified.
 
 ---
 
-## Подготовка .qc файла
+## Preparing the .qc file
 
-Чтобы **v_base** смог добавить анимации для будущего проигрывания, для каждой анимации нужно добавить уникальный `activity "ИМЯ_АКТИВНОСТИ" 1` (См. [ACT](https://wiki.facepunch.com/gmod/Enums/ACT)).
+For **v_base** to be able to add animations for future playback, you need to add a unique `activity "ACTIVITY_NAME" 1` for each animation (See [ACT](https://wiki.facepunch.com/gmod/Enums/ACT)).
 
-Имя активности может быть вообще любым, главное чтобы для каждой анимации оно было уникальным.
+The activity name can be anything, as long as it is unique for each animation.
 
-Пример:
+Example:
 
 ```c++
-// Анимация появления рук
+// Hand appearance animation
 $sequence "draw" {
 	"oldfreddy_anims\draw"
 	activity "ACT_VM_DRAW" 1
@@ -48,7 +48,7 @@ $sequence "walk" {
 	loop
 }
 
-// Второй вариант ходьбы
+// Second walk option
 $sequence "slowwalk" {
 	"oldfreddy_anims\slowwalk"
 	activity "ACT_WALK_STEALTH" 1
@@ -68,40 +68,40 @@ $sequence "run" {
 }
 ```
 
-После этого смело компилируйте модель.
+After this, compile the model.
 
 ---
 
-### Подготовка скрипта
+### Preparing the script
 
-В наших интересах сделать так, чтобы **Viewmodel** зарегистрировалась позже загрузки режима, иначе она не сможет унаследовать базу **v_base**.
+We want the **Viewmodel** to register after the gamemode loads, otherwise it will not be able to inherit the **v_base**.
 
-Создадим файл по пути:
+Create a file at:
 
 ```
 garrysmod/addons/my_fh_addon/
 └── lua/
     └── autorun/
-        └── v_ИМЯ.lua
+        └── v_NAME.lua
 ```
 
-:::tip На заметку
-Название файла **Viewmodel** стоит начинать с `v_`, чтобы различать их от оружия, у которого приставка `weapon_`
+:::tip Note
+The **Viewmodel** file name should start with `v_` to distinguish them from weapons, which have the prefix `weapon_`.
 :::
 
-Затем, наш файл должен выглядеть примерно так:
+Then, our file should look something like this:
 
 ```lua
 local SWEP = {}
 
--- Название рук
+-- Hand name
 SWEP.PrintName = "Bon SWEP"
--- База, про которую говорили ранее
+-- Base mentioned earlier
 SWEP.Base = "v_base"
 
 if CLIENT then
-	-- Необязательно, но для каждого аниматроника создаём
-	-- ConVar для изменения FOVа рук	
+	-- Optional, but create a ConVar for each animatronic
+	-- to change the hand FOV	
 	local vfov = CreateClientConVar('cl_fov_bon', 104, true, false, 'Fov of Bon')
 	SWEP.ViewModelFOV = vfov:GetFloat() or 104
     
@@ -113,22 +113,22 @@ if CLIENT then
     end)
 end
 
--- Путь до модели рук
+-- Path to the hand model
 SWEP.ViewModel = "models/gentoi/walterfiles/vm/bon.mdl"
 
--- Функция где нужно добавлять свои анимации
+-- Function where you need to add your animations
 function SWEP:SetupAnimations()
-	-- Добавляем анимации "draw" и "scare"
+	-- Add "draw" and "scare" animations
 	self:AddAnimation("draw")
 	self:AddAnimation("scare")
 end
 
 function SWEP:Think()
-	-- Если пишите кастомную логику, пожалуйста оставляйте такой return!
+	-- If writing custom logic, please keep this return!
     return self.BaseClass.Think and self.BaseClass.Think(self)
 end
 
--- Регистрируем наш Viewmodel только после того, как загрузился режим.
+-- Register our Viewmodel only after the gamemode has loaded.
 hook.Add("PostGamemodeLoaded", "fh_bon_register", function()
 	if engine.ActiveGamemode() ~= "fazbearshunt" then return end
 	
@@ -136,43 +136,43 @@ hook.Add("PostGamemodeLoaded", "fh_bon_register", function()
 end)
 ```
 
-Теперь можно заходить в режим, и если нет никаких ошибок, можно выдавать **Viewmodel** аниматронику. Надо всего лишь добавить в структуру Пилла параметр `viewmodel`
+Now you can enter the gamemode, and if there are no errors, you can give the **Viewmodel** to the animatronic. Simply add the `viewmodel` parameter to the Pill structure:
 
 ```lua
 viewmodel = {
 	weapon="v_bonbon",
-	skin=1, -- Необязательно, но если хотите поменять скин
+	skin=1, -- Optional, if you want to change the skin
 	func=function(wep)
-		-- Код здесь выполняется при выдаче рук
+		-- Code here executes when the hands are given
 	end
 }
 ```
 
-См. [Структура и Регистрация Пилла →](/guide/animatronics/pill-structure-registration.md)
+See [Pill Structure and Registration →](/en/guide/animatronics/pill-structure-registration.md)
 
 ---
 
-## Управление Viewmodel
+## Controlling the Viewmodel
 
-Как говорилось ранее, анимациями можно управлять, с этим нам помогут следующие функции:
+As mentioned earlier, animations can be controlled using the following functions:
 
 ### `SWEP:AddAnimation(anim, act, name, noForce)`
 
-Добавляет или заменяет анимацию. 
+Adds or replaces an animation.
 
-Если указать только первый аргумент - будет искать анимацию именно по нему.
-Если указать второй или третий аргумент - будет искать анимацию в модели по ним.
+If only the first argument is specified, it will search for the animation by that name.
+If the second or third argument is specified, it will search for the animation in the model by them.
 
-| Параметр | Тип | Описание |
+| Parameter | Type | Description |
 |---|---|---|
-| `anim` 		| `string`	| Имя анимации нашего Viewmodel |
-| `act` 		| `number` 	| Имя активности анимации модели. |
-| `name` 		| `string` 	| Название анимации модели |
-| `noForce` 	| `bool` 	| Если `true`, не заменяет анимацию если такая уже есть |
+| `anim` | `string` | Name of our Viewmodel animation |
+| `act` | `number` | Activity name of the model's animation |
+| `name` | `string` | Name of the model's animation |
+| `noForce` | `bool` | If `true`, does not replace the animation if it already exists |
 
 ```lua
--- У фредди есть второй вариант анимации ходьбы "slowwalk"
--- Заменим его обычную ходьбу при выдаче:
+-- Freddy has a second walk animation option "slowwalk"
+-- Replace his normal walking when given:
 viewmodel={
 	weapon="v_freddy",
 	func=function(wep)
@@ -183,12 +183,12 @@ viewmodel={
 
 ### `SWEP:HandleGroundAnim()`
 
-Стоит ли проигрывать анимации передвижения, даже если игрок не на земле?
+Should movement animations play even if the player is not on the ground?
 
-По умолчанию возвращает `false`
+Returns `false` by default.
 
 ### `SWEP:AlwaysRunning()`
 
-Игрок ВСЕГДА бегает? Полезно для таких аниматроников как Плюштрап, который имеет одинаковую скорость бега и ходьбы.
+Is the player ALWAYS running? Useful for animatronics like Plushtrap who have the same running and walking speed.
 
-По умолчанию возвращает `false`
+Returns `false` by default.

@@ -1,15 +1,15 @@
 # Getting Started
 
-This guide will help you set up a development environment for creating Fazbear's Hunt modifications.
+This guide will help you prepare a working environment for developing modifications for Fazbear's Hunt.
 
 ## Requirements
 
-- **Garry's Mod** (latest version)
-- The **Fazbear's Hunt** gamemode installed
+- Latest version of **Garry's Mod**
+- Installed **Fazbear's Hunt** gamemode
 - Any text editor ([VS Code](https://code.visualstudio.com/) recommended)
 - Basic understanding of GLua
 
-## Where to Write Code
+## Where to write code
 
 Modifications for FH are written as regular Garry's Mod addons. Create the following structure:
 
@@ -25,33 +25,37 @@ garrysmod/addons/my_fh_addon/
 ```
 
 ::: tip Auto-loading
-Files in `lua/autorun/` are loaded automatically. Use the `server/` and `client/` subdirectories to separate server and client code.
+Files in `lua/autorun/` are loaded automatically. Use the `server/` and `client/` subfolders to separate server and client code.
+:::
+::: danger Caution
+Auto-loading works such that files in `lua/autorun/` load first, and only then the gamemode's own files. This means that methods and functions may not exist at the time your logic loads.
+It is recommended to use the approach presented in [First modification](/en/guide/first-modification.md)
 :::
 
-## Verifying Your Setup
+## Checking the installation
 
-Create a file at `lua/autorun/server/fh_test.lua`:
+Create the file `lua/autorun/server/fh_test.lua`:
 
 ```lua
 hook.Add("fh_poststartgame", "MyFirstHook", function(roundType, animatronics)
     print("[FH Test] Round started! Type:", roundType)
-    print("[FH Test] Animatronics:", #animatronics)
+    print("[FH Test] Animatronics:", table.Count(animatronics))
 end)
 ```
 
-Start a server with the FH gamemode and begin a round — the messages should appear in the console. If they do, everything is working.
+Start a server with the FH gamemode, begin a round — messages should appear in the console. If messages appear, everything is working.
 
-## Badges in the Documentation
+## Badges in this documentation
 
-This wiki uses the following badges:
+The following badges are used in this wiki:
 
-<span class="fh-badge server">SERVER</span> — server-side only  
-<span class="fh-badge client">CLIENT</span> — client-side only  
-<span class="fh-badge shared">SHARED</span> — available on both sides  
-<span class="fh-badge hook">HOOK</span> — this is a hook you can listen to  
+<span class="fh-badge server">SERVER</span> — server-only function
+<span class="fh-badge client">CLIENT</span> — client-only function
+<span class="fh-badge shared">SHARED</span> — function available everywhere
+<span class="fh-badge hook">HOOK</span> — this is a hook that can be caught
 
-## Next Step
+## Next step
 
-Ready? Let's create your first modification — adding an animatronic from the Workshop.
+Before you start working, you first need to understand what the Pills database is and how to register animatronics.
 
-[First Modification →](/en/guide/first-modification.md)
+[Pills Base →](/en/guide/animatronics/pills-base.md)
