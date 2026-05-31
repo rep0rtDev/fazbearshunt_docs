@@ -43,7 +43,7 @@ end)
 
 ### `FH_YoursMineStart(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 
-Bonnie has activated the **"Through Your Mind"** ability.
+Bonnie has activated the **"Yours is Mine"** ability.
 
 ### `FH_YoursMineSpectating(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span>
 

@@ -157,7 +157,7 @@ killers.SetAbilities("bon", {
 
 See [Full explanation of Pill structure →](/en/guide/animatronics/pill-structure-registration.md)
 
-*(opt.)* Since we entered `fh.custom.animatronics.bon` as the third argument in `killers.Register(...)`, we need to create a translation file with this key (e.g., `resource/localization/ru/fhbon.properties`):
+*(opt.)* Since we entered `fh.custom.animatronics.bon` as the third argument in `killers.Register(...)`, we need to create a translation file with this key (e.g., `resource/localization/en/fhbon.properties`):
 
 ```properties
 fh.custom.animatronics.bon=Bon

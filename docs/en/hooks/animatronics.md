@@ -1,10 +1,10 @@
 # Animatronic Hooks
 
-Hooks related to general animatronic behavior: screamers, the Taser, voice lines.
+Hooks related to general animatronic behavior: jumpscares, the Taser, voice lines.
 
 ## `FH_PlayerShouldJumpscare(ply, ent, target)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_playershouldjumpscare}
 
-Called **before** a screamer.
+Called **before** a jumpscare.
 
 | Argument | Type | Description |
 |---|---|---|
@@ -12,7 +12,7 @@ Called **before** a screamer.
 | `ent` | `Entity` | The animatronic's model |
 | `target` | `Player` | The victim |
 
-**Return `false`** — cancel the screamer.
+**Return `false`** — cancel the jumpscare.
 
 ```lua
 -- Prevent screaming at admins in noclip
@@ -41,7 +41,7 @@ end)
 
 ## `FH_AnimatronicJumpscare(ply, ent, target, data)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_animatronicjumpscare}
 
-Called **after a successful** screamer.
+Called **after a successful** jumpscare.
 
 **`data` structure:**
 
@@ -49,7 +49,7 @@ Called **after a successful** screamer.
 {
     delay = 0.5,		-- time until target dies
     char  = "sfreddy",	-- animatronic name
-    dist  = 64.2,		-- distance at screamer moment
+    dist  = 64.2,		-- distance at jumpscare moment
     wep   = "v_freddy"	-- first-person weapon class
 }
 ```
@@ -65,7 +65,7 @@ end)
 
 ## `FH_JumpscareEvent(ply, ent, target, dist)` <span class="fh-badge hook">HOOK</span> <span class="fh-badge server">SERVER</span> {#fh_jumpscareevent}
 
-Called **before** freezing players during a screamer.
+Called **before** freezing players during a jumpscare.
 
 | Argument | Type | Description |
 |---|---|---|

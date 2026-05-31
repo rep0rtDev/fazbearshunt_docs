@@ -383,7 +383,7 @@ export default defineConfig({
                   { text: 'Animations', link: '/en/reference/pillcostume-meta#animations' },
                   { text: 'Sounds', link: '/en/reference/pillcostume-meta#sounds' },
                   { text: 'Speed', link: '/en/reference/pillcostume-meta#speed' },
-                  { text: 'Deattaching', link: '/en/reference/pillcostume-meta#detaching' },
+                  { text: 'Detaching', link: '/en/reference/pillcostume-meta#detaching' },
                 ]
               },
               {

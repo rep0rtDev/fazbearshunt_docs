@@ -69,15 +69,15 @@ Use hooks to react to animatronic actions:
 
 See full list: [Animatronic abilities →](/en/hooks/abilities.md)
 
-## Screamers
+## Jumpscares
 
-A screamer is the animatronic's climax action. Intercepting screamers is done via:
+A jumpscare is the animatronic's climax action. Intercepting jumpscares is done via:
 
 - [`FH_PlayerShouldJumpscare`](/en/hooks/animatronics.md#fh_playershouldjumpscare) — can be canceled
-- [`FH_AnimatronicJumpscare`](/en/hooks/animatronics.md#fh_animatronicjumpscare) — after a successful screamer
+- [`FH_AnimatronicJumpscare`](/en/hooks/animatronics.md#fh_animatronicjumpscare) — after a successful jumpscare
 - [`FH_JumpscareEvent`](/en/hooks/animatronics.md#fh_jumpscareevent) — before freezing the victim
 
-## Creating a custom screamer
+## Creating a custom jumpscare
 
 ```lua
 function simpleJumpscare(ply, ent)

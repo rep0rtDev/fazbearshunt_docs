@@ -31,7 +31,7 @@ fazhunt.stats.letters=написал %i букв(у).
 Устанавливает минимальное значение интереса. Если игрок не наберёт этого числа — статистика не покажется в чате.
 
 ```lua
-stats.SetMin("letters", 10)  -- меньше 10 прыжков — не выводим
+stats.SetMin("letters", 10)  -- меньше 10 букв — не выводим
 ```
 
 ### `stats.Add(ply, statName, value)` <span class="fh-badge server">SERVER</span>

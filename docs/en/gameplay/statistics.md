@@ -7,7 +7,7 @@ To add your own statistics, you must first register a translation string.
 
 ## Preparation: translation file
 
-Create a localization file (e.g., `resource/localization/ru/fh_custom_stats.properties`).
+Create a localization file (e.g., `resource/localization/en/fh_custom_stats.properties`).
 
 ::: warning Important
 All keys must start with `fazhunt.stats.` and **not duplicate** existing ones.
