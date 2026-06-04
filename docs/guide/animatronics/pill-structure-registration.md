@@ -30,6 +30,7 @@
 |---|---|---|
 | `camera` 				| `table[...]` 		| Настройки камера от первого и третьего лица |
 | `viewmodel` 			| `table[...]` 		| Класс и настройки SWEP'а который будет служить Пиллу руками от первого лица |
+| `talk` 				| `table[...]` 		| Укажите здесь параметры для движения рта аниматроника, когда тот разговаривает |
 | `modelScale` 			| `string`  	 	| Размер модели |
 | `bloodType` 			| `int`  	 		| Тип крови *(См. Enum [BLOOD_COLOR](https://wiki.facepunch.com/gmod/Enums/BLOOD_COLOR))* |
 | `muteSteps` 			| `bool`  	 		| Приглушить ходьбу игрока? |
@@ -194,6 +195,16 @@ viewmodel={
 	func = function(wep) -- Функция при выдаче
 		print("[TEST] Мы выдали игроку " .. wep:GetClass())
 	end
+},
+```
+
+### talk
+
+```lua
+talk = {
+	jawbone="bip_lowerEndoJaw", -- Кость которая должна двигаться
+	reversed=false, -- Если true, кость начинает двигаться в обратную сторону
+	scale=1.5, -- Увеличить силу вращения
 },
 ```
 

@@ -15,26 +15,21 @@
 
 ```
 garrysmod/addons/my_fh_addon/
-└── lua/
-    └── autorun/
-        ├── server/
-        │   └── my_server_code.lua
-        ├── client/
-        │   └── my_client_code.lua
-        └── my_shared_code.lua
+└── gamemodes/
+    └── fazbearshunt/
+        └── gamemode/
+            ├── sv_server_code.lua
+            ├── cl_client_code.lua
+            └── sh_shared_code.lua
 ```
 
 ::: tip Автозагрузка
-Файлы в `lua/autorun/` подгружаются автоматически. Используйте подпапки `server/` и `client/` для разделения серверного и клиентского кода.
-:::
-::: danger Осторожно
-Автозагрузка файлов работает так, что сначала подгружаются файлы `lua/autorun/`, а только затем файлы самого режима, это значит что методы и функции могут не существовать на момент подгрузки вашей логики.
-Советуется использовать способ представленный в [Первая модификация](/guide/first-modification.md)
+Файлы в `gamemodes/fazbearshunt/gamemode/` подгружаются автоматически. Используйте префиксы файлов `sv_`, `cl_` и `sh_` для разделения серверного и клиентского кода.
 :::
 
 ## Проверка установки
 
-Создайте файл `lua/autorun/server/fh_test.lua`:
+Создайте файл `gamemodes/fazbearshunt/gamemode/sv_test.lua`:
 
 ```lua
 hook.Add("fh_poststartgame", "MyFirstHook", function(roundType, animatronics)

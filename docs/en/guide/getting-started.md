@@ -15,26 +15,21 @@ Modifications for FH are written as regular Garry's Mod addons. Create the follo
 
 ```
 garrysmod/addons/my_fh_addon/
-└── lua/
-    └── autorun/
-        ├── server/
-        │   └── my_server_code.lua
-        ├── client/
-        │   └── my_client_code.lua
-        └── my_shared_code.lua
+└── gamemodes/
+    └── fazbearshunt/
+        └── gamemode/
+            ├── sv_server_code.lua
+            ├── cl_client_code.lua
+            └── sh_shared_code.lua
 ```
 
 ::: tip Auto-loading
-Files in `lua/autorun/` are loaded automatically. Use the `server/` and `client/` subfolders to separate server and client code.
-:::
-::: danger Caution
-Auto-loading works such that files in `lua/autorun/` load first, and only then the gamemode's own files. This means that methods and functions may not exist at the time your logic loads.
-It is recommended to use the approach presented in [First modification](/en/guide/first-modification.md)
+Files in `gamemodes/fazbearshunt/gamemode/` are loaded automatically. Use `sv_`, `cl_` and `sh_` file prefixes to separate server and client code.
 :::
 
 ## Checking the installation
 
-Create the file `lua/autorun/server/fh_test.lua`:
+Create the file `gamemodes/fazbearshunt/gamemode/sv_test.lua`:
 
 ```lua
 hook.Add("fh_poststartgame", "MyFirstHook", function(roundType, animatronics)

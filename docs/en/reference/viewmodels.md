@@ -80,9 +80,10 @@ Create a file at:
 
 ```
 garrysmod/addons/my_fh_addon/
-└── lua/
-    └── autorun/
-        └── v_NAME.lua
+└── gamemodes/
+    └── fazbearshunt/
+        └── entities/weapons/
+			└── v_NAME.lua
 ```
 
 :::tip Note
@@ -92,16 +93,14 @@ The **Viewmodel** file name should start with `v_` to distinguish them from weap
 Then, our file should look something like this:
 
 ```lua
-local SWEP = {}
-
--- Hand name
+-- swep name
 SWEP.PrintName = "Bon SWEP"
 -- Base mentioned earlier
 SWEP.Base = "v_base"
 
 if CLIENT then
 	-- Optional, but create a ConVar for each animatronic
-	-- to change the hand FOV	
+	-- to change the swep FOV	
 	local vfov = CreateClientConVar('cl_fov_bon', 104, true, false, 'Fov of Bon')
 	SWEP.ViewModelFOV = vfov:GetFloat() or 104
     
@@ -113,7 +112,7 @@ if CLIENT then
     end)
 end
 
--- Path to the hand model
+-- Path to the swep model
 SWEP.ViewModel = "models/gentoi/walterfiles/vm/bon.mdl"
 
 -- Function where you need to add your animations
@@ -127,13 +126,6 @@ function SWEP:Think()
 	-- If writing custom logic, please keep this return!
     return self.BaseClass.Think and self.BaseClass.Think(self)
 end
-
--- Register our Viewmodel only after the gamemode has loaded.
-hook.Add("PostGamemodeLoaded", "fh_bon_register", function()
-	if engine.ActiveGamemode() ~= "fazbearshunt" then return end
-	
-	weapons.Register( SWEP, "v_bonbon" )
-end)
 ```
 
 Now you can enter the gamemode, and if there are no errors, you can give the **Viewmodel** to the animatronic. Simply add the `viewmodel` parameter to the Pill structure:

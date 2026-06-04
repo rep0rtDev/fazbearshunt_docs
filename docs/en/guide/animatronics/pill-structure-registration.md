@@ -28,8 +28,9 @@ There are also additional parameters:
 
 | Parameter | Type | Description |
 |---|---|---|
-| `camera` | `table[...]` | First-person and third-person camera settings |
-| `viewmodel` | `table[...]` | SWEP class and settings that will serve as the Pill's first-person hands |
+| `camera` 		| `table[...]` 	| First-person and third-person camera settings |
+| `viewmodel` 	| `table[...]` 	| SWEP class and settings that will serve as the Pill's first-person hands |
+| `talk` 		| `table[...]` 	| Settings for animatronic's mouth bone, which moves when the player talks |
 | `modelScale` | `string` | Model scale |
 | `bloodType` | `int` | Blood type *(See Enum [BLOOD_COLOR](https://wiki.facepunch.com/gmod/Enums/BLOOD_COLOR))* |
 | `muteSteps` | `bool` | Mute player footsteps? |
@@ -194,6 +195,16 @@ viewmodel={
 	func = function(wep) -- Function when given
 		print("[TEST] We gave the player " .. wep:GetClass())
 	end
+},
+```
+
+### talk
+
+```lua
+talk = {
+	jawbone="bip_lowerEndoJaw", -- Bone that will move while talking
+	reversed=false, -- Reverse if jaw moves into the wrong direction
+	scale=1.5, -- Scale jaw rotation
 },
 ```
 

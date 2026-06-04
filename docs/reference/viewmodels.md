@@ -80,9 +80,10 @@ $sequence "run" {
 
 ```
 garrysmod/addons/my_fh_addon/
-└── lua/
-    └── autorun/
-        └── v_ИМЯ.lua
+└── gamemodes/
+    └── fazbearshunt/
+        └── entities/weapons/
+			└── v_ИМЯ.lua
 ```
 
 :::tip На заметку
@@ -92,8 +93,6 @@ garrysmod/addons/my_fh_addon/
 Затем, наш файл должен выглядеть примерно так:
 
 ```lua
-local SWEP = {}
-
 -- Название рук
 SWEP.PrintName = "Bon SWEP"
 -- База, про которую говорили ранее
@@ -127,13 +126,6 @@ function SWEP:Think()
 	-- Если пишите кастомную логику, пожалуйста оставляйте такой return!
     return self.BaseClass.Think and self.BaseClass.Think(self)
 end
-
--- Регистрируем наш Viewmodel только после того, как загрузился режим.
-hook.Add("PostGamemodeLoaded", "fh_bon_register", function()
-	if engine.ActiveGamemode() ~= "fazbearshunt" then return end
-	
-	weapons.Register( SWEP, "v_bonbon" )
-end)
 ```
 
 Теперь можно заходить в режим, и если нет никаких ошибок, можно выдавать **Viewmodel** аниматронику. Надо всего лишь добавить в структуру Пилла параметр `viewmodel`

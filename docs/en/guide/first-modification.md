@@ -12,15 +12,13 @@ The Pill Pack must be installed on both the server and the client, otherwise the
 
 ## Step 2. Create a Lua script
 
-Create the file `lua/autorun/my_animatronic.lua`:
+Create the file `gamemodes/fazbearshunt/gamemode/animatronics/my_animatronic.lua`:
 
 ```lua
-hook.Add("OnGamemodeLoaded", "fh_mycustom_anim", function()
-	-- make sure the server gamemode is Fazbear's Hunt
-	if engine.ActiveGamemode() ~= "fazbearshunt" then return end
+-- File must be loaded on clients too, so that our animatronic can appear in Admin-Panel, etc.
+AddCSLuaFile()
     
-	-- We will write the code for adding the animatronic here
-end)
+-- We will write the code for adding the animatronic here
 ```
 
 ::: warning Attention
@@ -49,7 +47,7 @@ BON.anims={
 		jump="jump",
 		glide="fall",
 		land="land",
-		-- The screamer animation must be named exactly "scare" if you use performJumpscare()
+		-- The jumpscare animation must be named exactly "scare" if you use performJumpscare()
 		scare="kill",	
 		-- Animation for when the animatronic is hit by the Taser.
 		stun="stun",
@@ -105,7 +103,7 @@ BON.killCondition=function(ply,ent)
 	return false
 end
 
--- Animatronic LMB.
+-- Animatronic Left Click.
 BON.attack={ 
 	mode="trigger",
 	func=function(ply,ent)
@@ -116,7 +114,7 @@ BON.attack={
 		
 		local success = performJumpscare(ply, ent, target, 1.6, "bon", 50, "v_bon")
 		
-		-- If no target was found, or the screamer didn't happen, try to break something in front of the player
+		-- If no target was found, or the jumpscare didn't happen, try to break something in front of the player
 		if !IsValid(target) or not success then
 			AnimatronicBreakProp(ply, ent)
 		end

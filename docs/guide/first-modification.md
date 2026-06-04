@@ -12,19 +12,19 @@
 
 ## Шаг 2. Создайте Lua-скрипт
 
-Создайте файл `lua/autorun/my_animatronic.lua`:
+Создайте файл `gamemodes/fazbearshunt/gamemode/animatronics/my_animatronic.lua`:
 
 ```lua
-hook.Add("OnGamemodeLoaded", "fh_mycustom_anim", function()
-	-- надо убедиться что режим сервера - Fazbear's Hunt
-	if engine.ActiveGamemode() ~= "fazbearshunt" then return end
+-- Файл должен загружаться и на клиенте, чтобы аниматроник появился в Админ-Панели и т.д.
+AddCSLuaFile()
     
-	-- Здесь мы будем писать код по добавлению аниматроника
-end)
+-- Ниже мы будем писать код по добавлению аниматроника
 ```
 
 ::: warning Внимание
-Для работы вашей модификации, нужно чтобы сначала подгрузился сам режим, а только затем наш код (пример выше). К сожалению используя этот метод придётся перезапускать карту каждый раз, для проверки изменений.
+Используйте уникальное название для Lua-скрипта, иначе игра вам выдаст ошибку.
+
+Плохой пример назвать скрипт `freddy`, `bonnie`, `springtrap` и т.д. Лучше вставить свой никнейм и имя аниматроника, к примеру `sergeant_bontherabbit`
 :::
 
 В качестве примера будем использовать Пилл-Пак [Bon The Rabbit](https://steamcommunity.com/sharedfiles/filedetails/?id=950845673)
