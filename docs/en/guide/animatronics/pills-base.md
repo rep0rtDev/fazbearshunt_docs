@@ -16,7 +16,7 @@
 If you are already familiar with the [Parakeets Pill Pack](https://steamcommunity.com/sharedfiles/filedetails/?id=950845673) base, porting a Pill from there can be done in a few steps:
 
 - Copy your Pill's registration code.
-- Wrap it in the `OnGamemodeLoaded` hook and check the gamemode name using `engine.ActiveGamemode()`.
+- Create the script `my_fh_addon/gamemodes/fazbearshunt/gamemode/animatronics/my_animatronic.lua`, and then paste your code here.
 - Rename `pk_pills` to `pills` everywhere.
 - Save the script, join any map, open the Admin Panel *(press Q)* and go to the **Animatronics** section. Your Pill should be in the "Unknown" category.
 
