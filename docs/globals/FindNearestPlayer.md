@@ -10,22 +10,34 @@
 
 > `1` [Vector](https://wiki.facepunch.com/gmod/Global.Vector) **origin**
 
-Позиция из которой идёт поиск.
+- Позиция из которой идёт поиск.
 
 > `2` [number](https://wiki.facepunch.com/gmod/number) **radius**
 
-Радиус поиска.
+- Радиус поиска.
 
 > `3` [Player](https://wiki.facepunch.com/gmod/Player) **attacker**
 
-"Атакующий" игрок. Он исключается из кандидатов поиска.
+- "Атакующий" игрок. Он исключается из кандидатов поиска.
 
 > `4` [number](https://wiki.facepunch.com/gmod/number) **fov**
 
-Поле зрения, в котором происходит поиск. Если указан `attacker` и `fov`, то рассчёты производятся из глаз `attacker`.
+- Поле зрения, в котором происходит поиск. Если указан `attacker` и `fov`, то рассчёты производятся из глаз `attacker`.
 
 # Возвращает
 
 > `1` [Player](https://wiki.facepunch.com/gmod/Player)
 
-Возвращает игрока, если найден. В противном случае выдаст nil.
+- Возвращает игрока, если найден. В противном случае выдаст nil.
+
+### Аргументы
+
+> `1` [Vector](https://wiki.facepunch.com/gmod/Global.Vector) **origin**
+
+- Позиция из которой идёт поиск.
+
+# `Аргументы`
+
+> `1` [Vector](https://wiki.facepunch.com/gmod/Global.Vector) **origin**
+
+- Позиция из которой идёт поиск.
