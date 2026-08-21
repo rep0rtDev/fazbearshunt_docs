@@ -70,7 +70,7 @@ export default defineConfig({
           /@([A-Za-z0-9_]+)@/g,
           (match, typeName) => {
             const url = TYPE_LINKS[typeName]
-            return url ? `[\( {typeName}]( \){url})` : match
+            return url ? `[${typeName}](${url})` : match
           }
         )
       })
