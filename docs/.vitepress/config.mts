@@ -274,6 +274,21 @@ export default defineConfig({
                 ]
               },
               {
+                text: 'Libraries',
+                collapsed: true,
+                items: [
+                  {
+                    text: 'gifts',
+                    collapsed: true,
+                    items: [
+                      { text: 'AddPositiveEffect', link: '/libraries/gifts/AddPositiveEffect' },
+                      { text: 'AddNegativeEffect', link: '/libraries/gifts/AddNegativeEffect' },
+                      { text: 'GrantEffect', link: '/libraries/gifts/GrantEffect' },
+                    ]
+                  },
+                ]
+              },
+              {
                 text: 'Enumerations',
                 collapsed: true,
                 items: [
