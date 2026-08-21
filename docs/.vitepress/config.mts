@@ -267,6 +267,7 @@ export default defineConfig({
                     collapsed: true,
                     items: [
                       { text: 'IsSurvivor', link: '/classes/player/IsSurvivor' },
+                      { text: 'IsAnimatronic', link: '/classes/player/IsAnimatronic' },
                       { text: 'IsStuck', link: '/classes/player/IsStuck' },
                     ]
                   },

@@ -1,7 +1,26 @@
-> <span class="fh-badge shared">shared</span> **FindNearestPlayer(Vector origin, number radius, Player ignorePlayer, number fov)**
+> <span class="fh-badge shared">shared</span> [Player](https://wiki.facepunch.com/gmod/Player) **FindNearestPlayer(Vector origin, number radius, Player attacker, number fov)**
 
 # Описание
 
 Ищет ближайшего выжившего в радиусе. Если указать `fov`, то выживший будет искаться в конусе перед игроком, всё ещё с учётом радиуса. 
 
 Все аниматроники со скримером используют именно эту функцию для скримера.
+
+# Аргументы
+
+> `1` Vector origin
+Позиция из которой идёт поиск.
+
+> `2` number radius
+Радиус поиска.
+
+> `3` Player attacker
+"Атакующий" игрок. Он исключается из кандидатов поиска.
+
+> `4` number fov
+Поле зрения, в котором происходит поиск. Если указан `attacker` и `fov`, то рассчёты производятся из глаз `attacker`.
+
+# Возвращает
+
+> `1` Player
+Возвращает игрока, если найден. В противном случае выдаст nil.

@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> Player:IsSurvivor()
+> <span class="fh-badge shared">shared</span> [boolean](https://wiki.facepunch.com/gmod/boolean) [Player](https://wiki.facepunch.com/gmod/Player):IsSurvivor()
 
 # Описание
 
