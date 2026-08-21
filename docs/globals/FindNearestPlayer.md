@@ -29,15 +29,3 @@
 > `1` [Player](https://wiki.facepunch.com/gmod/Player)
 
 - Возвращает игрока, если найден. В противном случае выдаст nil.
-
-### Аргументы
-
-> `1` [Vector](https://wiki.facepunch.com/gmod/Global.Vector) **origin**
-
-- Позиция из которой идёт поиск.
-
-# `Аргументы`
-
-> `1` [Vector](https://wiki.facepunch.com/gmod/Global.Vector) **origin**
-
-- Позиция из которой идёт поиск.
