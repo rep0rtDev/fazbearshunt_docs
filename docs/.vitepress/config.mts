@@ -65,22 +65,14 @@ export default defineConfig({
     theme: { light: 'github-light', dark: 'one-dark-pro' },
 
     config(md) {
-      md.core.ruler.before('inline', 'gmod-type-links', (state) => {
-        for (const token of state.tokens) {
-          if (token.type !== 'inline' || !token.children) continue
-
-          for (const child of token.children) {
-            if (child.type !== 'text') continue
-
-            child.content = child.content.replace(
-              /@([A-Za-z0-9_]+)@/g,
-              (match, typeName) => {
-                const url = TYPE_LINKS[typeName]
-                return url ? `[\( {typeName}]( \){url})` : match
-              }
-            )
+      md.core.ruler.before('normalize', 'gmod-type-links', (state) => {
+        state.src = state.src.replace(
+          /@([A-Za-z0-9_]+)@/g,
+          (match, typeName) => {
+            const url = TYPE_LINKS[typeName]
+            return url ? `[\( {typeName}]( \){url})` : match
           }
-        }
+        )
       })
     }
   },
