@@ -10,6 +10,7 @@ const TYPE_LINKS: Record<string, string> = {
   boolean: 'https://wiki.facepunch.com/gmod/boolean',
   table: 'https://wiki.facepunch.com/gmod/table',
   function: 'https://wiki.facepunch.com/gmod/function',
+  nil: 'https://wiki.facepunch.com/gmod/nil',
 }
 
 export default defineConfig({
@@ -295,12 +296,29 @@ export default defineConfig({
                 collapsed: true,
                 items: [
                   {
+                    text: 'Entity',
+                    collapsed: true,
+                    items: [
+                      { text: 'IsInvisible', link: '/classes/entity/IsInvisible' },
+                    ]
+                  },
+                  {
                     text: 'Player',
                     collapsed: true,
                     items: [
-                      { text: 'IsSurvivor', link: '/classes/player/IsSurvivor' },
+                      { text: 'GetPill', link: '/classes/player/GetPill' },
                       { text: 'IsAnimatronic', link: '/classes/player/IsAnimatronic' },
+                      { text: 'IsJumpscared', link: '/classes/player/IsJumpscared' },
+                      { text: 'IsPushBlocked', link: '/classes/player/IsPushBlocked' },
+                      { text: 'IsPushImmune', link: '/classes/player/IsPushImmune' },
                       { text: 'IsStuck', link: '/classes/player/IsStuck' },
+                      { text: 'IsSurvivor', link: '/classes/player/IsSurvivor' },
+                      { text: 'ReturnToSpawn', link: '/classes/player/ReturnToSpawn' },
+                      { text: 'SetJumpscared', link: '/classes/player/SetJumpscared' },
+                      { text: 'SetPushBlocked', link: '/classes/player/SetPushBlocked' },
+                      { text: 'SetPushImmune', link: '/classes/player/SetPushImmune' },
+                      { text: 'SuppressRagdollSpawn', link: '/classes/player/SuppressRagdollSpawn' },
+                      { text: 'Unstuck', link: '/classes/player/Unstuck' },
                     ]
                   },
                 ]

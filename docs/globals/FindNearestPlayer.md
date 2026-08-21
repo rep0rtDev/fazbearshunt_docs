@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> [Player](https://wiki.facepunch.com/gmod/Player) **FindNearestPlayer([Vector](https://wiki.facepunch.com/gmod/Global.Vector) origin, [number](https://wiki.facepunch.com/gmod/number) radius, [Player](https://wiki.facepunch.com/gmod/Player) attacker, [number](https://wiki.facepunch.com/gmod/number) fov)**
+> <span class="fh-badge shared">shared</span> @Player@ **FindNearestPlayer(@Vector@ origin, @number@ radius, @Player@ attacker, @number@ fov)**
 
 # Описание
 
@@ -8,24 +8,24 @@
 
 # Аргументы
 
-> `1` [Vector](https://wiki.facepunch.com/gmod/Global.Vector) **origin**
+> `1` @Vector@ **origin**
 
 - Позиция из которой идёт поиск.
 
-> `2` [number](https://wiki.facepunch.com/gmod/number) **radius**
+> `2` @number@ **radius**
 
 - Радиус поиска.
 
-> `3` [Player](https://wiki.facepunch.com/gmod/Player) **attacker**
+> `3` @Player@ **attacker**
 
 - "Атакующий" игрок. Он исключается из кандидатов поиска.
 
-> `4` [number](https://wiki.facepunch.com/gmod/number) **fov**
+> `4` @number@ **fov**
 
 - Поле зрения, в котором происходит поиск. Если указан `attacker` и `fov`, то рассчёты производятся из глаз `attacker`.
 
 # Возвращает
 
-> `1` [Player](https://wiki.facepunch.com/gmod/Player)
+> `1` @Player@
 
 - Возвращает игрока, если найден. В противном случае выдаст nil.

@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> **gifts.GrantEffect(Player ply, string name)**
+> <span class="fh-badge server">server</span> **gifts.GrantEffect(@Player@ ply, @string@ name)**
 
 # Описание
 
@@ -6,11 +6,11 @@
 
 # Аргументы
 
-> `1` [Player](https://wiki.facepunch.com/gmod/Player) **ply**
+> `1` @Player@ **ply**
 
 - Название эффекта на английском.
 
-> `2` [string](https://wiki.facepunch.com/gmod/string) **name**
+> `2` @string@ **name**
 
 - Описание эффекта. Также принимаются переводимые строки.
 

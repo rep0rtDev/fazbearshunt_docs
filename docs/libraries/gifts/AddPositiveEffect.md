@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> **gifts.AddPositiveEffect(string name, string description, number num, function func, function or nil req = nil)**
+> <span class="fh-badge server">server</span> **gifts.AddPositiveEffect(@string@ name, @string@ description, @number@ num, @function@ func, @function@ or nil req = nil)**
 
 # Описание
 
@@ -6,19 +6,23 @@
 
 # Аргументы
 
-> `1` [string](https://wiki.facepunch.com/gmod/string) **name**
+> `1` @string@ **name**
 
 - Название эффекта на английском.
 
-> `2` [string](https://wiki.facepunch.com/gmod/string) **description**
+> `2` @string@ **description**
 
 - Описание эффекта. Также принимаются переводимые строки.
 
-> `3` [function](https://wiki.facepunch.com/gmod/function) **func**
+> `3` @number@ **num**
+
+- Число для подстановки в `%i` внутри **description** (если ≥ 0)
+
+> `4` @function@ **func**
 
 - Функция выдачи эффекта.
 
-> `4` [function](https://wiki.facepunch.com/gmod/function) **req** or [nil](https://wiki.facepunch.com/gmod/nil)
+> `5` @function@ **req** or @nil@
 
 - Функция с условием выдачи эффекта, должно возвращать `true` или `false`. *Не обязательный аргумент.*
 

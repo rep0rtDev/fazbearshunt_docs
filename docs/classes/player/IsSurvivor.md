@@ -1,8 +1,14 @@
-> <span class="fh-badge shared">shared</span> [boolean](https://wiki.facepunch.com/gmod/boolean) [Player](https://wiki.facepunch.com/gmod/Player):IsSurvivor()
+> <span class="fh-badge shared">shared</span> @boolean@ @Player@:IsSurvivor()
 
 # Описание
 
 Возвращает `true`, если игрок - выживший.
+
+# Возвращает
+
+> `1` @boolean@
+
+- Если игрок выживший, возвращает true, и false если нет.
 
 ## Пример
 
