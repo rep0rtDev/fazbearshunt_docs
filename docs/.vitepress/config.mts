@@ -1,5 +1,17 @@
 import { defineConfig } from 'vitepress'
 
+const TYPE_LINKS: Record<string, string> = {
+  Vector: 'https://wiki.facepunch.com/gmod/Vector',
+  Player: 'https://wiki.facepunch.com/gmod/Player',
+  Entity: 'https://wiki.facepunch.com/gmod/Entity',
+  Angle: 'https://wiki.facepunch.com/gmod/Angle',
+  number: 'https://wiki.facepunch.com/gmod/number',
+  string: 'https://wiki.facepunch.com/gmod/string',
+  boolean: 'https://wiki.facepunch.com/gmod/boolean',
+  table: 'https://wiki.facepunch.com/gmod/table',
+  function: 'https://wiki.facepunch.com/gmod/function',
+}
+
 export default defineConfig({
   title: "Fazbear's Hunt Wiki",
   cleanUrls: true,
@@ -50,6 +62,26 @@ export default defineConfig({
 
   markdown: {
     theme: { light: 'github-light', dark: 'one-dark-pro' },
+
+    config(md) {
+      md.core.ruler.before('inline', 'gmod-type-links', (state) => {
+        for (const token of state.tokens) {
+          if (token.type !== 'inline' || !token.children) continue
+
+          for (const child of token.children) {
+            if (child.type !== 'text') continue
+
+            child.content = child.content.replace(
+              /@([A-Za-z0-9_]+)@/g,
+              (match, typeName) => {
+                const url = TYPE_LINKS[typeName]
+                return url ? `[\( {typeName}]( \){url})` : match
+              }
+            )
+          }
+        }
+      })
+    }
   },
 
   locales: {
