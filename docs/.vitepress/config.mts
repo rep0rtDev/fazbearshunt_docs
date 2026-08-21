@@ -266,7 +266,8 @@ export default defineConfig({
                     text: 'Player',
                     collapsed: true,
                     items: [
-                      { text: 'FindNearestPlayer', link: '/classes/player/FindNearestPlayer' },
+                      { text: 'IsSurvivor', link: '/classes/player/IsSurvivor' },
+                      { text: 'IsStuck', link: '/classes/player/IsStuck' },
                     ]
                   },
                 ]

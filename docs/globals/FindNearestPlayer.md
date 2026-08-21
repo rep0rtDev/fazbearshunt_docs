@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> FindNearestPlayer(Vector origin, number radius, Player ignorePlayer, number fov)
+> <span class="fh-badge shared">shared</span> **FindNearestPlayer(Vector origin, number radius, Player ignorePlayer, number fov)**
 
 # Описание
 
