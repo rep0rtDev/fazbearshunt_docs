@@ -247,6 +247,39 @@ export default defineConfig({
               },
             ]
           },
+          {
+            text: 'Справочник 2',
+            collapsed: false,
+            items: [
+              {
+                text: 'Globals',
+                collapsed: true,
+                items: [
+                  { text: 'FindNearestPlayer', link: '/globals/FindNearestPlayer' },
+                ]
+              },
+              {
+                text: 'Classes',
+                collapsed: true,
+                items: [
+                  {
+                    text: 'Player',
+                    collapsed: true,
+                    items: [
+                      { text: 'FindNearestPlayer', link: '/classes/player/FindNearestPlayer' },
+                    ]
+                  },
+                ]
+              },
+              {
+                text: 'Enumerations',
+                collapsed: true,
+                items: [
+                  { text: 'TEAM', link: '/enums/team' },
+                ]
+              },
+            ]
+          },
         ],
 
         outline: {
