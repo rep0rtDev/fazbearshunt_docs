@@ -280,6 +280,7 @@ export default defineConfig({
                 text: 'Globals',
                 collapsed: true,
                 items: [
+                  { text: 'TaseAnimatronic', link: '/globals/TaseAnimatronic' },
                   { text: 'FindNearestPlayer', link: '/globals/FindNearestPlayer' },
                 ]
               },
@@ -321,6 +322,20 @@ export default defineConfig({
                       { text: 'SetPushImmune', link: '/classes/player/SetPushImmune' },
                       { text: 'SuppressRagdollSpawn', link: '/classes/player/SuppressRagdollSpawn' },
                       { text: 'Unstuck', link: '/classes/player/Unstuck' },
+                    ]
+                  },
+                ]
+              },
+              {
+                text: 'Hooks',
+                collapsed: true,
+                items: [
+                  {
+                    text: 'GM',
+                    collapsed: true,
+                    items: [
+                      { text: 'FH_PlayerShouldJumpscare', link: '/hooks/gm/FH_PlayerShouldJumpscare' },
+                      { text: 'SuccessTaserHit', link: '/hooks/gm/SuccessTaserHit' },
                     ]
                   },
                 ]
