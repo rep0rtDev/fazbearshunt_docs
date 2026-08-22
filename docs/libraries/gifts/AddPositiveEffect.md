@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> **gifts.AddPositiveEffect(@string@ name, @string@ description, @number@ num, @function@ func, @function@ or nil req = nil)**
+> <span class="fh-badge server">server</span> **gifts.AddPositiveEffect(@string@ name, @string@ description, @number@ num, @function@ func, @function@ or @nil@ req = nil)**
 
 # Описание
 
@@ -22,7 +22,7 @@
 
 - Функция выдачи эффекта.
 
-> `5` @function@ **req** or @nil@
+> `5` @function@ or @nil@ **req** *= nil*
 
 - Функция с условием выдачи эффекта, должно возвращать `true` или `false`. *Не обязательный аргумент.*
 
