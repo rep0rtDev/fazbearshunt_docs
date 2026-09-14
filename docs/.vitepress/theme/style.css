@@ -193,19 +193,21 @@ body {
 
 /* Сами ссылки в группе */
 .VPSidebarItem.level-1,
-.VPSidebarItem.level-2 {
+.VPSidebarItem.level-2,
+.VPSidebarItem.level-3 {
   padding: 0 !important;
   margin: 0 !important;
 }
 
 .VPSidebarItem.level-1 .item,
-.VPSidebarItem.level-2 .item {
+.VPSidebarItem.level-2 .item,
+.VPSidebarItem.level-3 .item {
   padding: 0 !important;
 }
 
 .VPSidebarItem .link {
   display: block !important;
-  padding: 4px 20px 4px 24px !important;
+  padding: 2px 20px 2px 24px !important;
   font-size: 13px !important;
   line-height: 1.45 !important;
   color: var(--vp-c-text-2) !important;
