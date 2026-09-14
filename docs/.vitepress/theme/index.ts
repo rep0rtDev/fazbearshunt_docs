@@ -2,7 +2,6 @@ import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
 import './style.css'
 
-// RegExp.escape polyfill for browsers older than Chrome 136 / Firefox 134 / Safari 18.2
 const RegExpCtor = RegExp as typeof RegExp & { escape?: (text: string) => string }
 if (typeof RegExpCtor.escape !== 'function') {
   RegExpCtor.escape = (text: string) => text.replace(/[\\^$.*+?()[\]{}|\/-]/g, '\\$&')

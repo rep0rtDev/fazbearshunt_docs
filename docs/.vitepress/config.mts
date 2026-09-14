@@ -1,5 +1,60 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
+import type { DefaultTheme } from 'vitepress'
 import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+
+const DOCS_DIR = fileURLToPath(new URL('..', import.meta.url))
+
+type Realm = 'server' | 'client' | 'shared'
+const REALM_RE = /fh-badge (server|client|shared)/
+const HEADING_RE = /^#{1,4} /
+
+function readPage(link: string): string[] | null {
+  const pathname = link.split('#')[0]
+  const rel = pathname.endsWith('/') ? `${pathname}index` : pathname
+  const file = path.join(DOCS_DIR, `${rel}.md`)
+  return fs.existsSync(file) ? fs.readFileSync(file, 'utf8').split('\n') : null
+}
+
+function escapeRegExp(text: string) {
+  return text.replace(/[\\^$.*+?()[\]{}|\/-]/g, '\\$&')
+}
+
+function realmOf(item: DefaultTheme.SidebarItem): Realm | null {
+  if (!item.link || !item.text) return null
+  const lines = readPage(item.link)
+  if (!lines) return null
+
+  if (!item.link.includes('#')) {
+    return (lines[0]?.match(REALM_RE)?.[1] as Realm | undefined) ?? null
+  }
+
+  const nameRe = new RegExp(`(^|[^A-Za-z0-9_])${escapeRegExp(item.text)}[(\`]`)
+  const idx = lines.findIndex(line => HEADING_RE.test(line) && nameRe.test(line))
+  if (idx === -1) return null
+
+  for (let i = idx; i >= 0; i--) {
+    const line = lines[i]
+    if (!HEADING_RE.test(line)) continue
+    const realm = line.match(REALM_RE)?.[1] as Realm | undefined
+    if (realm) return realm
+    if (line.startsWith('## ') && i !== idx) break
+  }
+  return null
+}
+
+function withRealmIcons(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
+  return items.map((item) => {
+    const realm = realmOf(item)
+    return {
+      ...item,
+      ...(realm && { text: `<span class="fh-realm ${realm}" title="${realm}"></span>${item.text}` }),
+      ...(item.items && { items: withRealmIcons(item.items) }),
+    }
+  })
+}
 
 const TYPE_LINKS: Record<string, string> = {
   Vector: 'https://wiki.facepunch.com/gmod/Vector',
@@ -95,7 +150,7 @@ export default defineConfig({
           { text: 'GitHub', link: 'https://github.com/rep0rtDev/fazbearshunt_docs' },
         ],
 
-        sidebar: [
+        sidebar: withRealmIcons([
           {
             text: 'Дополнительно',
             collapsed: false,
@@ -369,7 +424,7 @@ export default defineConfig({
               },
             ]
           },
-        ],
+        ]),
 
         outline: {
           label: 'На странице',
@@ -398,7 +453,7 @@ export default defineConfig({
           { text: 'GitHub', link: 'https://github.com/rep0rtDev/fazbearshunt_docs' },
         ],
 
-        sidebar: [
+        sidebar: withRealmIcons([
           {
             text: 'Other',
             collapsed: false,
@@ -581,7 +636,7 @@ export default defineConfig({
               },
             ]
           },
-        ],
+        ]),
 
         outline: {
           label: 'On this page',
