@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
 
 const TYPE_LINKS: Record<string, string> = {
   Vector: 'https://wiki.facepunch.com/gmod/Vector',
@@ -24,37 +25,41 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#c0392b' }],
   ],
 
+  vite: {
+    plugins: [
+      pagefindPlugin({
+        excludeSelector: ['div.aside', 'a.header-anchor', 'img'],
+        locales: {
+          root: {
+            btnPlaceholder: 'Поиск',
+            placeholder: 'Поиск по документации',
+            emptyText: 'Ничего не найдено',
+            loadingText: 'Поиск...',
+            heading: 'Найдено: {{searchResult}}',
+            toSelect: 'выбрать',
+            toNavigate: 'навигация',
+            toClose: 'закрыть',
+            searchBy: 'Поиск через',
+          },
+          en: {
+            btnPlaceholder: 'Search',
+            placeholder: 'Search docs',
+            emptyText: 'No results',
+            loadingText: 'Searching...',
+            heading: 'Total: {{searchResult}} results',
+            toSelect: 'to select',
+            toNavigate: 'to navigate',
+            toClose: 'to close',
+            searchBy: 'Search by',
+          },
+        },
+      }),
+    ],
+  },
+
   themeConfig: {
     logo: '/logo.png',
     siteTitle: "Fazbear's Hunt",
-
-    search: {
-      provider: 'local',
-      options: {
-        locales: {
-          root: {
-            translations: {
-              button: { buttonText: 'Поиск', buttonAriaLabel: 'Поиск' },
-              modal: {
-                noResultsText: 'Ничего не найдено',
-                resetButtonTitle: 'Сбросить',
-                footer: { selectText: 'выбрать', navigateText: 'навигация', closeText: 'закрыть' }
-              }
-            }
-          },
-          en: {
-            translations: {
-              button: { buttonText: 'Search', buttonAriaLabel: 'Search' },
-              modal: {
-                noResultsText: 'No results',
-                resetButtonTitle: 'Reset',
-                footer: { selectText: 'select', navigateText: 'navigate', closeText: 'close' }
-              }
-            }
-          }
-        }
-      }
-    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/rep0rtDev/fazbearshunt_docs' },

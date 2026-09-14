@@ -958,3 +958,8 @@ body {
 * {
   animation: none !important;
 }
+
+/* ========== SEARCH (pagefind) ========== */
+.command-palette-logo {
+  display: none !important;
+}
