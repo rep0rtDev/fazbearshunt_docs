@@ -61,7 +61,3 @@ fh.AddRoundMusic(
     "music/my_addon/golden_theme.mp3"
 )
 ```
-
-## Хуки раунда
-
-Все хуки, связанные с этапами раунда: [Хуки раунда →](/hooks/round.md)

@@ -28,7 +28,7 @@
 
 Скримерить админов в ноуклипе нельзя.
 
-```
+```lua
 hook.Add("FH_PlayerShouldJumpscare", "NoclipAdminsProtect", function(ply, ent, target)
     if target:IsAdmin() and target:GetMoveType() == MOVETYPE_NOCLIP then
         return false

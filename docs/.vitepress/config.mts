@@ -67,6 +67,7 @@ const TYPE_LINKS: Record<string, string> = {
   table: 'https://wiki.facepunch.com/gmod/table',
   function: 'https://wiki.facepunch.com/gmod/function',
   nil: 'https://wiki.facepunch.com/gmod/nil',
+  IMaterial: 'https://wiki.facepunch.com/gmod/IMaterial',
 }
 
 export default defineConfig({
@@ -178,75 +179,9 @@ export default defineConfig({
             ]
           },
           {
-            text: 'Геймплей',
-            collapsed: false,
-            items: [
-              {
-                text: 'Раунды',
-                collapsed: true,
-                items: [
-                  { text: 'Обзор', link: '/gameplay/rounds' },
-                  { text: 'fh.RegisterRoundType', link: '/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-server' },
-                  { text: 'fh.SetRoundTypeBlocked', link: '/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
-                  { text: 'fh.GetRoundTypes', link: '/gameplay/rounds#fh-getroundtypes-server' },
-                  { text: 'fh.GetRoundTypeByName', link: '/gameplay/rounds#fh-getroundtypebyname-name-server' },
-                  { text: 'fh.AddRoundMusic', link: '/gameplay/rounds#fh-addroundmusic-num-music-server' },
-                ]
-              },
-              {
-                text: 'Подарки',
-                collapsed: true,
-                items: [
-                  { text: 'Обзор', link: '/gameplay/gifts' },
-                  { text: 'gifts.AddPositiveEffect', link: '/gameplay/gifts#gifts-addpositiveeffect-name-desc-num-func-req-server' },
-                  { text: 'gifts.AddNegativeEffect', link: '/gameplay/gifts#gifts-addnegativeeffect-name-desc-num-func-server' },
-                  { text: 'gifts.GrantEffect', link: '/gameplay/gifts#gifts-addnegativeeffect-ply-name-server' },
-                  { text: 'FH_ShouldPlayerReceiveGifts', link: '/gameplay/gifts#fh-shouldplayerreceivegifts-hook-server' },
-                ]
-              },
-              {
-                text: 'Просветы',
-                collapsed: true,
-                items: [
-                  { text: 'Обзор', link: '/gameplay/highlights' },
-                  { text: 'highlight.ByDistance', link: '/gameplay/highlights#highlight-bydistance-ply-ent-server' },
-                  { text: 'highlight.Add', link: '/gameplay/highlights#highlight-add-ply-players-duration-server' },
-                  { text: 'highlight.Cooldown', link: '/gameplay/highlights#highlight-cooldown-ply-duration-server' },
-                  { text: 'highlight.AddVisionSounds', link: '/gameplay/highlights#highlight-addvisionsounds-name-snd-affected-snd-unaffected-server' },
-                  { text: 'highlight.NotifyTarget', link: '/gameplay/highlights#highlight-notifytarget-target-ent-isaffected-server' },
-                ]
-              },
-              {
-                text: 'Статистика',
-                collapsed: true,
-                items: [
-                  { text: 'Обзор', link: '/gameplay/statistics' },
-                  { text: 'stats.SetMin', link: '/gameplay/statistics#stats-setmin-statname-minvalue-server' },
-                  { text: 'stats.Add', link: '/gameplay/statistics#stats-add-ply-statname-value-server' },
-                  { text: 'stats.GetTop', link: '/gameplay/statistics#stats-gettop-statname-server' },
-                ]
-              },
-            ]
-          },
-          {
             text: 'Справочник',
             collapsed: false,
             items: [
-              {
-                text: 'PlayerMeta',
-                collapsed: true,
-                items: [
-                  { text: 'Обзор', link: '/reference/player-meta' },
-                  { text: 'IsSurvivor', link: '/reference/player-meta#player-issurvivor' },
-                  { text: 'IsAnimatronic', link: '/reference/player-meta#player-isanimatronic' },
-                  { text: 'ReturnToSpawn', link: '/reference/player-meta#player-returntospawn' },
-                  { text: 'IsStuck / Unstuck', link: '/reference/player-meta#застревания-server' },
-                  { text: 'Push (толкания)', link: '/reference/player-meta#толкания-server' },
-                  { text: 'Voice Chat', link: '/reference/player-meta#голосовои-чат-server' },
-                  { text: 'GFreddy Immune', link: '/reference/player-meta#золотои-фредди-server' },
-                  { text: 'Gift Ownership', link: '/reference/player-meta#setgiftownership' },
-                ]
-              },
               {
                 text: 'PillCostumeMeta',
                 collapsed: true,
@@ -259,28 +194,11 @@ export default defineConfig({
                   { text: 'Отсоединение от игрока', link: '/reference/pillcostume-meta#detaching' },
                 ]
               },
-              {
-                text: 'Функции FH',
-                collapsed: true,
-                items: [
-                  { text: 'Обзор', link: '/reference/functions' },
-                  { text: 'giveKiller', link: '/reference/functions#givekiller-ply-killer-force-server' },
-                  { text: 'TaseAnimatronic', link: '/reference/functions#taseanimatronic-ply-server' },
-                  { text: 'restoreAnimatronics', link: '/reference/functions#restoreanimatronics-server' },
-                  { text: 'doGiftSpawning', link: '/reference/functions#dogiftspawning' },
-                  { text: 'disableGiftSpawning', link: '/reference/functions#disablegiftspawning' },
-                  { text: 'fh.GetRoundCount', link: '/reference/functions#fh-getroundcount-server' },
-                  { text: 'fh.GetEarnedKillers', link: '/reference/functions#fh-getearnedkillers-players-server' },
-                  { text: 'fh.GetRoundType', link: '/reference/functions#fh-getroundtype-server' },
-                  { text: 'performJumpscare', link: '/reference/functions#performjumpscare' },
-                  { text: 'FindNearestPlayer', link: '/reference/functions#findnearestplayer' },
-                  { text: 'killers.Register', link: '/reference/functions#killersregister' },
-                ]
-              },
               { text: 'Аниматроники', link: '/reference/animatronics' },
               { text: 'Темы погони', link: '/reference/terror-radius' },
               { text: 'ViewModel аниматроника', link: '/reference/viewmodels' },
               { text: 'Типы раундов', link: '/reference/round-types' },
+              { text: 'Работа со статистикой', link: '/reference/statistics' },
             ]
           },
           {
@@ -299,17 +217,6 @@ export default defineConfig({
                 ]
               },
               {
-                text: 'Аниматроники',
-                collapsed: true,
-                items: [
-                  { text: 'FH_PlayerShouldJumpscare', link: '/hooks/animatronics#fh_playershouldjumpscare' },
-                  { text: 'FH_HandleTaserHit', link: '/hooks/animatronics#fh-handletaserhit-hook-server' },
-                  { text: 'FH_AnimatronicJumpscare', link: '/hooks/animatronics#fh_animatronicjumpscare' },
-                  { text: 'FH_JumpscareEvent', link: '/hooks/animatronics#fh_jumpscareevent' },
-                  { text: 'FH_OverrideVoiceline', link: '/hooks/animatronics#fh-overridevoiceline-hook-server' },
-                ]
-              },
-              {
                 text: 'Способности',
                 collapsed: true,
                 items: [
@@ -322,14 +229,6 @@ export default defineConfig({
                   { text: 'Той Чика', link: '/hooks/abilities#toy-chica' },
                 ]
               },
-              {
-                text: 'Ивенты',
-                collapsed: true,
-                items: [
-                  { text: 'FH_KillerObsessed', link: '/hooks/events#fh-killerobsessed' },
-                  { text: 'FH_KillerLostObsession', link: '/hooks/events#fh-killerlostobsession' },
-                ]
-              },
             ]
           },
           {
@@ -340,8 +239,12 @@ export default defineConfig({
                 text: 'Globals',
                 collapsed: true,
                 items: [
-                  { text: 'TaseAnimatronic', link: '/globals/TaseAnimatronic' },
+                  { text: 'AreLandConditionsGood', link: '/globals/AreLandConditionsGood' },
                   { text: 'FindNearestPlayer', link: '/globals/FindNearestPlayer' },
+                  { text: 'GiveKiller', link: '/globals/GiveKiller' },
+                  { text: 'GiveKillerSilent', link: '/globals/GiveKillerSilent' },
+                  { text: 'PlayerInOutworld', link: '/globals/PlayerInOutworld' },
+                  { text: 'TaseAnimatronic', link: '/globals/TaseAnimatronic' },
                 ]
               },
               {
@@ -394,7 +297,21 @@ export default defineConfig({
                     text: 'GM',
                     collapsed: true,
                     items: [
+                      { text: 'FH_AnimatronicJumpscare', link: '/hooks/gm/FH_AnimatronicJumpscare' },
+                      { text: 'FH_HandleGiftPickup', link: '/hooks/gm/FH_HandleGiftPickup' },
+                      { text: 'FH_HandleTaserHit', link: '/hooks/gm/FH_HandleTaserHit' },
+                      { text: 'FH_KillerAxeReceived', link: '/hooks/gm/FH_KillerAxeReceived' },
+                      { text: 'FH_KillerLostObsession', link: '/hooks/gm/FH_KillerLostObsession' },
+                      { text: 'FH_KillerObsessed', link: '/hooks/gm/FH_KillerObsessed' },
+                      { text: 'FH_LastManStanding', link: '/hooks/gm/FH_LastManStanding' },
+                      { text: 'FH_OverrideVoiceline', link: '/hooks/gm/FH_OverrideVoiceline' },
                       { text: 'FH_PlayerShouldJumpscare', link: '/hooks/gm/FH_PlayerShouldJumpscare' },
+                      { text: 'FH_ShouldPlayerReceiveGifts', link: '/hooks/gm/FH_ShouldPlayerReceiveGifts' },
+                      { text: 'ForceDrawPill', link: '/hooks/gm/ForceDrawPill' },
+                      { text: 'PillApply', link: '/hooks/gm/PillApply' },
+                      { text: 'PillCreated', link: '/hooks/gm/PillCreated' },
+                      { text: 'PillRestore', link: '/hooks/gm/PillRestore' },
+                      { text: 'PillSound', link: '/hooks/gm/PillSound' },
                       { text: 'SuccessTaserHit', link: '/hooks/gm/SuccessTaserHit' },
                     ]
                   },
@@ -411,8 +328,58 @@ export default defineConfig({
                       { text: 'AddPositiveEffect', link: '/libraries/gifts/AddPositiveEffect' },
                       { text: 'AddNegativeEffect', link: '/libraries/gifts/AddNegativeEffect' },
                       { text: 'GrantEffect', link: '/libraries/gifts/GrantEffect' },
+                      { text: 'SetBlockPositiveEffect', link: '/libraries/gifts/SetBlockPositiveEffect' },
                     ]
                   },
+                  {
+                    text: 'highlight',
+                    collapsed: true,
+                    items: [
+                      { text: 'Add', link: '/libraries/highlight/Add' },
+                      { text: 'AddVisionSounds', link: '/libraries/highlight/AddVisionSounds' },
+                      { text: 'ByDistance', link: '/libraries/highlight/ByDistance' },
+                      { text: 'Cooldown', link: '/libraries/highlight/Cooldown' },
+                      { text: 'GetCooldown', link: '/libraries/highlight/GetCooldown' },
+                      { text: 'GetVisionSounds', link: '/libraries/highlight/GetVisionSounds' },
+                      { text: 'NotifyTarget', link: '/libraries/highlight/NotifyTarget' },
+                    ]
+                  },
+                  {
+                    text: 'killers',
+                    collapsed: true,
+                    items: [
+                      { text: 'GetAll', link: '/libraries/killers/GetAll' },
+                      { text: 'GetAllNonPreferables', link: '/libraries/killers/GetAllNonPreferables' },
+                      { text: 'GetAllPreferables', link: '/libraries/killers/GetAllPreferables' },
+                      { text: 'GetAllSolos', link: '/libraries/killers/GetAllSolos' },
+                      { text: 'GetAvatar', link: '/libraries/killers/GetAvatar' },
+                      { text: 'GetFullName', link: '/libraries/killers/GetFullName' },
+                      { text: 'GetName', link: '/libraries/killers/GetName' },
+                      { text: 'GetPortrait', link: '/libraries/killers/GetPortrait' },
+                      { text: 'Register', link: '/libraries/killers/Register' },
+                      { text: 'SetAbilities', link: '/libraries/killers/SetAbilities' },
+                    ]
+                  },
+                  {
+                    text: 'playerlist',
+                    collapsed: true,
+                    items: [
+                      { text: 'AddIconSet', link: '/libraries/playerlist/AddIconSet' },
+                      { text: 'GetPlayerIcon', link: '/libraries/playerlist/GetPlayerIcon' },
+                      { text: 'ResetIconSet', link: '/libraries/playerlist/ResetIconSet' },
+                      { text: 'SetPlayerIcon', link: '/libraries/playerlist/SetPlayerIcon' },
+                    ]
+                  },
+                  {
+                    text: 'stats',
+                    collapsed: true,
+                    items: [
+                      { text: 'Add', link: '/libraries/stats/Add' },
+                      { text: 'GetTop', link: '/libraries/stats/GetTop' },
+                      { text: 'SetMin', link: '/libraries/stats/SetMin' },
+                    ]
+                  },
+                  { text: 'rounds', link: '/libraries/rounds' },
                 ]
               },
               {
@@ -481,76 +448,9 @@ export default defineConfig({
             ]
           },
           {
-            text: 'Gameplay',
-            collapsed: false,
-            items: [
-              {
-                text: 'Rounds',
-                collapsed: true,
-                items: [
-                  { text: 'Overview', link: '/en/gameplay/rounds' },
-                  { text: 'fh.RegisterRoundType', link: '/en/gameplay/rounds#fh-registerroundtype-name-id-func-weight-minplayers-maxplayers-server' },
-                  { text: 'fh.SetRoundTypeBlocked', link: '/en/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
-                  { text: 'fh.SetRoundTypeBlocked', link: '/en/gameplay/rounds#fh-setroundtypeblocked-id-block-server' },
-                  { text: 'fh.GetRoundTypes', link: '/en/gameplay/rounds#fh-getroundtypes-server' },
-                  { text: 'fh.GetRoundTypeByName', link: '/en/gameplay/rounds#fh-getroundtypebyname-name-server' },
-                  { text: 'fh.AddRoundMusic', link: '/en/gameplay/rounds#fh-addroundmusic-num-music-server' },
-                ]
-              },
-              {
-                text: 'Gifts',
-                collapsed: true,
-                items: [
-                  { text: 'Overview', link: '/en/gameplay/gifts' },
-                  { text: 'gifts.AddPositiveEffect', link: '/en/gameplay/gifts#gifts-addpositiveeffect-name-desc-num-func-req-server' },
-                  { text: 'gifts.AddNegativeEffect', link: '/en/gameplay/gifts#gifts-addnegativeeffect-name-desc-num-func-server' },
-                  { text: 'gifts.GrantEffect', link: '/en/gameplay/gifts#gifts-addnegativeeffect-ply-name-server' },
-                  { text: 'FH_ShouldPlayerReceiveGifts', link: '/en/gameplay/gifts#fh-shouldplayerreceivegifts-hook-server' },
-                ]
-              },
-              {
-                text: 'Highlights',
-                collapsed: true,
-                items: [
-                  { text: 'Overview', link: '/en/gameplay/highlights' },
-                  { text: 'highlight.ByDistance', link: '/en/gameplay/highlights#highlight-bydistance-ply-ent-server' },
-                  { text: 'highlight.Add', link: '/en/gameplay/highlights#highlight-add-ply-players-duration-server' },
-                  { text: 'highlight.Cooldown', link: '/en/gameplay/highlights#highlight-cooldown-ply-duration-server' },
-                  { text: 'highlight.AddVisionSounds', link: '/en/gameplay/highlights#highlight-addvisionsounds-name-snd-affected-snd-unaffected-server' },
-                  { text: 'highlight.NotifyTarget', link: '/en/gameplay/highlights#highlight-notifytarget-target-ent-isaffected-server' },
-                ]
-              },
-              {
-                text: 'Statistics',
-                collapsed: true,
-                items: [
-                  { text: 'Overview', link: '/en/gameplay/statistics' },
-                  { text: 'stats.SetMin', link: '/en/gameplay/statistics#stats-setmin-statname-minvalue-server' },
-                  { text: 'stats.Add', link: '/en/gameplay/statistics#stats-add-ply-statname-value-server' },
-                  { text: 'stats.GetTop', link: '/en/gameplay/statistics#stats-gettop-statname-server' },
-                ]
-              },
-            ]
-          },
-          {
             text: 'Reference',
             collapsed: false,
             items: [
-              {
-                text: 'PlayerMeta',
-                collapsed: true,
-                items: [
-                  { text: 'Overview', link: '/en/reference/player-meta' },
-                  { text: 'IsSurvivor', link: '/en/reference/player-meta#player-issurvivor' },
-                  { text: 'IsAnimatronic', link: '/en/reference/player-meta#player-isanimatronic' },
-                  { text: 'ReturnToSpawn', link: '/en/reference/player-meta#player-returntospawn' },
-                  { text: 'IsStuck / Unstuck', link: '/en/reference/player-meta#stuck-server' },
-                  { text: 'Player Push', link: '/en/reference/player-meta#pushing-server' },
-                  { text: 'Voice Chat', link: '/en/reference/player-meta#voice-chat-server' },
-                  { text: 'GFreddy Immune', link: '/en/reference/player-meta#golden-freddy-server' },
-                  { text: 'Gift Ownership', link: '/en/reference/player-meta#setgiftownership' },
-                ]
-              },
               {
                 text: 'PillCostumeMeta',
                 collapsed: true,
@@ -563,28 +463,11 @@ export default defineConfig({
                   { text: 'Detaching', link: '/en/reference/pillcostume-meta#detaching' },
                 ]
               },
-              {
-                text: 'FH Functions',
-                collapsed: true,
-                items: [
-                  { text: 'Overview', link: '/en/reference/functions' },
-                  { text: 'giveKiller', link: '/en/reference/functions#givekiller-ply-killer-force-server' },
-                  { text: 'TaseAnimatronic', link: '/en/reference/functions#taseanimatronic-ply-server' },
-                  { text: 'restoreAnimatronics', link: '/en/reference/functions#restoreanimatronics-server' },
-                  { text: 'doGiftSpawning', link: '/en/reference/functions#dogiftspawning' },
-                  { text: 'disableGiftSpawning', link: '/en/reference/functions#disablegiftspawning' },
-                  { text: 'fh.GetRoundCount', link: '/en/reference/functions#fh-getroundcount-server' },
-                  { text: 'fh.GetEarnedKillers', link: '/en/reference/functions#fh-getearnedkillers-players-server' },
-                  { text: 'fh.GetRoundType', link: '/en/reference/functions#fh-getroundtype-server' },
-                  { text: 'performJumpscare', link: '/en/reference/functions#performjumpscare' },
-                  { text: 'FindNearestPlayer', link: '/en/reference/functions#findnearestplayer' },
-                  { text: 'killers.Register', link: '/en/reference/functions#killersregister' },
-                ]
-              },
               { text: 'Animatronics', link: '/en/reference/animatronics' },
               { text: 'Chase themes', link: '/en/reference/terror-radius' },
               { text: 'Pills ViewModels', link: '/en/reference/viewmodels' },
               { text: 'Round types', link: '/en/reference/round-types' },
+              { text: 'Statistics', link: '/en/reference/statistics' },
             ]
           },
           {
@@ -603,17 +486,6 @@ export default defineConfig({
                 ]
               },
               {
-                text: 'Animatronics',
-                collapsed: true,
-                items: [
-                  { text: 'FH_PlayerShouldJumpscare', link: '/en/hooks/animatronics#fh_playershouldjumpscare' },
-                  { text: 'FH_HandleTaserHit', link: '/en/hooks/animatronics#fh-handletaserhit-hook-server' },
-                  { text: 'FH_AnimatronicJumpscare', link: '/en/hooks/animatronics#fh_animatronicjumpscare' },
-                  { text: 'FH_JumpscareEvent', link: '/en/hooks/animatronics#fh_jumpscareevent' },
-                  { text: 'FH_OverrideVoiceline', link: '/en/hooks/animatronics#fh-overridevoiceline-hook-server' },
-                ]
-              },
-              {
                 text: 'Abilities',
                 collapsed: true,
                 items: [
@@ -624,14 +496,6 @@ export default defineConfig({
                   { text: 'Endo02', link: '/en/hooks/abilities#endo02' },
                   { text: 'Golden Freddy', link: '/en/hooks/abilities#golden-freddy' },
                   { text: 'Toy Chica', link: '/en/hooks/abilities#toy-chica' },
-                ]
-              },
-              {
-                text: 'Events',
-                collapsed: true,
-                items: [
-                  { text: 'FH_KillerObsessed', link: '/en/hooks/events#fh-killerobsessed' },
-                  { text: 'FH_KillerLostObsession', link: '/en/hooks/events#fh-killerlostobsession' },
                 ]
               },
             ]
