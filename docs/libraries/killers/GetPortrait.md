@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> @bool@ **killers.GetPortrait(@string@ pill)**
+> <span class="fh-badge shared">shared</span> @IMaterial@ или @nil@ **killers.GetPortrait(@string@ pill)**
 
 # Описание
 

@@ -703,12 +703,12 @@ body {
 }
 
 .fh-badge.server  { background:#eef3f8; color:#2d4a6a; border-color:#b0c4d8; }
-.fh-badge.client  { background:#eef7ee; color:#2d5a2d; border-color:#a8c8a8; }
+.fh-badge.client  { background:#eef7ee; color:#7D5609; border-color:#E1C58E; }
 .fh-badge.shared  { background:#fbeeee; color:#6a2a2a; border-color:#d4a8a8; }
 .fh-badge.hook    { background:#fdf6e3; color:#6b5010; border-color:#d8c490; }
 
 .dark .fh-badge.server  { background:#1f2a35; color:#8eb0d0; border-color:#3a5470; }
-.dark .fh-badge.client  { background:#1f2e1f; color:#8ec88e; border-color:#3a703a; }
+.dark .fh-badge.client  { background:#322A1A; color:#E2E058; border-color:#80632A; }
 .dark .fh-badge.shared  { background:#2e1f1f; color:#d88e8e; border-color:#703a3a; }
 .dark .fh-badge.hook    { background:#2e2820; color:#d8b85a; border-color:#705a30; }
 
@@ -975,10 +975,10 @@ body {
   border-radius: 50%;
 }
 .fh-realm.server { background: #4a7db5; }
-.fh-realm.client { background: #4caf50; }
+.fh-realm.client { background: #B2882A; }
 .fh-realm.shared { background: #c0392b; }
 .dark .fh-realm.server { background: #8eb0d0; }
-.dark .fh-realm.client { background: #8ec88e; }
+.dark .fh-realm.client { background: #E5C070; }
 .dark .fh-realm.shared { background: #d88e8e; }
 
 /* ========== SEARCH (pagefind) ========== */

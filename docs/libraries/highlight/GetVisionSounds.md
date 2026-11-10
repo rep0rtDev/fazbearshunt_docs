@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> **highlight.GetVisionSounds(@Entity@ pill)**
+> <span class="fh-badge server">server</span> @table@ **highlight.GetVisionSounds(@Entity@ pill)**
 
 # Описание
 

@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> **TaseAnimatronic(@Player@ ply)**
+> <span class="fh-badge server">server</span> @Player@ **TaseAnimatronic(@Player@ ply, @Player@ taserer)**
 
 # Описание
 
@@ -8,7 +8,11 @@
 
 > `1` @Player@ **ply**
 
-- Игрок которого надо ударить током
+- Игрок которого надо ударить током.
+
+> `2` @Player@ **taserer**
+
+- Игрок, который вызывает ивент удара током.
 
 # Возвращает
 

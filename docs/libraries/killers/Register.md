@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> @bool@ **killers.Register(@string@ pill, @string@ name, @string@ fullname, @Color@ color, @string@ category)**
+> <span class="fh-badge shared">shared</span> **killers.Register(@string@ pill, @string@ name, @string@ fullname, @Color@ color, @string@ category)**
 
 # Описание
 

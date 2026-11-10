@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> **FH_HandleTaserHit(@Player@ ply, @Entity@ ent, @Player@ taserer)**
+> <span class="fh-badge server">server</span> @boolean@ **FH_HandleTaserHit(@Player@ ply, @Entity@ ent, @Player@ taserer)**
 
 # Описание
 

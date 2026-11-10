@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> **highlight.GetCooldown(@Player@ ply)**
+> <span class="fh-badge server">server</span> @number@ **highlight.GetCooldown(@Player@ ply)**
 
 # Описание
 
