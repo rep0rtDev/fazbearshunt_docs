@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> @bool@ **PlayerInOutworld(@Player@ ply)**
+> <span class="fh-badge shared">shared</span> @boolean@ **PlayerInOutworld(@Player@ ply)**
 
 # Описание
 
