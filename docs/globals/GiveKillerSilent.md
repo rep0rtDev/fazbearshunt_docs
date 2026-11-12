@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> @Player@ **GiveKiller(@Player@ ply, @string@ name, @boolean@ force)**
+> <span class="fh-badge server">server</span> @Player@ **GiveKillerSilent(@Player@ ply, @string@ name, @boolean@ force)**
 
 # Описание
 

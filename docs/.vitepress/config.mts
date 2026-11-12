@@ -241,6 +241,7 @@ export default defineConfig({
                 collapsed: true,
                 items: [
                   { text: 'AreLandConditionsGood', link: '/globals/AreLandConditionsGood' },
+                  { text: 'DisplayText', link: '/globals/DisplayText' },
                   { text: 'FindNearestPlayer', link: '/globals/FindNearestPlayer' },
                   { text: 'GiveKiller', link: '/globals/GiveKiller' },
                   { text: 'GiveKillerSilent', link: '/globals/GiveKillerSilent' },
@@ -502,6 +503,172 @@ export default defineConfig({
                   { text: 'Endo02', link: '/en/hooks/abilities#endo02' },
                   { text: 'Golden Freddy', link: '/en/hooks/abilities#golden-freddy' },
                   { text: 'Toy Chica', link: '/en/hooks/abilities#toy-chica' },
+                ]
+              },
+            ]
+          },
+          {
+            text: 'Reference 2',
+            collapsed: false,
+            items: [
+              {
+                text: 'Globals',
+                collapsed: true,
+                items: [
+                  { text: 'AreLandConditionsGood', link: '/en/globals/AreLandConditionsGood' },
+                  { text: 'DisplayText', link: '/en/globals/DisplayText' },
+                  { text: 'FindNearestPlayer', link: '/en/globals/FindNearestPlayer' },
+                  { text: 'GiveKiller', link: '/en/globals/GiveKiller' },
+                  { text: 'GiveKillerSilent', link: '/en/globals/GiveKillerSilent' },
+                  { text: 'IsChristmas', link: '/en/globals/IsChristmas' },
+                  { text: 'IsHalloween', link: '/en/globals/IsHalloween' },
+                  { text: 'PlayerInOutworld', link: '/en/globals/PlayerInOutworld' },
+                  { text: 'TaseAnimatronic', link: '/en/globals/TaseAnimatronic' },
+                ]
+              },
+              {
+                text: 'Classes',
+                collapsed: true,
+                items: [
+                  {
+                    text: 'Entity',
+                    collapsed: true,
+                    items: [
+                      { text: 'IsInvisible', link: '/en/classes/entity/IsInvisible' },
+                    ]
+                  },
+                  {
+                    text: 'Player',
+                    collapsed: true,
+                    items: [
+                      { text: 'ForceListenPlayer', link: '/en/classes/player/ForceListenPlayer' },
+                      { text: 'GetAudible', link: '/en/classes/player/GetAudible' },
+                      { text: 'GetGFreddyImmune', link: '/en/classes/player/GetGFreddyImmune' },
+                      { text: 'GetGiftOwnership', link: '/en/classes/player/GetGiftOwnership' },
+                      { text: 'GetOnlyAudibleByTeammates', link: '/en/classes/player/GetOnlyAudibleByTeammates' },
+                      { text: 'GetPill', link: '/en/classes/player/GetPill' },
+                      { text: 'IsAnimatronic', link: '/en/classes/player/IsAnimatronic' },
+                      { text: 'IsJumpscared', link: '/en/classes/player/IsJumpscared' },
+                      { text: 'IsPushBlocked', link: '/en/classes/player/IsPushBlocked' },
+                      { text: 'IsPushImmune', link: '/en/classes/player/IsPushImmune' },
+                      { text: 'IsStuck', link: '/en/classes/player/IsStuck' },
+                      { text: 'IsSurvivor', link: '/en/classes/player/IsSurvivor' },
+                      { text: 'ResetListenPlayer', link: '/en/classes/player/ResetListenPlayer' },
+                      { text: 'ReturnToSpawn', link: '/en/classes/player/ReturnToSpawn' },
+                      { text: 'SetAudible', link: '/en/classes/player/SetAudible' },
+                      { text: 'SetGFreddyImmune', link: '/en/classes/player/SetGFreddyImmune' },
+                      { text: 'SetGiftOwnership', link: '/en/classes/player/SetGiftOwnership' },
+                      { text: 'SetJumpscared', link: '/en/classes/player/SetJumpscared' },
+                      { text: 'SetOnlyAudibleByTeammates', link: '/en/classes/player/SetOnlyAudibleByTeammates' },
+                      { text: 'SetPushBlocked', link: '/en/classes/player/SetPushBlocked' },
+                      { text: 'SetPushImmune', link: '/en/classes/player/SetPushImmune' },
+                      { text: 'SetSpeedSlowdown', link: '/en/classes/player/SetSpeedSlowdown' },
+                      { text: 'SuppressRagdollSpawn', link: '/en/classes/player/SuppressRagdollSpawn' },
+                      { text: 'Unstuck', link: '/en/classes/player/Unstuck' },
+                    ]
+                  },
+                ]
+              },
+              {
+                text: 'Hooks',
+                collapsed: true,
+                items: [
+                  {
+                    text: 'GM',
+                    collapsed: true,
+                    items: [
+                      { text: 'FH_AnimatronicJumpscare', link: '/en/hooks/gm/FH_AnimatronicJumpscare' },
+                      { text: 'FH_HandleGiftPickup', link: '/en/hooks/gm/FH_HandleGiftPickup' },
+                      { text: 'FH_HandleTaserHit', link: '/en/hooks/gm/FH_HandleTaserHit' },
+                      { text: 'FH_KillerAxeReceived', link: '/en/hooks/gm/FH_KillerAxeReceived' },
+                      { text: 'FH_KillerLostObsession', link: '/en/hooks/gm/FH_KillerLostObsession' },
+                      { text: 'FH_KillerObsessed', link: '/en/hooks/gm/FH_KillerObsessed' },
+                      { text: 'FH_LastManStanding', link: '/en/hooks/gm/FH_LastManStanding' },
+                      { text: 'FH_OverrideVoiceline', link: '/en/hooks/gm/FH_OverrideVoiceline' },
+                      { text: 'FH_PlayerShouldJumpscare', link: '/en/hooks/gm/FH_PlayerShouldJumpscare' },
+                      { text: 'FH_ShouldPlayerReceiveGifts', link: '/en/hooks/gm/FH_ShouldPlayerReceiveGifts' },
+                      { text: 'ForceDrawPill', link: '/en/hooks/gm/ForceDrawPill' },
+                      { text: 'PillApply', link: '/en/hooks/gm/PillApply' },
+                      { text: 'PillCreated', link: '/en/hooks/gm/PillCreated' },
+                      { text: 'PillRestore', link: '/en/hooks/gm/PillRestore' },
+                      { text: 'PillSound', link: '/en/hooks/gm/PillSound' },
+                      { text: 'ShouldSpawnRagdoll', link: '/en/hooks/gm/ShouldSpawnRagdoll' },
+                      { text: 'SuccessTaserHit', link: '/en/hooks/gm/SuccessTaserHit' },
+                    ]
+                  },
+                ]
+              },
+              {
+                text: 'Libraries',
+                collapsed: true,
+                items: [
+                  {
+                    text: 'gifts',
+                    collapsed: true,
+                    items: [
+                      { text: 'AddPositiveEffect', link: '/en/libraries/gifts/AddPositiveEffect' },
+                      { text: 'AddNegativeEffect', link: '/en/libraries/gifts/AddNegativeEffect' },
+                      { text: 'GrantEffect', link: '/en/libraries/gifts/GrantEffect' },
+                      { text: 'SetBlockPositiveEffect', link: '/en/libraries/gifts/SetBlockPositiveEffect' },
+                    ]
+                  },
+                  {
+                    text: 'highlight',
+                    collapsed: true,
+                    items: [
+                      { text: 'Add', link: '/en/libraries/highlight/Add' },
+                      { text: 'AddVisionSounds', link: '/en/libraries/highlight/AddVisionSounds' },
+                      { text: 'ByDistance', link: '/en/libraries/highlight/ByDistance' },
+                      { text: 'Cooldown', link: '/en/libraries/highlight/Cooldown' },
+                      { text: 'GetCooldown', link: '/en/libraries/highlight/GetCooldown' },
+                      { text: 'GetVisionSounds', link: '/en/libraries/highlight/GetVisionSounds' },
+                      { text: 'NotifyTarget', link: '/en/libraries/highlight/NotifyTarget' },
+                    ]
+                  },
+                  {
+                    text: 'killers',
+                    collapsed: true,
+                    items: [
+                      { text: 'GetAll', link: '/en/libraries/killers/GetAll' },
+                      { text: 'GetAllNonPreferables', link: '/en/libraries/killers/GetAllNonPreferables' },
+                      { text: 'GetAllPreferables', link: '/en/libraries/killers/GetAllPreferables' },
+                      { text: 'GetAllSolos', link: '/en/libraries/killers/GetAllSolos' },
+                      { text: 'GetAvatar', link: '/en/libraries/killers/GetAvatar' },
+                      { text: 'GetColor', link: '/en/libraries/killers/GetColor' },
+                      { text: 'GetFullName', link: '/en/libraries/killers/GetFullName' },
+                      { text: 'GetName', link: '/en/libraries/killers/GetName' },
+                      { text: 'GetPortrait', link: '/en/libraries/killers/GetPortrait' },
+                      { text: 'Register', link: '/en/libraries/killers/Register' },
+                      { text: 'SetAbilities', link: '/en/libraries/killers/SetAbilities' },
+                    ]
+                  },
+                  {
+                    text: 'playerlist',
+                    collapsed: true,
+                    items: [
+                      { text: 'AddIconSet', link: '/en/libraries/playerlist/AddIconSet' },
+                      { text: 'GetPlayerIcon', link: '/en/libraries/playerlist/GetPlayerIcon' },
+                      { text: 'ResetIconSet', link: '/en/libraries/playerlist/ResetIconSet' },
+                      { text: 'SetPlayerIcon', link: '/en/libraries/playerlist/SetPlayerIcon' },
+                    ]
+                  },
+                  {
+                    text: 'stats',
+                    collapsed: true,
+                    items: [
+                      { text: 'Add', link: '/en/libraries/stats/Add' },
+                      { text: 'GetTop', link: '/en/libraries/stats/GetTop' },
+                      { text: 'SetMin', link: '/en/libraries/stats/SetMin' },
+                    ]
+                  },
+                  { text: 'rounds', link: '/en/libraries/rounds' },
+                ]
+              },
+              {
+                text: 'Enumerations',
+                collapsed: true,
+                items: [
+                  { text: 'TEAM', link: '/en/enums/team' },
                 ]
               },
             ]

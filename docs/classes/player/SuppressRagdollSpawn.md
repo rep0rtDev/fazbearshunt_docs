@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> @Player@:SupressRagdollSpawn(@boolean@ suppress)
+> <span class="fh-badge server">server</span> @Player@:SuppressRagdollSpawn(@boolean@ suppress)
 
 # Описание
 
