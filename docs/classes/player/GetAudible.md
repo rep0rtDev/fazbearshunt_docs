@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> @bool@ @Player@:GetAudible()
+> <span class="fh-badge shared">shared</span> @boolean@ @Player@:GetAudible()
 
 # Описание
 
@@ -6,6 +6,6 @@
 
 # Возвращает
 
-> `1` @bool@
+> `1` @boolean@
 
 - Может ли игрок говорить?

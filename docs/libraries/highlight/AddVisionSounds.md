@@ -22,7 +22,7 @@
 
 Добавляем уникальный звук просвета для Фредди.
 
-```
+```lua
 highlight.AddVisionSounds(
     "pill_wgfreddy2",
     "my_anim/highlight_success.wav",

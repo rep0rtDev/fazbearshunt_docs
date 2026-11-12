@@ -58,6 +58,7 @@ function withRealmIcons(items: DefaultTheme.SidebarItem[]): DefaultTheme.Sidebar
 
 const TYPE_LINKS: Record<string, string> = {
   Vector: 'https://wiki.facepunch.com/gmod/Vector',
+  Color: 'https://wiki.facepunch.com/gmod/Color',
   Player: 'https://wiki.facepunch.com/gmod/Player',
   Entity: 'https://wiki.facepunch.com/gmod/Entity',
   Angle: 'https://wiki.facepunch.com/gmod/Angle',
@@ -243,6 +244,8 @@ export default defineConfig({
                   { text: 'FindNearestPlayer', link: '/globals/FindNearestPlayer' },
                   { text: 'GiveKiller', link: '/globals/GiveKiller' },
                   { text: 'GiveKillerSilent', link: '/globals/GiveKillerSilent' },
+                  { text: 'IsChristmas', link: '/globals/IsChristmas' },
+                  { text: 'IsHalloween', link: '/globals/IsHalloween' },
                   { text: 'PlayerInOutworld', link: '/globals/PlayerInOutworld' },
                   { text: 'TaseAnimatronic', link: '/globals/TaseAnimatronic' },
                 ]
@@ -283,6 +286,7 @@ export default defineConfig({
                       { text: 'SetOnlyAudibleByTeammates', link: '/classes/player/SetOnlyAudibleByTeammates' },
                       { text: 'SetPushBlocked', link: '/classes/player/SetPushBlocked' },
                       { text: 'SetPushImmune', link: '/classes/player/SetPushImmune' },
+                      { text: 'SetSpeedSlowdown', link: '/classes/player/SetSpeedSlowdown' },
                       { text: 'SuppressRagdollSpawn', link: '/classes/player/SuppressRagdollSpawn' },
                       { text: 'Unstuck', link: '/classes/player/Unstuck' },
                     ]
@@ -312,6 +316,7 @@ export default defineConfig({
                       { text: 'PillCreated', link: '/hooks/gm/PillCreated' },
                       { text: 'PillRestore', link: '/hooks/gm/PillRestore' },
                       { text: 'PillSound', link: '/hooks/gm/PillSound' },
+                      { text: 'ShouldSpawnRagdoll', link: '/hooks/gm/ShouldSpawnRagdoll' },
                       { text: 'SuccessTaserHit', link: '/hooks/gm/SuccessTaserHit' },
                     ]
                   },
@@ -353,6 +358,7 @@ export default defineConfig({
                       { text: 'GetAllPreferables', link: '/libraries/killers/GetAllPreferables' },
                       { text: 'GetAllSolos', link: '/libraries/killers/GetAllSolos' },
                       { text: 'GetAvatar', link: '/libraries/killers/GetAvatar' },
+                      { text: 'GetColor', link: '/libraries/killers/GetColor' },
                       { text: 'GetFullName', link: '/libraries/killers/GetFullName' },
                       { text: 'GetName', link: '/libraries/killers/GetName' },
                       { text: 'GetPortrait', link: '/libraries/killers/GetPortrait' },

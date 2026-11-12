@@ -57,8 +57,9 @@ Allows intercepting round events, such as round start, animatronic unfreeze, a t
 
 | Events | Description |
 |---|---|
-| `OnStartRound` | Called at round start |
-| `OnPostStartRound` | Called after animatronics are unfrozen |
-| `OnEndGameKillers` | Called towards the end of the round when animatronics win |
-| `OnEndGameSurvivors` | Called towards the end of the round when survivors win |
-| `OnTimerCutback` | Called when the timer is reduced when the last survivor remains |
+| `OnStartRound`        | Called at round start |
+| `OnPostStartRound`    | Called after animatronics are unfrozen |
+| `OnEndGameKillers`    | Called towards the end of the round when animatronics win |
+| `OnEndGameSurvivors`  | Called towards the end of the round when survivors win |
+| `OnLastManStanding`   | Called when one survivor is left on the man |
+| `OnTimerCutback`      | Called when the timer is reduced when the last survivor remains |

@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> @bool@ @Player@:GetOnlyAudibleByTeammates()
+> <span class="fh-badge shared">shared</span> @boolean@ @Player@:GetOnlyAudibleByTeammates()
 
 # Описание
 
@@ -6,6 +6,6 @@
 
 # Возвращает
 
-> `1` @bool@
+> `1` @boolean@
 
 - Игрока могут слышать только его союзники?

@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> @bool@ @Player@:GetGFreddyImmune()
+> <span class="fh-badge shared">shared</span> @boolean@ @Player@:GetGFreddyImmune()
 
 # Описание
 
@@ -6,6 +6,6 @@
 
 # Возвращает
 
-> `1` @bool@
+> `1` @boolean@
 
 - Имеет ли игрок иммунитет или нет

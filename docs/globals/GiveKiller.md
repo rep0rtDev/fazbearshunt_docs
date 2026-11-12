@@ -1,4 +1,4 @@
-> <span class="fh-badge server">server</span> @Player@ **GiveKiller(@Player@ ply, @string@ name, @bool@ force)**
+> <span class="fh-badge server">server</span> @Player@ **GiveKiller(@Player@ ply, @string@ name, @boolean@ force)**
 
 # Описание
 
@@ -16,6 +16,6 @@
 
 - Имя аниматроника, например `pill_wfreddy2`.
 
-> `3` @bool@ **force**
+> `3` @boolean@ **force**
 
 - Принудить выдачу? Если нет, то аниматроника не выдаст если такой уже присутствует на карте.

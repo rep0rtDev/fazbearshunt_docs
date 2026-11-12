@@ -1,4 +1,4 @@
-> <span class="fh-badge shared">shared</span> @bool@ @Player@:GetGiftOwnership()
+> <span class="fh-badge shared">shared</span> @boolean@ @Player@:GetGiftOwnership()
 
 # Описание
 
@@ -6,6 +6,6 @@
 
 # Возвращает
 
-> `1` @bool@
+> `1` @boolean@
 
 - Имеет ли игрок несобранный подарок?

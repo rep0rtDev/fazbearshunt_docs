@@ -13,9 +13,9 @@
   --vp-font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Layout */
-  --vp-layout-max-width: 1600px;
-  --vp-sidebar-width: 288px;
-  --vp-aside-width: 480px;
+  --vp-layout-max-width: 2000px;
+  --vp-sidebar-width: 320px;
+  --vp-aside-width: 300px;
   --vp-nav-height: 52px;
 }
 
@@ -161,14 +161,14 @@ body {
 
 .VPSidebar .group {
   padding: 0 !important;
-  margin: 0 0 4px 0 !important;
+  margin: 0 0 -8px 0 !important;
   border-top: none !important;
 }
 
 .VPSidebar .group + .group {
-  margin-top: 12px !important;
-  padding-top: 12px !important;
-  border-top: 1px solid var(--vp-c-divider) !important;
+  margin-top: 32px !important;
+  padding-top: 4px !important;
+  border-top: 2px solid #54272C !important;
 }
 
 /* Заголовок группы */
@@ -177,25 +177,25 @@ body {
 }
 
 .VPSidebarItem.level-0 > .item {
-  padding: 4px 20px !important;
+  padding: 4px 0px !important;
   cursor: default;
 }
 
 .VPSidebarItem.level-0 > .item > .text,
 .VPSidebarItem.level-0 > .item > .indicator + .text {
-  font-weight: 700 !important;
-  font-size: 11px !important;
+  font-weight: 0 !important;
+  font-size: 16px !important;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--vp-c-text-3) !important;
   line-height: 1.5;
+  color: #ff6b6b !important;
 }
 
 /* Сами ссылки в группе */
 .VPSidebarItem.level-1,
 .VPSidebarItem.level-2,
 .VPSidebarItem.level-3 {
-  padding: 0 !important;
+  padding: 0 px !important;
   margin: 0 !important;
 }
 
@@ -207,8 +207,8 @@ body {
 
 .VPSidebarItem .link {
   display: block !important;
-  padding: 2px 20px 2px 24px !important;
-  font-size: 13px !important;
+  padding: 0px 20px 0px 16px !important;
+  font-size: 14px !important;
   line-height: 1.45 !important;
   color: var(--vp-c-text-2) !important;
   border-left: 2px solid transparent;
@@ -217,10 +217,10 @@ body {
 }
 
 .VPSidebarItem .link .text {
-  font-weight: 400 !important;
+  font-weight: 300 !important;
   color: inherit !important;
-  font-size: 13px !important;
-  line-height: 1.45 !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
 }
 
 .VPSidebarItem .link:hover {
@@ -239,7 +239,7 @@ body {
 
 .VPSidebarItem.is-active > .item > .link .text {
   color: var(--fh-red) !important;
-  font-weight: 500 !important;
+  font-weight: 800 !important;
 }
 
 .VPSidebarItem.is-active > .item > .indicator {
@@ -400,13 +400,13 @@ body {
 
 .vp-doc h1 {
   font-weight: 700 !important;
-  font-size: 30px !important;
+  font-size: 26px !important;
   letter-spacing: -0.015em !important;
   line-height: 1.25 !important;
-  margin: 0 0 8px 0 !important;
+  margin: 64px 0 8px 0 !important;
   padding-bottom: 14px !important;
-  border-bottom: 1px solid var(--vp-c-border) !important;
-  color: var(--vp-c-text-1) !important;
+  border-bottom: 1px solid #6a2a2a !important;
+  color: #c0392b !important;
 }
 
 .vp-doc h2 {
@@ -482,7 +482,7 @@ body {
   background-color: #2a2a2a !important;
   color: #ff6b6b !important;
   border: 1px solid #3a3a3a;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 2px 7px !important;
   font-size: 0.88em;
   font-family: var(--vp-font-family-mono);
@@ -531,8 +531,8 @@ body {
 }
 
 .vp-doc div[class*='language-'] code {
-  font-size: 13px !important;
-  line-height: 1.65 !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
   font-family: var(--vp-font-family-mono);
   padding: 0 !important;
 }
@@ -624,9 +624,9 @@ body {
 }
 
 .vp-doc .custom-block.tip {
-  background-color: #eef7ee !important;
+  background-color: #c2ffc2 !important;
   border-color: #6ab26a !important;
-  color: #2d5a2d !important;
+  color: #1f3d1f !important;
 }
 .vp-doc .custom-block.tip .custom-block-title { color: #2d5a2d !important; }
 
@@ -638,9 +638,9 @@ body {
 .vp-doc .custom-block.info .custom-block-title { color: #2d4a6a !important; }
 
 .vp-doc .custom-block.warning {
-  background-color: #fdf6e3 !important;
+  background-color: #ecd185 !important;
   border-color: #d4a017 !important;
-  color: #6b5010 !important;
+  color: #3a2b09 !important;
 }
 .vp-doc .custom-block.warning .custom-block-title { color: #6b5010 !important; }
 
@@ -687,30 +687,28 @@ body {
 /* ========== BADGES ========== */
 .fh-badge {
   display: inline-block;
-  padding: 1px 7px;
-  border-radius: 3px;
-  font-size: 0.72em;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  vertical-align: baseline;
-  margin: 0 2px;
-  font-family: var(--vp-font-family-mono);
-  border: 1px solid;
-  text-transform: uppercase;
-  line-height: 1.6;
-  position: relative;
-  top: -1px;
+  width: 20px;
+  height: 20px;
+  min-width: 10px;
+  padding: 0;
+  margin: 0 3px;
+  border-radius: 35%;
+  font-size: 0;
+  line-height: 10px;
+  border: none;
+  vertical-align: middle;
+  overflow: hidden;
 }
 
-.fh-badge.server  { background:#eef3f8; color:#2d4a6a; border-color:#b0c4d8; }
-.fh-badge.client  { background:#eef7ee; color:#7D5609; border-color:#E1C58E; }
-.fh-badge.shared  { background:#fbeeee; color:#6a2a2a; border-color:#d4a8a8; }
-.fh-badge.hook    { background:#fdf6e3; color:#6b5010; border-color:#d8c490; }
+.fh-badge.server { background: #328ff1; }
+.fh-badge.client { background: #eca200; }
+.fh-badge.shared {background: linear-gradient(135deg, #328ff1 50%, #eca200 50%); color: #000000; border-color: #ffffff;}
+.fh-badge.hook   { background:#bb6ae0; }
 
-.dark .fh-badge.server  { background:#1f2a35; color:#8eb0d0; border-color:#3a5470; }
-.dark .fh-badge.client  { background:#322A1A; color:#E2E058; border-color:#80632A; }
-.dark .fh-badge.shared  { background:#2e1f1f; color:#d88e8e; border-color:#703a3a; }
-.dark .fh-badge.hook    { background:#2e2820; color:#d8b85a; border-color:#705a30; }
+.dark .fh-badge.server { background: #328ff1; }
+.dark .fh-badge.client { background: #eca200; }
+.dark .fh-badge.shared {background: linear-gradient(135deg, #328ff1 50%, #eca200 50%); color: #000000; border-color: #ffffff;}
+.dark .fh-badge.hook   { background:#bb6ae0; }
 
 /* ========== HOME ========== */
 .VPHome {
@@ -964,22 +962,22 @@ body {
 /* ========== SIDEBAR REALM ICONS ========== */
 .VPSidebarItem .text:has(> .fh-realm) {
   position: relative;
-  padding-left: 17px;
+  padding-left: 20px;
 }
 .VPSidebarItem .fh-realm {
   position: absolute;
   left: 0;
-  top: 0.55em;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  top: 0.4em;
+  width: 14px;
+  height: 14px;
+  border-radius: 35%;
 }
-.fh-realm.server { background: #4a7db5; }
-.fh-realm.client { background: #B2882A; }
-.fh-realm.shared { background: #c0392b; }
-.dark .fh-realm.server { background: #8eb0d0; }
-.dark .fh-realm.client { background: #E5C070; }
-.dark .fh-realm.shared { background: #d88e8e; }
+.fh-realm.server { background: #328ff1; }
+.fh-realm.client { background: #eca200; }
+.fh-realm.shared {background: linear-gradient(135deg, #328ff1 50%, #eca200 50%);}
+.dark .fh-realm.server { background: #0b81f0; }
+.dark .fh-realm.client { background: #ffb71d; }
+.dark .fh-realm.shared { background: linear-gradient(135deg, #0b81f0 50%, #ffb71d 50%); }
 
 /* ========== SEARCH (pagefind) ========== */
 .command-palette-logo {
