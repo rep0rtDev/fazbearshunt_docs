@@ -4,7 +4,7 @@
 
 Sets an icon for a player in the player list.
 
-Before that, read how to add icon sets - [playerlist.AddIconSet()](/libraries/playerlist/AddIconSet)
+Before that, read how to add icon sets - [playerlist.AddIconSet()](/en/libraries/playerlist/AddIconSet)
 
 # Arguments
 

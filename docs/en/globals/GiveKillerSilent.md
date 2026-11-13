@@ -2,7 +2,7 @@
 
 # Description
 
-Gives a Pill to the selected player. Compared to [GiveKiller()](/globals/GiveKiller), it does not announce anything to players in chat.
+Gives a Pill to the selected player. Compared to [GiveKiller()](/en/globals/GiveKiller), it does not announce anything to players in chat.
 
 # Arguments
 

@@ -4,7 +4,7 @@
 
 Lets you find out a player's current icon in the player list via their [Player:SteamID64](https://wiki.facepunch.com/gmod/Player:SteamID64)
 
-To set an icon, see [playerlist.SetPlayerIcon()](/libraries/playerlist/SetPlayerIcon)
+To set an icon, see [playerlist.SetPlayerIcon()](/en/libraries/playerlist/SetPlayerIcon)
 
 # Arguments
 

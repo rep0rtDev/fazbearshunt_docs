@@ -2,7 +2,7 @@
 
 # Description
 
-Resets the forced listening restriction previously set through [Player:ForceListenPlayer()](/classes/player/ForceListenPlayer).
+Resets the forced listening restriction previously set through [Player:ForceListenPlayer()](/en/classes/player/ForceListenPlayer).
 
 ## Example
 

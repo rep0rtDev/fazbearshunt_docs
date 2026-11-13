@@ -4,7 +4,7 @@
 
 Gives a Pill to the selected player. After a successful grant, it announces the player's name and the animatronic to everyone in chat.
 
-If you want to give a Pill without a chat announcement, use [GiveKillerSilent()](/globals/GiveKillerSilent)
+If you want to give a Pill without a chat announcement, use [GiveKillerSilent()](/en/globals/GiveKillerSilent)
 
 # Arguments
 

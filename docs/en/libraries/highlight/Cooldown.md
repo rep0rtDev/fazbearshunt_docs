@@ -2,7 +2,7 @@
 
 # Description
 
-Sets a cooldown on highlighting. The cooldown is automatically taken into account only in [highlight.ByDistance](/libraries/highlight/ByDistance)
+Sets a cooldown on highlighting. The cooldown is automatically taken into account only in [highlight.ByDistance](/en/libraries/highlight/ByDistance)
 
 # Arguments
 

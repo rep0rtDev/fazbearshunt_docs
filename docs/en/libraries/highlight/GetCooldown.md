@@ -4,7 +4,7 @@
 
 Lets you find out the highlight cooldown.
 
-The cooldown can be set through [highlight.Cooldown](/libraries/highlight/Cooldown)
+The cooldown can be set through [highlight.Cooldown](/en/libraries/highlight/Cooldown)
 
 # Arguments
 
